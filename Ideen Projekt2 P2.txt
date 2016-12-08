@@ -1,0 +1,65 @@
+1. Idee: TeeShop
+
+Beschrieb:
+
+AIO Software für ein KMU (Buchaltung,
+
+Learning:
+
+Ziel, keine visuellen Änderungen
+sicher 
+einfach
+schnell
+Cross Plattform evtl Shop
+
+
+Tools/Technologien:
+
+offen
+
+
+
+2. Idee: RadioTool
+
+Beschrieb:
+Radioapp, Recherche, Sendung, after
+
+
+Learning:
+Login
+Crossplattform (mobile, Linux, macOS)
+
+
+
+
+3. Idee: DL Anbieten
+
+Beschrieb:
+App wo jeder seine Skills anbieten oder einkaufen kann
+
+Learning:
+
+Login
+Crossplattform (mobile, Linux, macOS)
+
+
+Tools/Technologien:
+offen
+Skalierbarkeit
+
+
+
+
+
+
+3. Idee:
+
+Beschrieb:
+
+
+Learning:
+
+
+
+
+Tools/Technologien:
