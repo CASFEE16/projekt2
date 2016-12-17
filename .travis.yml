@@ -1,0 +1,16 @@
+# For more information about the configurations used
+# in this file, please see the Travis CI documentation:
+# https://docs.travis-ci.com/user/languages/javascript-with-nodejs/
+
+language: node_js
+node_js:
+  - "6"
+before_script:
+  - npm install
+script:
+  - npm build --prod
+after_success:
+  - npm deploy
+env:
+  global:
+  - AUTHOR_EMAIL: "travis@build.local"

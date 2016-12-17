@@ -1,5 +1,14 @@
 # Projekt2
 
+Project documentation:
+* https://github.com/CASFEE16/projekt2/wiki
+
+Deployed app:
+* https://hsr-fee16-projekt2.firebaseapp.com/
+
+Build server:
+* https://travis-ci.org/CASFEE16/projekt2
+
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.22-1.
 
 ## Local installation
@@ -29,9 +38,9 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 Before running the tests make sure you are serving the app via `ng serve`.
 
-## Deploying to Github Pages
+## Deploying to Firebase
 
-Run `ng github-pages:deploy` to deploy to Github Pages.
+Run `npm deploy` to deploy to Firebase Hosting.
 
 ## Further help
 
