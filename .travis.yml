@@ -8,9 +8,9 @@ node_js:
 before_script:
   - npm install
 script:
-  - npm build --prod
+  - npm run-script build
 after_success:
-  - npm deploy
+  - npm run-script deploy
 env:
   global:
   - AUTHOR_EMAIL: "travis@build.local"
