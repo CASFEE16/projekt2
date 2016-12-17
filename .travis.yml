@@ -8,9 +8,9 @@ node_js:
 before_script:
   - npm install
 script:
-  - npm run-script build
+  - npm run-script build --prod
 after_success:
-  - npm run-script deploy
+  - npm run-script deploy --token "$FIREBASE_TOKEN"
 env:
   global:
   - AUTHOR_EMAIL: "travis@build.local"
