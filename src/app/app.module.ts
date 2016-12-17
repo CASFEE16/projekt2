@@ -5,7 +5,14 @@ import { HttpModule } from '@angular/http';
 import { MaterialModule } from '@angular/material';
 import {AngularFireModule, FirebaseAppConfig} from 'angularfire2';
 
-import { AppComponent } from './app.component';
+import {RouterModule} from '@angular/router';
+import {ROUTE_CONFIG} from './route-config';
+
+import {AppComponent} from './app.component';
+import {UserModule} from './user/user.module';
+import {CoreModule} from './core/core.module';
+import {LayoutComponent} from './shared/material/layout/layout.component';
+import {FrontModule} from './front/front.module';
 
 export const firebaseConfig: FirebaseAppConfig = {
   apiKey: 'AIzaSyCNjUMHsV_64Qgh0LM5xUrHf1RMNJ97PGw',
@@ -16,14 +23,19 @@ export const firebaseConfig: FirebaseAppConfig = {
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LayoutComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     MaterialModule.forRoot(),
-    AngularFireModule.initializeApp(firebaseConfig)
+    AngularFireModule.initializeApp(firebaseConfig),
+    RouterModule.forRoot(ROUTE_CONFIG),
+    CoreModule,
+    UserModule,
+    FrontModule
   ],
   providers: [],
   bootstrap: [AppComponent]
