@@ -1,22 +1,18 @@
 /* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed, inject} from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-import { AngularFire } from 'angularfire2';
 
 import { HomeComponent } from './home.component';
 import {Observable} from 'rxjs';
+import {WelcomeService} from "./welcome.service";
 
-const data: any = [{1: 'Test'}];
+const data: any = ['Test'];
 
-class MockAngularFireDatabase {
-  public list(url: string): Observable<any[]> {
+class MockWelcomeService {
+  public getWelcomeMessages(): Observable<string> {
     return Observable.of(data);
   }
-}
-
-class MockAngularFire {
-  database: any = new MockAngularFireDatabase();
 }
 
 describe('HomeComponent', () => {
@@ -24,12 +20,18 @@ describe('HomeComponent', () => {
   let fixture: ComponentFixture<HomeComponent>;
 
   beforeEach(async(() => {
+
     TestBed.configureTestingModule({
       providers: [
-        {provide: AngularFire, useClass: MockAngularFire}
+        {provide: WelcomeService, useClass: MockWelcomeService},
       ],
       declarations: [ HomeComponent ]
-    })
+    }).overrideComponent(HomeComponent, {
+      set: {
+        providers: [
+          {provide: WelcomeService, useClass: MockWelcomeService}
+        ]
+      }})
     .compileComponents();
   }));
 
@@ -39,7 +41,7 @@ describe('HomeComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create', inject([WelcomeService], () => {
     expect(component).toBeTruthy();
-  });
+  }));
 });

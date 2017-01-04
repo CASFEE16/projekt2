@@ -1,6 +1,6 @@
 {
   "project": {
-    "version": "1.0.0-beta.22-1",
+    "version": "1.0.0-beta.24",
     "name": "projekt2"
   },
   "apps": [
@@ -8,7 +8,8 @@
       "root": "src",
       "outDir": "dist",
       "assets": [
-        "assets"
+        "assets",
+        "favicon.ico"
       ],
       "index": "index.html",
       "main": "main.ts",

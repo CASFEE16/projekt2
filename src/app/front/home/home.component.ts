@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FirebaseListObservable, AngularFire} from 'angularfire2';
 import {WelcomeService} from "./welcome.service";
 import {Observable} from "rxjs";
+import {FirebaseListObservable} from "angularfire2";
 
 @Component({
   selector: 'app-home',
@@ -11,7 +11,7 @@ import {Observable} from "rxjs";
 })
 export class HomeComponent implements OnInit {
 
-  items: Observable<string[]>;
+  items: FirebaseListObservable<string[]>;
 
   constructor(private welcomeService: WelcomeService) {
   }

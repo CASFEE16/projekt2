@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {BackendService} from "./firebase/backend.service";
+import {SessionService} from "./firebase/session.service";
 
 @NgModule({
   imports: [
@@ -8,7 +9,8 @@ import {BackendService} from "./firebase/backend.service";
   ],
   declarations: [],
   providers: [
-    BackendService
+    BackendService,
+    SessionService
   ]
 })
 export class CoreModule { }
