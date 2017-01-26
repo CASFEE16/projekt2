@@ -1,8 +1,11 @@
 import {Routes, CanActivate} from '@angular/router';
-import { HomeComponent } from './front/home/home.component';
-import { AboutComponent } from './front/about/about.component';
+import { HomeComponent, AboutComponent, LoginComponent, RegisterComponent } from './front';
 
 export const ROUTE_CONFIG: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'about', component: AboutComponent }
+  { path: 'about', component: AboutComponent },
+
+  // TODO: Ins Front-Modul verschieben?
+  {path: 'login', component: LoginComponent},
+  {path: 'register', component: RegisterComponent}
 ];

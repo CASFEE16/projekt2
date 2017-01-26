@@ -1,0 +1,26 @@
+<div class="register-container">
+  <md-card class="register-card">
+    <md-toolbar color="primary">Registration</md-toolbar>
+    <md-card-content>
+      <form class="register-form">
+        <md-input-container>
+          <input md-input placeholder="Name" required type="text"
+                 [(ngModel)]="registration.name" name="name">
+        </md-input-container>
+        <md-input-container>
+          <input md-input placeholder="Email" required type="email"
+                 [(ngModel)]="registration.email" name="email">
+        </md-input-container>
+        <md-input-container>
+          <input md-input placeholder="Password" type="password" required
+                 [(ngModel)]="registration.password1" name="password">
+        </md-input-container>
+        <md-input-container>
+          <input md-input placeholder="Password Repeat" type="password" required
+                 [(ngModel)]="registration.password2" name="password">
+        </md-input-container>
+        <button md-button type="submit">Register</button>
+      </form>
+    </md-card-content>
+  </md-card>
+</div>
