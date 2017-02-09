@@ -11,3 +11,15 @@ html, body, material-app, md-sidenav-container, .my-content {
 .app-toolbar-filler {
   flex-grow: 1;
 }
+
+.sidenav-link {
+  width: 100%;
+}
+
+.sidenav-container {
+  widht: 100%;
+}
+
+.sidenav-links {
+  width: 100%;
+}

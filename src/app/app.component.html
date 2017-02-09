@@ -1,11 +1,15 @@
 <md-sidenav-layout fullscreen>
 
   <md-sidenav #sidenav mode="side" class="app-sidenav" opened="true">
-    <ul>
-      <li *ngFor="let navLink of navLinks">
-        <a routerLink="{{navLink.link}}" routerLinkActive #rla="routerLinkActive">{{navLink.label}}</a>
-      </li>
-    </ul>
+    <div class="sidenav-container">
+      <img md-card-image src="assets/radio.jpg">
+      <div *ngIf="loggedIn | async">{{sessionService.username}}</div>
+        <md-list class="sidenav-links">
+          <md-list-item class="sidenav-links" *ngFor="let navLink of navLinks">
+            <a md-button class="sidenav-link" routerLink="{{navLink.link}}" routerLinkActive #rla="routerLinkActive">{{navLink.label}}</a>
+          </md-list-item>
+        </md-list>
+    </div>
   </md-sidenav>
 
   <md-toolbar color="primary">
@@ -24,8 +28,7 @@
     <!-- <button md-button (click)="isDarkTheme = !isDarkTheme">TOGGLE DARK THEME</button> -->
 
     <span *ngIf="loggedIn | async">
-      <span class="app-toolbar-user">{{username}}</span>
-      <a md-button (click)="onLogout()">Logout</a>
+      <button md-fab (click)="onUserMenu()"><md-icon>face</md-icon></button>
     </span>
     <span *ngIf="!(loggedIn | async)">
       <a md-button routerLink="/login">Login</a>

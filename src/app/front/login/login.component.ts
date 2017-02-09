@@ -28,9 +28,9 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.error = null;
-    this.subscription = this.sessionService.event.subscribe(
-      (event) => this.handleEvent(event)
-    )
+    //this.subscription = this.sessionService.event.subscribe(
+    //  (event) => this.handleEvent(event)
+    //)
   }
 
   ngOnDestroy() {
@@ -57,7 +57,20 @@ export class LoginComponent implements OnInit, OnDestroy {
   onSubmit() {
     console.log("Submit", this.credentials);
     this.error = null;
-    this.sessionService.loginCredentials(this.credentials);
+
+    this.sessionService.loginCredentials(this.credentials).subscribe(
+      (result) => {
+        // console.log('Loggedin');
+        this.router.navigate(['/']);
+      },
+      (error) => {
+        // console.log('Error');
+        this.error = error.message;
+        this.snackbar.open(this.error, '', {
+          duration: 3000
+        });
+      });
+
     this.submitted = true;
   }
 }

@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import {SessionService, ISessionEvent} from "./core/firebase/session.service";
 import {Observable} from 'rxjs';
+import {MdDialog, MdDialogConfig} from "@angular/material";
+import {UserMenuComponent} from "./front/user-menu/user-menu.component";
 
 export interface NavLink {
   link: string;
@@ -30,7 +32,7 @@ export class AppComponent implements OnInit {
       label: 'About'
     }];
 
-  constructor(private sessionService: SessionService) {}
+  constructor(private sessionService: SessionService, private dialog: MdDialog) {}
 
   ngOnInit() {
     this.sessionService.event.subscribe(
@@ -55,8 +57,13 @@ export class AppComponent implements OnInit {
     return this.sessionService.event.map((event) => event.name === 'login' && !event.state.anonymous);
   }
 
-  onLogout() {
-    this.sessionService.logout();
+  onUserMenu() {
+    let dialogRef = this.dialog.open(UserMenuComponent, {
+      position: {
+        top: '25px',
+        right: '25px'
+      }
+    });
   }
 
 }
