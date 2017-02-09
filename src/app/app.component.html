@@ -2,26 +2,34 @@
 
   <md-sidenav #sidenav mode="side" class="app-sidenav" opened="true">
     <ul>
-      <li><a routerLink="/" routerLinkActive="active">Home</a></li>
-      <li><a routerLink="/about">About</a></li>
+      <li *ngFor="let navLink of navLinks">
+        <a routerLink="{{navLink.link}}" routerLinkActive #rla="routerLinkActive">{{navLink.label}}</a>
+      </li>
     </ul>
   </md-sidenav>
 
   <md-toolbar color="primary">
-    <button class="app-icon-button" (click)="sidenav.toggle()">
-      <i class="material-icons app-toolbar-menu">menu</i>
+    <button md-icon-button class="app-icon-button" (click)="sidenav.toggle()">
+      <md-icon>menu</md-icon>
     </button>
     Radio App
+
+    <nav>
+      <a md-button *ngFor="let navLink of navLinks" routerLink="{{navLink.link}}" routerLinkActive #rla="routerLinkActive">
+        {{navLink.label}}
+      </a>
+    </nav>
     <span class="app-toolbar-filler"></span>
 
     <!-- <button md-button (click)="isDarkTheme = !isDarkTheme">TOGGLE DARK THEME</button> -->
 
     <span *ngIf="loggedIn | async">
       <span class="app-toolbar-user">{{username}}</span>
+      <a md-button (click)="onLogout()">Logout</a>
     </span>
     <span *ngIf="!(loggedIn | async)">
-      <a routerLink="/login">Login</a> |
-      <a routerLink="/register">Register</a>
+      <a md-button routerLink="/login">Login</a>
+      <a md-button routerLink="/register">Register</a>
     </span>
   </md-toolbar>
 

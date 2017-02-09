@@ -2,7 +2,8 @@
 <md-card class="login-card">
   <md-toolbar color="primary">Login</md-toolbar>
   <md-card-content>
-    <form class="login-form">
+    <br>
+    <form class="login-form" (ngSubmit)="onSubmit()">
       <md-input-container>
         <input md-input placeholder="Email" required type="email"
                [(ngModel)]="credentials.email" name="email">
@@ -11,6 +12,9 @@
         <input md-input placeholder="Password" type="password" required
                [(ngModel)]="credentials.password" name="password">
       </md-input-container>
+      <div *ngIf="error" class="alert alert-danger">
+        {{ error }}
+      </div>
       <button md-button type="submit">Login</button>
     </form>
   </md-card-content>

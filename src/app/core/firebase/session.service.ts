@@ -1,11 +1,12 @@
 import { Injectable, Inject } from '@angular/core';
-import {AngularFire, FirebaseListObservable, AuthProviders, AuthMethods, FirebaseAuthState, FirebaseAuth} from 'angularfire2';
+import {AngularFire, FirebaseListObservable, AuthProviders, AuthMethods, FirebaseAuthState} from 'angularfire2';
 import { EmailPasswordCredentials } from 'angularfire2/auth';
-import { ReplaySubject } from 'rxjs';
+import {ReplaySubject, Observable} from 'rxjs';
 
 export interface ISessionEvent {
   name: string;
-  state: FirebaseAuthState;
+  state?: FirebaseAuthState;
+  error?: Error;
 }
 
 @Injectable()
@@ -16,6 +17,7 @@ export class SessionService {
 
   constructor(private af: AngularFire) {
     af.auth.subscribe((auth) =>  {
+      console.log(auth);
       if(auth == null) {
         this._user = null;
         this._state = null;
@@ -37,18 +39,34 @@ export class SessionService {
   public event: ReplaySubject<ISessionEvent> = new ReplaySubject();
 
   public loginAnonymous() {
+    console.log('Login anonymous');
     this.af.auth.login({
       provider: AuthProviders.Anonymous,
       method: AuthMethods.Anonymous,
     });
   }
 
-  public loginCredentials(credentials: EmailPasswordCredentials) {
-    this.af.auth.login(credentials);
+  public loginCredentials(credentials: EmailPasswordCredentials): firebase.Promise<FirebaseAuthState> {
+    return this.af.auth.login(credentials, {
+      provider: AuthProviders.Password,
+      method: AuthMethods.Password
+    }).catch(
+      (error) => this.event.next({
+        name: 'login-error',
+        state: null,
+        error: error
+      })
+    );
   }
 
-  public logout(): void {
-    this.af.auth.logout();
+  public logout(): Promise<void> {
+    return this.af.auth.logout().catch(
+      (error) => this.event.next({
+        name: 'login-error',
+        state: null,
+        error: error
+      })
+    );
   }
 
   public currentUser(): firebase.User {

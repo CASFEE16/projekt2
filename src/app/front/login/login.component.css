@@ -12,3 +12,8 @@
   flex-direction: row;
   justify-content: center;
 }
+
+.alert {
+  padding: 10px;
+  border: solid 1px #d81b60;
+}
