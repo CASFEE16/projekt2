@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     'email': '',
     'password': ''
   };
-  error: string = null;
+  error: Error = null;
 
   constructor(private sessionService: SessionService, private snackbar: MdSnackBar, private router: Router) { }
 
@@ -39,21 +39,6 @@ export class LoginComponent implements OnInit, OnDestroy {
     }
   }
 
-  handleEvent(event: ISessionEvent) {
-    console.log('LOGIN-EVENT', event);
-    if (event.error) {
-      this.error = event.error.message;
-      this.snackbar.open(this.error, '', {
-        duration: 3000
-      });
-    } else {
-      this.error = null;
-    }
-    if (event.name === 'login') {
-      this.router.navigate(['/']);
-    }
-  }
-
   onSubmit() {
     console.log("Submit", this.credentials);
     this.error = null;
@@ -66,7 +51,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       (error) => {
         // console.log('Error');
         this.error = error.message;
-        this.snackbar.open(this.error, '', {
+        this.snackbar.open(this.error.message, '', {
           duration: 3000
         });
       });

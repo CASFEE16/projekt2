@@ -2,7 +2,8 @@
   <md-card class="register-card">
     <md-toolbar color="primary">Registration</md-toolbar>
     <md-card-content>
-      <form class="register-form">
+      <br>
+      <form class="register-form" (ngSubmit)="onSubmit()">
         <md-input-container>
           <input md-input placeholder="Name" required type="text"
                  [(ngModel)]="registration.name" name="name">
