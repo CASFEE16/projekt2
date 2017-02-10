@@ -1,5 +1,47 @@
-<ul>
-  <li class="text" *ngFor="let item of items | async">
-    {{item.$value}}
-  </li>
-</ul>
+<div>
+  <md-grid-list cols="2">
+    <md-grid-tile>
+      <div>
+        <h1>Upcoming shows</h1>
+      <table>
+        <tr><td>
+          <div>
+            <strong>Saturday Night Live</strong>
+            23.2.2017
+            <ul>
+              <li>New album from Radiohead</li>
+              <li>Elvis is alive</li>
+            </ul>
+          </div>
+        </td></tr>
+        <tr><td>
+          <div>
+            <strong>Saturday Night Live</strong>
+            30.2.2017
+            <ul>
+              <li>...</li>
+            </ul>
+          </div>
+        </td></tr>
+      </table>
+</div>
+    </md-grid-tile>
+    <md-grid-tile>
+      <div>
+      <textarea name="Text1" cols="40" rows="5"></textarea>
+      <button md-button>Post</button>
+      <md-list>
+        <md-list-item>
+          Elvis is still dead
+        </md-list-item>
+        <md-list-item>
+          Cool music video on youtube
+        </md-list-item>
+        <md-list-item>
+          Check this out.
+        </md-list-item>
+      </md-list>
+      </div>
+    </md-grid-tile>
+  </md-grid-list>
+</div>
