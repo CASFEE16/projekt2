@@ -12,6 +12,14 @@ html, body, material-app, md-sidenav-container, .my-content {
   flex-grow: 1;
 }
 
+.sidenav-header {
+  margin-bottom: 30px;
+}
+
+.sidenav-user {
+  text-align: center;
+}
+
 .sidenav-container {
   widht: 100%;
 }

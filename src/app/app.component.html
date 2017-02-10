@@ -2,18 +2,20 @@
 
   <md-sidenav #sidenav mode="side" class="app-sidenav" opened="true">
     <div class="sidenav-container">
-      <img md-card-image src="assets/radio.jpg">
-      <div *ngIf="loggedIn | async">{{sessionService.username}}</div>
-        <div class="sidenav-container">
-          <div *ngFor="let navLink of navLinks">
-            <a md-button class="sidenav-link" routerLink="{{navLink.link}}" routerLinkActive #rla="routerLinkActive">
-              <div class="sidenav-item">
-                <div class="sidenav-item-icon"><md-icon>{{navLink.icon}}</md-icon></div>
-                <div class="sidenav-item-text">{{navLink.label}}</div>
-              </div>
-            </a>
-          </div>
+      <div class="sidenav-header">
+        <img md-card-image src="assets/radio.jpg">
+        <div class="sidenav-user" *ngIf="loggedIn | async">{{sessionService.username}}</div>
+      </div>
+      <div class="sidenav-container">
+        <div *ngFor="let navLink of navLinks">
+          <a md-button class="sidenav-link" routerLink="{{navLink.link}}" routerLinkActive #rla="routerLinkActive">
+            <div class="sidenav-item">
+              <div class="sidenav-item-icon"><md-icon>{{navLink.icon}}</md-icon></div>
+              <div class="sidenav-item-text">{{navLink.label}}</div>
+            </div>
+          </a>
         </div>
+      </div>
     </div>
   </md-sidenav>
 
