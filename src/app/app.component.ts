@@ -8,6 +8,7 @@ import {UserMenuComponent} from "./front/user-menu/user-menu.component";
 export interface NavLink {
   link: string;
   label: string;
+  icon?: string;
 }
 
 @Component({
@@ -20,37 +21,35 @@ export class AppComponent implements OnInit {
   navLinks: NavLink[] = [
     {
       link: '/',
-      label: 'Home'
+      label: 'Home',
+      icon: 'home'
     }, {
       link: '/shows',
-      label: 'Shows'
+      label: 'Shows',
+      icon: 'radio'
     }, {
       link: '/search',
-      label: 'Search'
+      label: 'Search',
+      icon: 'search'
     }, {
       link: '/about',
-      label: 'About'
+      label: 'About',
+      icon: 'info'
     }];
 
   constructor(private sessionService: SessionService, private dialog: MdDialog) {}
 
   ngOnInit() {
+
+    // Register for all authentication events like login, logout
     this.sessionService.event.subscribe(
       (event) => this.handleEvent(event)
     );
-    // this.sessionService.loginAnonymous();
   }
 
+  // About Toolbar etc on authentication event
   handleEvent(event: ISessionEvent) {
 
-  }
-
-  get username() {
-    let user = this.sessionService.currentUser();
-    if (user) {
-      return user.displayName || user.email || 'unknown';
-    }
-    return 'anonymous';
   }
 
   get loggedIn(): Observable<boolean> {

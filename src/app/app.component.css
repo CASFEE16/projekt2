@@ -12,14 +12,50 @@ html, body, material-app, md-sidenav-container, .my-content {
   flex-grow: 1;
 }
 
-.sidenav-link {
-  width: 100%;
-}
-
 .sidenav-container {
   widht: 100%;
 }
 
-.sidenav-links {
+.sidenav-link {
   width: 100%;
+}
+
+.sidenav-item {
+  margin-left: 10px;
+  margin-right: 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: left;
+}
+
+.sidenav-item-icon {
+  vertical-align: middle;
+  text-align: left;
+  margin-top: 5px;
+}
+
+.sidenav-item-text {
+  margin-left: 20px;
+  vertical-align: middle;
+  text-align: left;
+  flex-grow: 1;
+}
+
+.toolbar-nav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: left;
+  margin-left: 20px;
+}
+
+.toolbar-link {
+  height: 100%;
+}
+
+.toolbar-title {
+  word-wrap: normal;
+  white-space: nowrap;
 }

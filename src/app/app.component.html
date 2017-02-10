@@ -4,36 +4,46 @@
     <div class="sidenav-container">
       <img md-card-image src="assets/radio.jpg">
       <div *ngIf="loggedIn | async">{{sessionService.username}}</div>
-        <md-list class="sidenav-links">
-          <md-list-item class="sidenav-links" *ngFor="let navLink of navLinks">
-            <a md-button class="sidenav-link" routerLink="{{navLink.link}}" routerLinkActive #rla="routerLinkActive">{{navLink.label}}</a>
-          </md-list-item>
-        </md-list>
+        <div class="sidenav-container">
+          <div *ngFor="let navLink of navLinks">
+            <a md-button class="sidenav-link" routerLink="{{navLink.link}}" routerLinkActive #rla="routerLinkActive">
+              <div class="sidenav-item">
+                <div class="sidenav-item-icon"><md-icon>{{navLink.icon}}</md-icon></div>
+                <div class="sidenav-item-text">{{navLink.label}}</div>
+              </div>
+            </a>
+          </div>
+        </div>
     </div>
   </md-sidenav>
 
   <md-toolbar color="primary">
-    <button md-icon-button class="app-icon-button" (click)="sidenav.toggle()">
-      <md-icon>menu</md-icon>
-    </button>
+    <div>
+      <button md-icon-button class="app-icon-button" (click)="sidenav.toggle()">
+        <md-icon>menu</md-icon>
+      </button>
+    </div>
+    <div class="toolbar-title">
     Radio App
-
-    <nav>
-      <a md-button *ngFor="let navLink of navLinks" routerLink="{{navLink.link}}" routerLinkActive #rla="routerLinkActive">
-        {{navLink.label}}
-      </a>
-    </nav>
-    <span class="app-toolbar-filler"></span>
-
+    </div>
+    <div class="toolbar-nav">
+      <div *ngFor="let navLink of navLinks">
+        <a md-button class="toolbar-link" routerLink="{{navLink.link}}" routerLinkActive #rla="routerLinkActive">
+          <md-icon>{{navLink.icon}}</md-icon> {{navLink.label}}
+        </a>
+      </div>
+    </div>
+    <div class="app-toolbar-filler"></div>
     <!-- <button md-button (click)="isDarkTheme = !isDarkTheme">TOGGLE DARK THEME</button> -->
-
-    <span *ngIf="loggedIn | async">
-      <button md-fab (click)="onUserMenu()"><md-icon>face</md-icon></button>
-    </span>
-    <span *ngIf="!(loggedIn | async)">
-      <a md-button routerLink="/login">Login</a>
-      <a md-button routerLink="/register">Register</a>
-    </span>
+    <div>
+      <div *ngIf="loggedIn | async">
+        <div><button md-fab (click)="onUserMenu()"><md-icon>face</md-icon></button></div>
+      </div>
+      <div class="toolbar-nav" *ngIf="!(loggedIn | async)">
+        <div><a md-button class="toolbar-link" routerLink="/login">Login</a></div>
+        <div><a md-button class="toolbar-link" routerLink="/register">Register</a></div>
+      </div>
+    </div>
   </md-toolbar>
 
   <div class="app-content">

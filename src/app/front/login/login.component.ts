@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       },
       (error) => {
         // console.log('Error');
-        this.error = error.message;
+        this.error = error;
         this.snackbar.open(this.error.message, '', {
           duration: 3000
         });
