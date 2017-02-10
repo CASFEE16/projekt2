@@ -93,4 +93,8 @@ export class SessionService {
     return 'anonymous';
   }
 
+  public serverTimestamp(): any {
+    return firebase.database['ServerValue']['TIMESTAMP'];
+  }
+
 }

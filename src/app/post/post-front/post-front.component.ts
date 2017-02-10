@@ -26,21 +26,17 @@ export class PostFrontComponent implements OnInit {
   }
 
   onSubmit() {
-    let obs: FirebaseListObservable<Post[]> = <FirebaseListObservable<Post[]>>this.posts;
-    obs.push(this.post)
-      .catch(error => {
-        this.snackbar.open(error.message);
-      })
-      .then(result => console.log(result));
+    this.postService.add(this.post).subscribe(
+      result => console.log(result),
+      error => this.snackbar.open(error.message)
+    );
   }
 
   onDelete(deletePost: Post) {
-    let obs: FirebaseListObservable<Post[]> = <FirebaseListObservable<Post[]>>this.posts;
-    obs.remove(deletePost['$key'])
-      .catch(error => {
-        this.snackbar.open(error.message);
-      })
-      .then(result => console.log(result));
+    this.postService.delete(deletePost).subscribe(
+        result => console.log(result),
+        error => this.snackbar.open(error.message)
+      );
   }
 
 }
