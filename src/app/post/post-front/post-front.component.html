@@ -1,0 +1,31 @@
+<div class="post-front-container">
+
+  <div>
+    <form (ngSubmit)="onSubmit()">
+      <div>
+        <textarea name="Text1" cols="50" rows="5" [(ngModel)]="post.text"></textarea>
+      </div>
+      <button md-button>Post</button>
+    </form>
+  </div>
+
+  <md-spinner *ngIf="loading"></md-spinner>
+
+  <div>
+    <md-card class="post-card" *ngFor="let post of posts | async">
+      <!--
+      <md-card-header>
+        <div md-card-avatar><md-icon>face</md-icon></div>
+        <md-card-title>{{post.username}}</md-card-title>
+      </md-card-header>
+       -->
+      <md-card-content>
+        {{post.text}}
+      </md-card-content>
+      <md-card-actions>
+        <button md-mini-fab (click)="onDelete(post)"><md-icon>delete</md-icon></button>
+      </md-card-actions>
+    </md-card>
+
+  </div>
+</div>

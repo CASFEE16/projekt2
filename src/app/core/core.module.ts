@@ -10,9 +10,9 @@ import {RegistrationService} from "./firebase/registration.service";
   ],
   declarations: [],
   providers: [
-    BackendService,
     SessionService,
-    RegistrationService
+    RegistrationService,
+    BackendService
   ]
 })
 export class CoreModule { }

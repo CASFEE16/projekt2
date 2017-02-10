@@ -7,8 +7,8 @@ export class BackendService {
 
   constructor(private af: AngularFire) { }
 
-  public list(resource: string): FirebaseListObservable<any[]> {
-    return this.af.database.list(resource);
+  public list(resource: string, options?: any): FirebaseListObservable<any[]> {
+    return this.af.database.list(resource, options);
   }
 
 }

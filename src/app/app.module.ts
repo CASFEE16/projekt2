@@ -15,6 +15,7 @@ import {FrontModule} from './front/front.module';
 import {environment} from "../environments/environment";
 
 import 'hammerjs';
+import {PostModule} from "./post/post.module";
 
 export const FIREBASE_CONFIG: FirebaseAppConfig = environment.firebase.config;
 
@@ -31,7 +32,8 @@ export const FIREBASE_CONFIG: FirebaseAppConfig = environment.firebase.config;
     RouterModule.forRoot(ROUTE_CONFIG),
     CoreModule,
     UserModule,
-    FrontModule
+    FrontModule,
+    PostModule
   ],
   providers: [],
   bootstrap: [AppComponent]

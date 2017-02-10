@@ -1,0 +1,15 @@
+.front-container {
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+}
+
+.front-left {
+  flex: 2 1 auto;
+  margin: 10px;
+}
+
+.front-right {
+  flex: 1 1 auto;
+  margin: 10px;
+}
