@@ -9,6 +9,10 @@ export interface ISessionEvent {
   error?: Error;
 }
 
+/**
+ * This is a global service! It keeps the authentcation state for the application.
+ * Use this service to access AngularFire services.
+ */
 @Injectable()
 export class SessionService {
 

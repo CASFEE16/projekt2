@@ -8,17 +8,14 @@ import {SessionService} from "../../core/firebase/session.service";
 @Injectable()
 export class PostService {
 
-  posts: FirebaseListObservable<Post[]> = null;
-
-  constructor(private backend: BackendService, private session: SessionService) { }
+  constructor(private backend: BackendService<Post>, private session: SessionService) { }
 
   public findFront(): FirebaseListObservable<Post[]> {
-    this.posts = this.backend.list('/posts', {
+    return this.backend.find('/posts', {
       query: {
         limitToLast: 10,
         orderByChild: 'sortKey'
       }});
-    return this.posts;
   }
 
   public add(post: Post): Observable<Post> {
@@ -26,16 +23,9 @@ export class PostService {
     post.user = this.session.currentUser().uid;
     // post.ts = this.session.serverTimestamp();
     post.dt = new Date().toISOString();
+    post.sortKey = 0 - Date.now(); // AF can not sort descending, so use this workaround
 
-    // Can not sort descending, so use this workaround
-    post.sortKey = 0 - Date.now();
-
-    let obs: FirebaseListObservable<Post[]> = <FirebaseListObservable<Post[]>>this.posts;
-    return Observable.create((observer: Observer<Post>) => {
-      return obs.push(post)
-        .catch(error => observer.error(error))
-        .then(result => {observer.next(result); observer.complete()});
-    })
+    return this.backend.add(post);
   }
 
   public delete(post: Post): Observable<Post> {
@@ -44,12 +34,7 @@ export class PostService {
       return Observable.of(null);
     }
 
-    let obs: FirebaseListObservable<Post[]> = <FirebaseListObservable<Post[]>>this.posts;
-    return Observable.create((observer: Observer<Post>) => {
-      return obs.remove(post['$key'])
-        .catch(error => observer.error(error))
-        .then(result => {observer.next(result); observer.complete()});
-    })
+    return this.backend.delete(post);
   }
 
 }

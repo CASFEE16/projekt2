@@ -4,12 +4,13 @@ import {Observable} from "rxjs";
 import {Post} from "../shared/post.model";
 import {FirebaseListObservable} from "angularfire2";
 import {MdSnackBar} from "@angular/material";
+import {BackendService} from "../../core/firebase/backend.service";
 
 @Component({
   selector: 'app-post-front',
   templateUrl: './post-front.component.html',
   styleUrls: ['./post-front.component.css'],
-  providers: [PostService]
+  providers: [BackendService, PostService]
 })
 export class PostFrontComponent implements OnInit {
 

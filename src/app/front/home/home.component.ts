@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {WelcomeService} from "./welcome.service";
 import {Observable} from "rxjs";
 import {FirebaseListObservable} from "angularfire2";
 
@@ -7,17 +6,17 @@ import {FirebaseListObservable} from "angularfire2";
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
-  providers: [WelcomeService]
+  providers: []
 })
 export class HomeComponent implements OnInit {
 
   items: FirebaseListObservable<string[]>;
 
-  constructor(private welcomeService: WelcomeService) {
+  constructor() {
   }
 
   ngOnInit() {
-    this.items = this.welcomeService.getWelcomeMessages();
+
   }
 
 }
