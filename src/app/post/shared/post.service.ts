@@ -10,12 +10,17 @@ export class PostService {
 
   constructor(private backend: BackendService<Post>, private session: SessionService) { }
 
-  public findFront(): FirebaseListObservable<Post[]> {
+  public findFront(): Observable<Post[]> {
     return this.backend.find('/posts', {
       query: {
         limitToLast: 10,
         orderByChild: 'sortKey'
-      }});
+      }}).map(result => this.map(result));
+  }
+
+  map(list: Post[]): Post[] {
+    let newList: Post[] = list.map(each => Object.assign(new Post(), each));
+    return newList;
   }
 
   public add(post: Post): Observable<Post> {

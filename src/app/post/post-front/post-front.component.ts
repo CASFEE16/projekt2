@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {PostService} from "../shared/post.service";
 import {Observable} from "rxjs";
-import {Post} from "../shared/post.model";
+import {Post, PostTypes, PostType} from "../shared/post.model";
 import {FirebaseListObservable} from "angularfire2";
 import {MdSnackBar} from "@angular/material";
 import {BackendService} from "../../core/firebase/backend.service";
@@ -14,16 +14,23 @@ import {BackendService} from "../../core/firebase/backend.service";
 })
 export class PostFrontComponent implements OnInit {
 
-  post: Post = new Post();
+  post: Post = null;
   posts: Observable<Post[]> = null;
   loading: boolean = true;
+  typeList: any[];
 
   constructor(private postService: PostService, private snackbar: MdSnackBar) { }
 
   ngOnInit() {
-    this.post.text = '';
+    this.post = new Post();
+    this.post.type = PostType.Note;
+    this.typeList = PostTypes.list();
     this.posts = this.postService.findFront()
       .do(each => this.loading = false);
+  }
+
+  getIcon(obj: Post) {
+    return PostTypes.icon(obj.type);
   }
 
   onSubmit() {
