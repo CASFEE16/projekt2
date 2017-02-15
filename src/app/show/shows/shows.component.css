@@ -1,0 +1,13 @@
+.show-front-container {
+  heigth: 100%;
+}
+.show-card {
+  margin-bottom: 10px;
+}
+.show-new-form {
+  display: flex;
+  flex-direction: row;
+}
+.show-new-form-2 {
+  margin-left: 20px;
+}

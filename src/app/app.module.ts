@@ -16,6 +16,7 @@ import {environment} from "../environments/environment";
 
 import 'hammerjs';
 import {PostModule} from "./post/post.module";
+import {ShowModule} from "./show/show.module";
 
 export const FIREBASE_CONFIG: FirebaseAppConfig = environment.firebase.config;
 
@@ -33,7 +34,8 @@ export const FIREBASE_CONFIG: FirebaseAppConfig = environment.firebase.config;
     CoreModule,
     UserModule,
     FrontModule,
-    PostModule
+    PostModule,
+    ShowModule
   ],
   providers: [],
   bootstrap: [AppComponent]

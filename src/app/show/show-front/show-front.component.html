@@ -1,0 +1,19 @@
+<md-card class="login-card">
+  <md-toolbar color="primary">Upcoming shows</md-toolbar>
+  <md-card-content>
+    <br>
+    <md-spinner *ngIf="loading"></md-spinner>
+    <table>
+      <tr *ngFor="let show of shows | async">
+        <td>
+          <div>
+            <strong>{{show.title}}</strong> {{show.date | date}}
+            <ul>
+              <li></li>.
+            </ul>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </md-card-content>
+</md-card>

@@ -8,13 +8,15 @@ import {FormsModule} from '@angular/forms';
 import { RegisterComponent } from './register/register.component';
 import { UserMenuComponent } from './user-menu/user-menu.component';
 import {PostModule} from "../post/post.module";
+import {ShowModule} from "../show/show.module";
 
 @NgModule({
   imports: [
     CommonModule,
     MaterialModule,
     FormsModule,
-    PostModule
+    PostModule,
+    ShowModule
   ],
   declarations: [
     HomeComponent,
