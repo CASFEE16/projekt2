@@ -7,6 +7,7 @@
 .show-new-form {
   display: flex;
   flex-direction: row;
+  margin-bottom: 20px;
 }
 .show-new-form-2 {
   margin-left: 20px;

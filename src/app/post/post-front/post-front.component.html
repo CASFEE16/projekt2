@@ -2,10 +2,14 @@
 
   <div>
     <form (ngSubmit)="onSubmit()">
-      <div>
+      <div class="post-new-form">
+      <div class="post-new-form-1">
         <textarea name="Text1" cols="50" rows="5" [(ngModel)]="post.text"></textarea>
       </div>
-      <button md-button>Post</button>
+      <div class="post-new-form-2">
+        <button md-fab><md-icon>add</md-icon></button>
+      </div>
+      </div>
     </form>
   </div>
 
