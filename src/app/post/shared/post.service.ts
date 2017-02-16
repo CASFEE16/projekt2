@@ -4,6 +4,7 @@ import {Post} from "./post.model";
 import {BackendService} from "../../core/firebase/backend.service";
 import {FirebaseListObservable} from "angularfire2";
 import {SessionService} from "../../core/firebase/session.service";
+import {DateUtils} from "../../shared/DateUtils";
 
 @Injectable()
 export class PostService {
@@ -25,10 +26,17 @@ export class PostService {
 
   public add(post: Post): Observable<Post> {
 
-    post.user = this.session.currentUser().uid;
-    // post.ts = this.session.serverTimestamp();
-    post.dt = new Date().toISOString();
-    post.sortKey = 0 - Date.now(); // AF can not sort descending, so use this workaround
+    if (!post.user) {
+      post.user = this.session.currentUser().uid;
+    }
+    if (!post.ts) {
+      post.ts = Date.now();
+    }
+    if (!post.date) {
+      post.date = DateUtils.todayISOString();
+    }
+
+    post.sortKey = 0 - post.ts;
 
     return this.backend.add(post);
   }

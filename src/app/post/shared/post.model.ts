@@ -8,14 +8,10 @@ export class Post {
   id: number;
   text: string;
   type?: PostType;
+  date?: string;
   user?: string;
-  ts?: any;
-  dt?: string;
+  ts?: number;
   sortKey?: number;
-
-  get date(): string {
-    return this.dt;
-  }
 }
 
 export enum PostType {

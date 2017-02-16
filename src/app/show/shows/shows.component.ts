@@ -13,23 +13,22 @@ import {MdSnackBar} from "@angular/material";
 })
 export class ShowsComponent implements OnInit {
 
-  newShow: Show = new Show();
+  newShow: Show = null;
   shows: Observable<Show[]> = null;
   loading: boolean = true;
 
   constructor(private showService: ShowService, private snackbar: MdSnackBar) { }
 
   ngOnInit() {
-    console.log('INIT');
-    this.newShow.title = 'New Show';
+    this.newShow = this.showService.newDefault();
     this.shows = this.showService.findAll()
       .do(each => this.loading = false);
   }
 
   onSubmit() {
     this.showService.add(this.newShow).subscribe(
-      result => console.log(result),
-      error => this.snackbar.open(error.message)
+      result => {this.newShow = this.showService.newDefault()},
+      error => {this.snackbar.open(error.message)}
     );
   }
 
