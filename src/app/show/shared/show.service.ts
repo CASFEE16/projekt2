@@ -5,12 +5,15 @@ import {Show} from "./show.model";
 import {Observable} from "rxjs";
 import {FirebaseListObservable} from "angularfire2";
 import {DateUtils} from "../../shared/DateUtils";
+import {ListCache} from "../../core/firebase/ListCache";
 
 
 @Injectable()
 export class ShowService {
 
-  constructor(private backend: BackendService<Show>, private session: SessionService) { }
+  private listCache: ListCache<Show> = new ListCache<Show>();
+
+  constructor(private backend: BackendService, private session: SessionService) { }
 
   public newDefault(): Show {
     let show: Show = new Show();
@@ -21,8 +24,8 @@ export class ShowService {
     return show;
   }
 
-  public findFront(): Observable<Show[]> {
-    return this.backend.find('/shows', {
+  public findUpcoming(): Observable<Show[]> {
+    return this.listCache.find(this.backend.database(), '/shows', {
       query: {
         limitToLast: 10,
         orderByChild: 'date',
@@ -30,8 +33,12 @@ export class ShowService {
       }}).map(each => this.map(each));
   }
 
+  public findFront(): Observable<Show[]> {
+    return this.findUpcoming();
+  }
+
   public findAll(): Observable<Show[]> {
-    return this.backend.find('/shows', {
+    return this.listCache.find(this.backend.database(), '/shows', {
       query: {
         limitToLast: 100,
         orderByChild: 'sortKey'
@@ -58,7 +65,7 @@ export class ShowService {
     let time: number = new Date(show.date).getTime();
     show.sortKey = 0 - time;
 
-    return this.backend.add(show);
+    return this.listCache.add(show);
   }
 
   public delete(show: Show): Observable<Show> {
@@ -67,7 +74,7 @@ export class ShowService {
       return Observable.of(null);
     }
 
-    return this.backend.delete(show);
+    return this.listCache.delete(show);
   }
 
 

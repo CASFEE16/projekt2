@@ -8,7 +8,7 @@ import {Show} from "../shared/show.model";
   selector: 'app-show-front',
   templateUrl: './show-front.component.html',
   styleUrls: ['./show-front.component.css'],
-  providers: [BackendService, ShowService]
+  providers: [ShowService]
 })
 export class ShowFrontComponent implements OnInit {
 

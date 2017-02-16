@@ -5,14 +5,17 @@ import {BackendService} from "../../core/firebase/backend.service";
 import {FirebaseListObservable} from "angularfire2";
 import {SessionService} from "../../core/firebase/session.service";
 import {DateUtils} from "../../shared/DateUtils";
+import {ListCache} from "../../core/firebase/ListCache";
 
 @Injectable()
 export class PostService {
 
-  constructor(private backend: BackendService<Post>, private session: SessionService) { }
+  private listCache: ListCache<Post> = new ListCache<Post>();
+
+  constructor(private backend: BackendService, private session: SessionService) { }
 
   public findFront(): Observable<Post[]> {
-    return this.backend.find('/posts', {
+    return this.listCache.find(this.backend.database(), '/posts', {
       query: {
         limitToLast: 10,
         orderByChild: 'sortKey'
@@ -38,7 +41,7 @@ export class PostService {
 
     post.sortKey = 0 - post.ts;
 
-    return this.backend.add(post);
+    return this.listCache.add(post);
   }
 
   public delete(post: Post): Observable<Post> {
@@ -47,7 +50,7 @@ export class PostService {
       return Observable.of(null);
     }
 
-    return this.backend.delete(post);
+    return this.listCache.delete(post);
   }
 
 }

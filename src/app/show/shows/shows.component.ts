@@ -9,7 +9,7 @@ import {MdSnackBar} from "@angular/material";
   selector: 'app-show-edit',
   templateUrl: 'shows.component.html',
   styleUrls: ['shows.component.css'],
-  providers: [BackendService, ShowService]
+  providers: [ShowService]
 })
 export class ShowsComponent implements OnInit {
 

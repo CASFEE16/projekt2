@@ -12,6 +12,7 @@ export class Post {
   user?: string;
   ts?: number;
   sortKey?: number;
+  show_id?: number;
 }
 
 export enum PostType {

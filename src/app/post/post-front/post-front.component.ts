@@ -5,12 +5,13 @@ import {Post, PostTypes, PostType} from "../shared/post.model";
 import {FirebaseListObservable} from "angularfire2";
 import {MdSnackBar} from "@angular/material";
 import {BackendService} from "../../core/firebase/backend.service";
+import {ShowService} from "../../show/shared/show.service";
 
 @Component({
   selector: 'app-post-front',
   templateUrl: './post-front.component.html',
   styleUrls: ['./post-front.component.css'],
-  providers: [BackendService, PostService]
+  providers: [PostService, ShowService]
 })
 export class PostFrontComponent implements OnInit {
 
@@ -19,7 +20,7 @@ export class PostFrontComponent implements OnInit {
   loading: boolean = true;
   typeList: any[];
 
-  constructor(private postService: PostService, private snackbar: MdSnackBar) { }
+  constructor(private postService: PostService, private showService: ShowService, private snackbar: MdSnackBar) { }
 
   ngOnInit() {
     this.post = new Post();
