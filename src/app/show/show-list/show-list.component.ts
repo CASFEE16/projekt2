@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
 import {ShowService} from "../shared/show.service";
-import {BackendService} from "../../core/firebase/backend.service";
-import {Show} from "../shared/show.model";
+import {Show, SHOWS_RESOURCE_PATH} from "../shared/show.model";
 import {Observable} from "rxjs";
-import {MdSnackBar} from "@angular/material";
+import {MdSnackBar, MdDialog} from "@angular/material";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-show-edit',
-  templateUrl: 'shows.component.html',
-  styleUrls: ['shows.component.css'],
+  templateUrl: 'show-list.component.html',
+  styleUrls: ['show-list.component.css'],
   providers: [ShowService]
 })
-export class ShowsComponent implements OnInit {
+export class ShowListComponent implements OnInit {
 
   newShow: Show = null;
   shows: Observable<Show[]> = null;
   loading: boolean = true;
 
-  constructor(private showService: ShowService, private snackbar: MdSnackBar) { }
+  constructor(private showService: ShowService, private snackbar: MdSnackBar, private router: Router) { }
 
   ngOnInit() {
     this.newShow = this.showService.newDefault();
@@ -40,7 +40,7 @@ export class ShowsComponent implements OnInit {
   }
 
   onEdit(obj: Show) {
-
+    this.router.navigate(['/show', obj['$key']]);
   }
 
 }

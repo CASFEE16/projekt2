@@ -21,7 +21,6 @@ export class SessionService {
 
   constructor(private af: AngularFire) {
     af.auth.subscribe((auth) =>  {
-      console.log(auth);
       if(auth == null) {
         this._user = null;
         this._state = null;
@@ -43,7 +42,6 @@ export class SessionService {
   public event: ReplaySubject<ISessionEvent> = new ReplaySubject();
 
   public loginAnonymous() {
-    console.log('Login anonymous');
     this.af.auth.login({
       provider: AuthProviders.Anonymous,
       method: AuthMethods.Anonymous,

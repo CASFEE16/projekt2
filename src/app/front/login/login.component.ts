@@ -40,7 +40,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   onSubmit() {
-    console.log("Submit", this.credentials);
     this.error = null;
 
     this.sessionService.loginCredentials(this.credentials).subscribe(

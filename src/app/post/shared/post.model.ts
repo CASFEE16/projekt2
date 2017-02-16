@@ -17,6 +17,8 @@ export class Post {
 
 }
 
+export const POSTS_RESOURCE_PATH: string = '/posts';
+
 export enum PostType {
   Note,
   Album,

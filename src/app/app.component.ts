@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
       label: 'Home',
       icon: 'home'
     }, {
-      link: '/shows',
+      link: '/show',
       label: 'Shows',
       icon: 'radio'
     }, {

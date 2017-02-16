@@ -6,4 +6,5 @@ export class Show {
   sortKey?: number; // Special sort key for Firebase for sorting by descending date
 }
 
+export const SHOWS_RESOURCE_PATH: string = '/shows';
 

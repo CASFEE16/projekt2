@@ -1,28 +1,14 @@
 import {Routes} from "@angular/router";
-import {ShowsComponent} from './shows/shows.component';
+import {ShowListComponent} from './show-list/show-list.component';
+import {ShowDetailsComponent} from './show-details/show-details.component';
 
 export const SHOW_ROUTE_CONFIG: Routes = [
   {
-    path: 'shows',
-    component: ShowsComponent
-
-    /*
-    children: [
-      {
-        path: '',
-        component: CrisisListComponent,
-        children: [
-          {
-            path: ':id',
-            component: CrisisDetailComponent
-          },
-          {
-            path: '',
-            component: CrisisCenterHomeComponent
-          }
-        ]
-      }
-    ]
-    */
-  }
+    path: 'show',
+    component: ShowListComponent
+  },
+  {
+    path: 'show/:id',
+    component: ShowDetailsComponent
+    }
 ];

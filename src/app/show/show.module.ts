@@ -5,8 +5,9 @@ import {MaterialModule} from "@angular/material";
 import {CoreModule} from "../core/core.module";
 import {RouterModule} from "@angular/router";
 import {SHOW_ROUTE_CONFIG} from './show-route-config';
-import {ShowsComponent} from "./shows/shows.component";
+import {ShowListComponent} from "./show-list/show-list.component";
 import { ShowFrontComponent } from './show-front/show-front.component';
+import { ShowDetailsComponent } from './show-details/show-details.component';
 
 @NgModule({
   imports: [
@@ -20,6 +21,6 @@ import { ShowFrontComponent } from './show-front/show-front.component';
     RouterModule,
     ShowFrontComponent
   ],
-  declarations: [ShowsComponent, ShowFrontComponent]
+  declarations: [ShowListComponent, ShowFrontComponent, ShowDetailsComponent]
 })
 export class ShowModule { }

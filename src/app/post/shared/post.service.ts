@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable, Observer} from "rxjs";
-import {Post} from "./post.model";
+import {Post, POSTS_RESOURCE_PATH} from "./post.model";
 import {BackendService} from "../../core/firebase/backend.service";
 import {FirebaseListObservable} from "angularfire2";
 import {SessionService} from "../../core/firebase/session.service";
@@ -21,7 +21,7 @@ export class PostService {
   constructor(private backend: BackendService, private session: SessionService) { }
 
   public findFront(): Observable<PostShowListEntry[]> {
-    return this.listCache.find(this.backend.database(), '/posts', {
+    return this.listCache.find(this.backend.database(), POSTS_RESOURCE_PATH, {
       query: {
         limitToLast: 10,
         orderByChild: 'sortKey'

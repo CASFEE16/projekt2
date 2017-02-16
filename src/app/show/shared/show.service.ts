@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import {BackendService} from "../../core/firebase/backend.service";
 import {SessionService} from "../../core/firebase/session.service";
-import {Show} from "./show.model";
+import {Show, SHOWS_RESOURCE_PATH} from "./show.model";
 import {Observable} from "rxjs";
 import {FirebaseListObservable} from "angularfire2";
 import {DateUtils} from "../../shared/DateUtils";
 import {ListCache} from "../../core/firebase/ListCache";
-import {Post} from "../../post/shared/post.model";
+import {Post, POSTS_RESOURCE_PATH} from "../../post/shared/post.model";
 
 export interface ShowWithPosts {
   show: Show;
@@ -30,7 +30,7 @@ export class ShowService {
   }
 
   public findUpcoming(): Observable<Show[]> {
-    return this.listCache.find(this.backend.database(), '/shows', {
+    return this.listCache.find(this.backend.database(), SHOWS_RESOURCE_PATH, {
       query: {
         limitToLast: 10,
         orderByChild: 'date',
@@ -42,7 +42,7 @@ export class ShowService {
     return this.findUpcoming().flatMap(shows => {
       return Observable.of(
         shows.map(show => {
-          let posts: Observable<Post[]> = this.backend.database().list('/posts',{
+          let posts: Observable<Post[]> = this.backend.database().list(POSTS_RESOURCE_PATH, {
             query: {
               limitToLast: 10,
               orderByChild: 'show_key',
@@ -55,7 +55,7 @@ export class ShowService {
   }
 
   public findAll(): Observable<Show[]> {
-    return this.listCache.find(this.backend.database(), '/shows', {
+    return this.listCache.find(this.backend.database(), SHOWS_RESOURCE_PATH, {
       query: {
         limitToLast: 100,
         orderByChild: 'sortKey'

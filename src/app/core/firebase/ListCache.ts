@@ -14,9 +14,8 @@ export class ListCache<T> {
   }
 
   public add(obj: T): Observable<T> {
-    let obs: FirebaseListObservable<T[]> = <FirebaseListObservable<T[]>>this.list;
     return Observable.create((observer: Observer<T>) => {
-      return obs.push(obj)
+      return this.list.push(obj)
         .catch(error => observer.error(error))
         .then(result => {
           observer.next(result);
@@ -26,9 +25,8 @@ export class ListCache<T> {
   }
 
   public delete(obj: T): Observable<T> {
-    let obs: FirebaseListObservable<T[]> = <FirebaseListObservable<T[]>>this.list;
     return Observable.create((observer: Observer<T>) => {
-      return obs.remove(obj['$key'])
+      return this.list.remove(obj['$key'])
         .catch(error => observer.error(error))
         .then(result => {
           observer.next(result);
@@ -38,10 +36,8 @@ export class ListCache<T> {
   }
 
   public update(obj: T, changes: any): Observable<T> {
-    let obs: FirebaseListObservable<T[]> = <FirebaseListObservable<T[]>>this.list;
     return Observable.create((observer: Observer<T>) => {
-      console.log('UPDATE', obj['$key'], changes);
-      return obs.update(obj['$key'], changes)
+      return this.list.update(obj['$key'], changes)
         .catch(error => observer.error(error))
         .then(result => {
           observer.next(result);
