@@ -3,19 +3,21 @@
   <md-card-content>
     <br>
     <md-spinner *ngIf="loading"></md-spinner>
-    <table>
-      <tr *ngFor="let each of shows | async">
-        <td>
-          <div>
-            <strong>{{each?.show?.title}}</strong> {{each?.show?.date | date}}
-            <ul>
-              <li *ngFor="let post of each?.posts | async">
-                {{post.text}}
-              </li>
-            </ul>
-          </div>
-        </td>
-      </tr>
-    </table>
+    <md-card class="show-card" *ngFor="let each of shows | async">
+      <md-card-header>
+        <div md-card-avatar>
+          <md-icon>radio</md-icon>
+        </div>
+        <md-card-title><strong>{{each?.show?.title}}</strong></md-card-title>
+        <md-card-subtitle>{{each?.show?.date | date}}</md-card-subtitle>
+      </md-card-header>
+      <md-card-content>
+        <ul>
+          <li *ngFor="let post of each?.posts | async">
+            {{post.text}}
+          </li>
+        </ul>
+      </md-card-content>
+    </md-card>
   </md-card-content>
 </md-card>

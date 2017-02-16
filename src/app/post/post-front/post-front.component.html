@@ -1,25 +1,25 @@
 <div class="post-front-container">
 
 
-  <div>
-    <form (ngSubmit)="onSubmit()">
-      <div class="post-new-form">
-      <div class="post-new-form-1">
-        <div>
-          <textarea name="Text1" cols="50" rows="5" [(ngModel)]="post.text"></textarea>
+  <md-card class="post-card">
+      <form (ngSubmit)="onSubmit()">
+        <div class="post-new-form">
+        <div class="post-new-form-1">
+          <div>
+            <textarea name="Text1" cols="50" rows="5" [(ngModel)]="post.text"></textarea>
+          </div>
+          <div>
+            <md-radio-group name="type" [(ngModel)]="post.type">
+              <md-radio-button *ngFor="let t of typeList" [value]="t.value">{{t.label}}</md-radio-button>
+            </md-radio-group>
+          </div>
         </div>
-        <div>
-          <md-radio-group name="type" [(ngModel)]="post.type">
-            <md-radio-button *ngFor="let t of typeList" [value]="t.value">{{t.label}}</md-radio-button>
-          </md-radio-group>
+        <div class="post-new-form-2">
+          <button md-fab><md-icon>add</md-icon></button>
         </div>
-      </div>
-      <div class="post-new-form-2">
-        <button md-fab><md-icon>add</md-icon></button>
-      </div>
-      </div>
-    </form>
-  </div>
+        </div>
+      </form>
+  </md-card>
 
   <md-spinner *ngIf="loading"></md-spinner>
 
@@ -27,7 +27,8 @@
     <md-card class="post-card" *ngFor="let each of posts | async">
       <md-card-header>
         <div md-card-avatar><md-icon>{{getIcon(each.post)}}</md-icon></div>
-        <md-card-title><strong>{{each.post.text}}</strong> {{each.post.date | date}}</md-card-title>
+        <md-card-title><strong>{{each.post.text}}</strong></md-card-title>
+        <md-card-subtitle>{{each.post.date | date}}</md-card-subtitle>
       </md-card-header>
       <md-card-actions>
         <button md-mini-fab (click)="onDelete(each.post)"><md-icon>delete</md-icon></button>

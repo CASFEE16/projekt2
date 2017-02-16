@@ -1,8 +1,10 @@
 .show-front-container {
   heigth: 100%;
+  margin: 20px;
 }
 .show-card {
   margin-bottom: 10px;
+  margin-top: 10px;
 }
 .show-new-form {
   display: flex;
