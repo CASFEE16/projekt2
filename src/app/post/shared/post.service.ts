@@ -47,7 +47,7 @@ export class PostService {
       post.date = DateUtils.todayISOString();
     }
 
-    post.sortKey = 0 - post.ts;
+    post.sortKey = 0 - Date.now();
 
     return this.listCache.add(post);
   }
