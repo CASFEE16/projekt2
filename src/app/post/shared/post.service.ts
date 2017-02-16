@@ -6,6 +6,12 @@ import {FirebaseListObservable} from "angularfire2";
 import {SessionService} from "../../core/firebase/session.service";
 import {DateUtils} from "../../shared/DateUtils";
 import {ListCache} from "../../core/firebase/ListCache";
+import {Show} from "../../show/shared/show.model";
+
+export interface PostShowListEntry {
+  post: Post;
+  show: Show;
+}
 
 @Injectable()
 export class PostService {
@@ -14,17 +20,19 @@ export class PostService {
 
   constructor(private backend: BackendService, private session: SessionService) { }
 
-  public findFront(): Observable<Post[]> {
+  public findFront(): Observable<PostShowListEntry[]> {
     return this.listCache.find(this.backend.database(), '/posts', {
       query: {
         limitToLast: 10,
         orderByChild: 'sortKey'
-      }}).map(result => this.map(result));
-  }
-
-  map(list: Post[]): Post[] {
-    let newList: Post[] = list.map(each => Object.assign(new Post(), each));
-    return newList;
+      }}).map(posts => {
+          return posts.map(post => {
+              // TODO: Get Show from Firebase this.backend.database.object(...)
+              return {post: Object.assign(new Post(), post), show: null};
+            }
+          );
+        }
+      );
   }
 
   public add(post: Post): Observable<Post> {
@@ -51,6 +59,12 @@ export class PostService {
     }
 
     return this.listCache.delete(post);
+  }
+
+  public setShow(post: Post, show: Show): Observable<Post> {
+    if (!show['$key'])
+      return null;
+    return this.listCache.update(post, {show_key: show['$key']});
   }
 
 }

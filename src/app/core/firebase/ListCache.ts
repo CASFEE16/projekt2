@@ -1,8 +1,6 @@
 import {FirebaseListObservable, AngularFireDatabase} from "angularfire2";
 import {Observable, Observer} from "rxjs";
 
-
-
 export class ListCache<T> {
 
   list: FirebaseListObservable<T[]> = null;
@@ -38,4 +36,18 @@ export class ListCache<T> {
         });
     })
   }
+
+  public update(obj: T, changes: any): Observable<T> {
+    let obs: FirebaseListObservable<T[]> = <FirebaseListObservable<T[]>>this.list;
+    return Observable.create((observer: Observer<T>) => {
+      console.log('UPDATE', obj['$key'], changes);
+      return obs.update(obj['$key'], changes)
+        .catch(error => observer.error(error))
+        .then(result => {
+          observer.next(result);
+          observer.complete()
+        });
+    })
+  }
+
 }

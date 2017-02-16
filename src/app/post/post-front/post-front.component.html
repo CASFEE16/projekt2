@@ -24,13 +24,18 @@
   <md-spinner *ngIf="loading"></md-spinner>
 
   <div>
-    <md-card class="post-card" *ngFor="let post of posts | async">
+    <md-card class="post-card" *ngFor="let each of posts | async">
       <md-card-header>
-        <div md-card-avatar><md-icon>{{getIcon(post)}}</md-icon></div>
-        <md-card-title><strong>{{post.text}}</strong> {{post.date | date}}</md-card-title>
+        <div md-card-avatar><md-icon>{{getIcon(each.post)}}</md-icon></div>
+        <md-card-title><strong>{{each.post.text}}</strong> {{each.post.date | date}}</md-card-title>
       </md-card-header>
       <md-card-actions>
-        <button md-mini-fab (click)="onDelete(post)"><md-icon>delete</md-icon></button>
+        <button md-mini-fab (click)="onDelete(each.post)"><md-icon>delete</md-icon></button>
+        <md-select class="post-card-show-select" placeholder="Select show" [(ngModel)]="each.post.show_key">
+          <md-option *ngFor="let show of shows | async" [value]="show['$key']" (onSelect)="onSelectShow(each.post, show)">
+            {{ show.title }} {{show.date | date}}
+          </md-option>
+        </md-select>
       </md-card-actions>
     </md-card>
 

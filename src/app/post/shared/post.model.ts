@@ -1,3 +1,5 @@
+
+import {Observable} from "rxjs";
 export class Post {
 
   public Post() {
@@ -5,14 +7,14 @@ export class Post {
     this.type = PostType.Note;
   }
 
-  id: number;
   text: string;
   type?: PostType;
   date?: string;
   user?: string;
   ts?: number;
   sortKey?: number;
-  show_id?: number;
+  show_key?: number;
+
 }
 
 export enum PostType {
