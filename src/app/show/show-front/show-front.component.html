@@ -4,12 +4,14 @@
     <br>
     <md-spinner *ngIf="loading"></md-spinner>
     <table>
-      <tr *ngFor="let show of shows | async">
+      <tr *ngFor="let each of shows | async">
         <td>
           <div>
-            <strong>{{show.title}}</strong> {{show.date | date}}
+            <strong>{{each?.show?.title}}</strong> {{each?.show?.date | date}}
             <ul>
-              <li></li>.
+              <li *ngFor="let post of each?.posts | async">
+                {{post.text}}
+              </li>
             </ul>
           </div>
         </td>

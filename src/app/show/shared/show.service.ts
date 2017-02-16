@@ -6,7 +6,12 @@ import {Observable} from "rxjs";
 import {FirebaseListObservable} from "angularfire2";
 import {DateUtils} from "../../shared/DateUtils";
 import {ListCache} from "../../core/firebase/ListCache";
+import {Post} from "../../post/shared/post.model";
 
+export interface ShowWithPosts {
+  show: Show;
+  posts: Observable<Post[]>;
+}
 
 @Injectable()
 export class ShowService {
@@ -33,8 +38,20 @@ export class ShowService {
       }}).map(each => this.map(each));
   }
 
-  public findFront(): Observable<Show[]> {
-    return this.findUpcoming();
+  public findFront(): Observable<ShowWithPosts[]> {
+    return this.findUpcoming().flatMap(shows => {
+      return Observable.of(
+        shows.map(show => {
+          let posts: Observable<Post[]> = this.backend.database().list('/posts',{
+            query: {
+              limitToLast: 10,
+              orderByChild: 'show_key',
+              equalTo: show['$key']
+            }});
+          return {show: show, posts: posts};
+        })
+      );
+    });
   }
 
   public findAll(): Observable<Show[]> {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {BackendService} from "../../core/firebase/backend.service";
-import {ShowService} from "../shared/show.service";
+import {ShowService, ShowWithPosts} from "../shared/show.service";
 import {Observable} from "rxjs";
 import {Show} from "../shared/show.model";
 
@@ -12,7 +12,7 @@ import {Show} from "../shared/show.model";
 })
 export class ShowFrontComponent implements OnInit {
 
-  shows: Observable<Show[]> = null;
+  shows: Observable<ShowWithPosts[]> = null;
   loading: boolean = true;
 
   constructor(private showService: ShowService) { }
