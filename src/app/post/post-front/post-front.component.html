@@ -1,12 +1,11 @@
 <div class="post-front-container">
 
-
-  <md-card class="post-card">
+  <md-card *ngIf="loggedIn" class="post-card">
       <form (ngSubmit)="onSubmit()">
         <div class="post-new-form">
         <div class="post-new-form-1">
           <div>
-            <textarea name="Text1" cols="50" rows="5" [(ngModel)]="post.text"></textarea>
+            <textarea name="Text1" cols="50" rows="5" [(ngModel)]="post.text" (ngModelChange)="onTextChanged($event)"></textarea>
           </div>
           <div>
             <md-radio-group name="type" [(ngModel)]="post.type">
@@ -30,7 +29,10 @@
         <md-card-title><strong>{{each.post.text}}</strong></md-card-title>
         <md-card-subtitle>{{each.post.date | date}}</md-card-subtitle>
       </md-card-header>
-      <md-card-actions>
+      <md-card-content>
+        <iframe *ngIf="youtubeURL(each.post)" width="560" height="315" [src]="youtubeURL(each.post) | safe" frameborder="0" allowfullscreen></iframe>
+      </md-card-content>
+      <md-card-actions *ngIf="loggedIn">
         <button md-mini-fab (click)="onDelete(each.post)"><md-icon>delete</md-icon></button>
         <md-select class="post-card-show-select" placeholder="Select show" [(ngModel)]="each.post.show_key">
           <md-option *ngFor="let show of shows | async" [value]="show['$key']" (onSelect)="onSelectShow(each.post, show)">

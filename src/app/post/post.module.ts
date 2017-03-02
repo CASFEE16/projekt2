@@ -4,6 +4,7 @@ import { PostFrontComponent } from './post-front/post-front.component';
 import {FormsModule} from "@angular/forms";
 import {MaterialModule} from "@angular/material";
 import {CoreModule} from "../core/core.module";
+import {SafePipe} from "../shared/safe.pipe";
 
 @NgModule({
   imports: [
@@ -12,7 +13,10 @@ import {CoreModule} from "../core/core.module";
     MaterialModule,
     CoreModule
   ],
-  declarations: [PostFrontComponent],
+  declarations: [
+    PostFrontComponent,
+    SafePipe
+  ],
   exports: [PostFrontComponent]
 })
 export class PostModule { }

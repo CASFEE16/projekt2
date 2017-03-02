@@ -19,7 +19,8 @@
       "mobile": false,
       "styles": [
         "styles.css",
-        "scss/material/theme.scss"
+        "scss/material/theme.scss",
+        "scss/greenery.css"
       ],
       "scripts": [],
       "environments": {

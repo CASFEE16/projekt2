@@ -17,6 +17,7 @@ import {environment} from "../environments/environment";
 import 'hammerjs';
 import {PostModule} from "./post/post.module";
 import {ShowModule} from "./show/show.module";
+import {SafePipe} from "./shared/safe.pipe";
 
 export const FIREBASE_CONFIG: FirebaseAppConfig = environment.firebase.config;
 

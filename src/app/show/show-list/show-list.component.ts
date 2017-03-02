@@ -4,6 +4,7 @@ import {Show, SHOWS_RESOURCE_PATH} from "../shared/show.model";
 import {Observable} from "rxjs";
 import {MdSnackBar, MdDialog} from "@angular/material";
 import {Router} from "@angular/router";
+import {SessionService} from "../../core/firebase/session.service";
 
 @Component({
   selector: 'app-show-edit',
@@ -16,11 +17,15 @@ export class ShowListComponent implements OnInit {
   newShow: Show = null;
   shows: Observable<Show[]> = null;
   loading: boolean = true;
+  loggedIn: boolean = false;
 
-  constructor(private showService: ShowService, private snackbar: MdSnackBar, private router: Router) { }
+  constructor(private showService: ShowService, private sessionService: SessionService, private snackbar: MdSnackBar, private router: Router) { }
 
   ngOnInit() {
-    this.newShow = this.showService.newDefault();
+    this.loggedIn = this.sessionService.isLoggedIn();
+    if (this.loggedIn) {
+      this.newShow = this.showService.newDefault();
+    }
     this.shows = this.showService.findAll()
       .do(each => this.loading = false);
   }

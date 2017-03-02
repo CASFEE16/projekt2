@@ -7,6 +7,8 @@ import {SessionService} from "../../core/firebase/session.service";
 import {DateUtils} from "../../shared/DateUtils";
 import {ListCache} from "../../core/firebase/ListCache";
 import {Show} from "../../show/shared/show.model";
+import {YoutubeUtils} from "../../core/youtube/YoutubeUtils";
+import {YoutubeService} from "../../core/youtube/youtube.service";
 
 export interface PostShowListEntry {
   post: Post;
@@ -18,7 +20,10 @@ export class PostService {
 
   private listCache: ListCache<Post> = new ListCache<Post>();
 
-  constructor(private backend: BackendService, private session: SessionService) { }
+  constructor(
+    private backend: BackendService,
+    private session: SessionService,
+    private youtube: YoutubeService) { }
 
   public findFront(): Observable<PostShowListEntry[]> {
     return this.listCache.find(this.backend.database(), POSTS_RESOURCE_PATH, {
@@ -48,6 +53,19 @@ export class PostService {
     }
 
     post.sortKey = 0 - Date.now();
+
+    let youtubeId = YoutubeUtils.getId(post.text);
+    if (youtubeId) {
+      return this.youtube.getVideoInfo(youtubeId)
+        .flatMap(result => {
+          let url = YoutubeUtils.getUrl(post.text);
+          if (url) {
+            post.content = url;
+            post.text = result.title || post.text;
+          }
+          return this.listCache.add(post);
+        });
+    }
 
     return this.listCache.add(post);
   }

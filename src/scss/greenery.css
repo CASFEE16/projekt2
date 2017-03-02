@@ -1,0 +1,754 @@
+/* =============================================================================
+   PARTICLES | MADAM MONOROM | monorom.com | HTML5 & CSS Project
+   This project is licensed under the MIT License
+   (https://opensource.org/licenses/MIT) Copyright (c) 2016 monorom.com
+
+   CONTENTS
+   - Border, Text and Background-color
+   - Hoverable
+   - Gradient
+  =============================================================================*/
+/* --------- niagara --------- */
+.niagara{
+  background-color: #5484A4 !important;
+}
+.niagara.light-1{
+  background-color: #769CB6 !important;
+}
+.niagara.light-2{
+  background-color: #98B4C8 !important;
+}
+.niagara.light-3{
+  background-color: #BACCDA !important;
+}
+.niagara.dark-1{
+  background-color: #4C7794 !important;
+}
+.niagara.dark-2{
+  background-color: #3C5D74 !important;
+}
+.niagara.dark-3{
+  background-color: #345064 !important;
+}
+/* --------- text --------- */
+.niagara-text{
+  color: #5484A4 !important;
+}
+.niagara-text.text-light-1{
+  color: #769CB6 !important;
+}
+.niagara-text.text-light-2{
+  color: #98B4C8 !important;
+}
+.niagara-text.text-light-3{
+  color: #BACCDA !important;
+}
+.niagara-text.text-dark-1{
+  color: #4C7794 !important;
+}
+.niagara-text.text-dark-2{
+  color: #3C5D74 !important;
+}
+.niagara-text.text-dark-3{
+  color: #345064 !important;
+}
+/* --------- border --------- */
+.niagara-border{
+  border:1px solid #5484A4;
+}
+.niagara-border.border-light-1{
+  border:1px solid #769CB6;
+}
+.niagara-border.border-light-2{
+  border:1px solid #98B4C8;
+}
+.niagara-border.border-light-3{
+  border:1px solid #BACCDA;
+}
+.niagara-border.border-dark-1{
+  border:1px solid #4C7794;
+}
+.niagara-border.border-dark-2{
+  border:1px solid #3C5D74;
+}
+.niagara-border.border-dark-3{
+  border:1px solid #345064;
+}
+/* --------- primroseYellow --------- */
+.primroseYellow{
+  background-color: #F6D155 !important;
+}
+.primroseYellow.light-1{
+  background-color: #F8DB77 !important;
+}
+.primroseYellow.light-2{
+  background-color: #FAE599 !important;
+}
+.primroseYellow.light-3{
+  background-color: #FCEFBB !important;
+}
+.primroseYellow.dark-1{
+  background-color: #f4c52a !important;
+}
+.primroseYellow.dark-2{
+  background-color: #e9b50c !important;
+}
+.primroseYellow.dark-3{
+  background-color: #d5a60b !important;
+}
+/* --------- text --------- */
+.primroseYellow-text{
+  color: #F6D155 !important;
+}
+.primroseYellow-text.text-light-1{
+  color: #F8DB77 !important;
+}
+.primroseYellow-text.text-light-2{
+  color: #FAE599 !important;
+}
+.primroseYellow-text.text-light-3{
+  color: #FCEFBB !important;
+}
+.primroseYellow-text.text-dark-1{
+  color: #f4c52a !important;
+}
+.primroseYellow-text.text-dark-2{
+  color: #e9b50c !important;
+}
+.primroseYellow-text.text-dark-3{
+  color: #d5a60b !important;
+}
+/* --------- border --------- */
+.primroseYellow-border{
+  border:1px solid #F6D155;
+}
+.primroseYellow-border.border-light-1{
+  border:1px solid #F8DB77;
+}
+.primroseYellow-border.border-light-2{
+  border:1px solid #FAE599;
+}
+.primroseYellow-border.border-light-3{
+  border:1px solid #FCEFBB;
+}
+.primroseYellow-border.border-dark-1{
+  border:1px solid #f4c52a;
+}
+.primroseYellow-border.border-dark-2{
+  border:1px solid #e9b50c;
+}
+.primroseYellow-border.border-dark-3{
+  border:1px solid #d5a60b;
+}
+/* --------- lapisBlue --------- */
+.lapisBlue{
+  background-color: #004B8D !important;
+}
+.lapisBlue.light-1{
+  background-color: #1A5D98 !important;
+}
+.lapisBlue.light-2{
+  background-color: #4E81AE !important;
+}
+.lapisBlue.light-3{
+  background-color: #82A5C4 !important;
+}
+.lapisBlue.dark-1{
+  background-color: #00417a !important;
+}
+.lapisBlue.dark-2{
+  background-color: #003666 !important;
+}
+.lapisBlue.dark-3{
+  background-color: #002c52 !important;
+}
+/* --------- text --------- */
+.lapisBlue-text{
+  color: #004B8D !important;
+}
+.lapisBlue-text.text-light-1{
+  color: #1A5D98 !important;
+}
+.lapisBlue-text.text-light-2{
+  color: #4E81AE !important;
+}
+.lapisBlue-text.text-light-3{
+  color: #82A5C4 !important;
+}
+.lapisBlue-text.text-dark-1{
+  color: #00417a !important;
+}
+.lapisBlue-text.text-dark-2{
+  color: #003666 !important;
+}
+.lapisBlue-text.text-dark-3{
+  color: #002c52 !important;
+}
+/* --------- border --------- */
+.lapisBlue-border{
+  border:1px solid #004B8D;
+}
+.lapisBlue-border.border-light-1{
+  border:1px solid #1A5D98;
+}
+.lapisBlue-border.border-light-2{
+  border:1px solid #4E81AE;
+}
+.lapisBlue-border.border-light-3{
+  border:1px solid #82A5C4;
+}
+.lapisBlue-border.border-dark-1{
+  border:1px solid #00417a;
+}
+.lapisBlue-border.border-dark-2{
+  border:1px solid #003666;
+}
+.lapisBlue-border.border-dark-3{
+  border:1px solid #002c52;
+}
+/* --------- flame --------- */
+.flame{
+  background-color: #F2552C !important;
+}
+.flame.light-1{
+  background-color: #F36641 !important;
+}
+.flame.light-2{
+  background-color: #F47756 !important;
+}
+.flame.light-3{
+  background-color: #F5886B !important;
+}
+.flame.dark-1{
+  background-color: #DA4C28 !important;
+}
+.flame.dark-2{
+  background-color: #C24324 !important;
+}
+.flame.dark-3{
+  background-color: #AA3A20 !important;
+}
+/* --------- text --------- */
+.flame-text{
+  color: #F2552C !important;
+}
+.flame-text.text-light-1{
+  color: #F36641 !important;
+}
+.flame-text.text-light-2{
+  color: #F47756 !important;
+}
+.flame-text.text-light-3{
+  color: #F5886B !important;
+}
+.flame-text.text-dark-1{
+  color: #DA4C28 !important;
+}
+.flame-text.text-dark-2{
+  color: #C24324 !important;
+}
+.flame-text.text-dark-3{
+  color: #AA3A20 !important;
+}
+/* --------- border --------- */
+.flame-border{
+  border:1px solid #F2552C;
+}
+.flame-border.border-light-1{
+  border:1px solid #F36641;
+}
+.flame-border.border-light-2{
+  border:1px solid #F47756;
+}
+.flame-border.border-light-3{
+  border:1px solid #F5886B;
+}
+.flame-border.border-dark-1{
+  border:1px solid #DA4C28;
+}
+.flame-border.border-dark-2{
+  border:1px solid #C24324;
+}
+.flame-border.border-dark-3{
+  border:1px solid #AA3A20;
+}
+/* --------- islandParadise --------- */
+.islandParadise{
+  background-color: #95DEE3 !important;
+}
+.islandParadise.light-1{
+  background-color: #aee6ea !important;
+}
+.islandParadise.light-2{
+  background-color: #bfebee !important;
+}
+.islandParadise.light-3{
+  background-color: #cff0f2 !important;
+}
+.islandParadise.dark-1{
+  background-color: #7ed6dd !important;
+}
+.islandParadise.dark-2{
+  background-color: #6ed1d8 !important;
+}
+.islandParadise.dark-3{
+  background-color: #4ec7d0 !important;
+}
+/* --------- text --------- */
+.islandParadise-text{
+  color: #95DEE3 !important;
+}
+.islandParadise-text.text-light-1{
+  color: #aee6ea !important;
+}
+.islandParadise-text.text-light-2{
+  color: #bfebee !important;
+}
+.islandParadise-text.text-light-3{
+  color: #cff0f2 !important;
+}
+.islandParadise-text.text-dark-1{
+  color: #7ed6dd !important;
+}
+.islandParadise-text.text-dark-2{
+  color: #6ed1d8 !important;
+}
+.islandParadise-text.text-dark-3{
+  color: #4ec7d0 !important;
+}
+/* --------- border --------- */
+.islandParadise-border{
+  border:1px solid #95DEE3;
+}
+.islandParadise-border.border-light-1{
+  border:1px solid #aee6ea;
+}
+.islandParadise-border.border-light-2{
+  border:1px solid #bfebee;
+}
+.islandParadise-border.border-light-3{
+  border:1px solid #cff0f2;
+}
+.islandParadise-border.border-dark-1{
+  border:1px solid #7ed6dd;
+}
+.islandParadise-border.border-dark-2{
+  border:1px solid #6ed1d8;
+}
+.islandParadise-border.border-dark-3{
+  border:1px solid #4ec7d0;
+}
+/* --------- paleDogwood --------- */
+.paleDogwood{
+  background-color: #EDCDC2 !important;
+}
+.paleDogwood.light-1{
+  background-color: #f1d8d0 !important;
+}
+.paleDogwood.light-2{
+  background-color: #f6e5e0 !important;
+}
+.paleDogwood.light-3{
+  background-color: #faf2ef !important;
+}
+.paleDogwood.dark-1{
+  background-color: #e8beb0 !important;
+}
+.paleDogwood.dark-2{
+  background-color: #e3b1a1 !important;
+}
+.paleDogwood.dark-3{
+  background-color: #dea491 !important;
+}
+/* --------- text --------- */
+.paleDogwood-text{
+  color: #EDCDC2 !important;
+}
+.paleDogwood-text.text-light-1{
+  color: #f1d8d0 !important;
+}
+.paleDogwood-text.text-light-2{
+  color: #f6e5e0 !important;
+}
+.paleDogwood-text.text-light-3{
+  color: #faf2ef !important;
+}
+.paleDogwood-text.text-dark-1{
+  color: #e8beb0 !important;
+}
+.paleDogwood-text.text-dark-2{
+  color: #e3b1a1 !important;
+}
+.paleDogwood-text.text-dark-3{
+  color: #dea491 !important;
+}
+/* --------- border --------- */
+.paleDogwood-border{
+  border:1px solid #EDCDC2;
+}
+.paleDogwood-border.border-light-1{
+  border:1px solid #f1d8d0;
+}
+.paleDogwood-border.border-light-2{
+  border:1px solid #f6e5e0;
+}
+.paleDogwood-border.border-light-3{
+  border:1px solid #faf2ef;
+}
+.paleDogwood-border.border-dark-1{
+  border:1px solid #e8beb0;
+}
+.paleDogwood-border.border-dark-2{
+  border:1px solid #e3b1a1;
+}
+.paleDogwood-border.border-dark-3{
+  border:1px solid #dea491;
+}
+/* --------- greenery --------- */
+.greenery{
+  background-color: #88B04B !important;
+}
+.greenery.light-1{
+  background-color: #98bc62 !important;
+}
+.greenery.light-2{
+  background-color: #abc87e !important;
+}
+.greenery.light-3{
+  background-color: #bdd49b !important;
+}
+.greenery.dark-1{
+  background-color: #6e8f3d !important;
+}
+.greenery.dark-2{
+  background-color: #638137 !important;
+}
+.greenery.dark-3{
+  background-color: #587231 !important;
+}
+/* --------- text --------- */
+.greenery-text{
+  color: #88B04B !important;
+}
+.greenery-text.text-light-1{
+  color: #98bc62 !important;
+}
+.greenery-text.text-light-2{
+  color: #abc87e !important;
+}
+.greenery-text.text-light-3{
+  color: #bdd49b !important;
+}
+.greenery-text.text-dark-1{
+  color: #6e8f3d !important;
+}
+.greenery-text.text-dark-2{
+  color: #638137 !important;
+}
+.greenery-text.text-dark-3{
+  color: #587231 !important;
+}
+/* --------- border --------- */
+.greenery-border{
+  border:1px solid #88B04B;
+}
+.greenery-border.border-light-1{
+  border:1px solid #98bc62;
+}
+.greenery-border.border-light-2{
+  border:1px solid #abc87e;
+}
+.greenery-border.border-light-3{
+  border:1px solid #bdd49b;
+}
+.greenery-border.border-dark-1{
+  border:1px solid #6e8f3d;
+}
+.greenery-border.border-dark-2{
+  border:1px solid #638137;
+}
+.greenery-border.border-dark-3{
+  border:1px solid #587231;
+}
+/* --------- pinkYarrow --------- */
+.pinkYarrow{
+  background-color: #CE3175 !important;
+}
+.pinkYarrow.light-1{
+  background-color: #d44986 !important;
+}
+.pinkYarrow.light-2{
+  background-color: #d85a91 !important;
+}
+.pinkYarrow.light-3{
+  background-color: #dc6a9c !important;
+}
+.pinkYarrow.dark-1{
+  background-color: #b62b67 !important;
+}
+.pinkYarrow.dark-2{
+  background-color: #a5275e !important;
+}
+.pinkYarrow.dark-3{
+  background-color: #952354 !important;
+}
+/* --------- text --------- */
+.pinkYarrow-text{
+  color: #CE3175 !important;
+}
+.pinkYarrow-text.text-light-1{
+  color: #d44986 !important;
+}
+.pinkYarrow-text.text-light-2{
+  color: #d85a91 !important;
+}
+.pinkYarrow-text.text-light-3{
+  color: #dc6a9c !important;
+}
+.pinkYarrow-text.text-dark-1{
+  color: #b62b67 !important;
+}
+.pinkYarrow-text.text-dark-2{
+  color: #a5275e !important;
+}
+.pinkYarrow-text.text-dark-3{
+  color: #952354 !important;
+}
+/* --------- border --------- */
+.pinkYarrow-border{
+  border:1px solid #CE3175;
+}
+.pinkYarrow-border.border-light-1{
+  border:1px solid #d44986;
+}
+.pinkYarrow-border.border-light-2{
+  border:1px solid #d85a91;
+}
+.pinkYarrow-border.border-light-3{
+  border:1px solid #dc6a9c;
+}
+.pinkYarrow-border.border-dark-1{
+  border:1px solid #b62b67;
+}
+.pinkYarrow-border.border-dark-2{
+  border:1px solid #a5275e;
+}
+.pinkYarrow-border.border-dark-3{
+  border:1px solid #952354;
+}
+/* --------- kale --------- */
+.kale{
+  background-color: #5A7247 !important;
+}
+.kale.light-1{
+  background-color: #6e8a56 !important;
+}
+.kale.light-2{
+  background-color: #78975e !important;
+}
+.kale.light-3{
+  background-color: #8ca975 !important;
+}
+.kale.dark-1{
+  background-color: #50643f !important;
+}
+.kale.dark-2{
+  background-color: #465837 !important;
+}
+.kale.dark-3{
+  background-color: #3c4b2f !important;
+}
+/* --------- text --------- */
+.kale-text{
+  color: #5A7247 !important;
+}
+.kale-text.text-light-1{
+  color: #6e8a56 !important;
+}
+.kale-text.text-light-2{
+  color: #78975e !important;
+}
+.kale-text.text-light-3{
+  color: #8ca975 !important;
+}
+.kale-text.text-dark-1{
+  color: #50643f !important;
+}
+.kale-text.text-dark-2{
+  color: #465837 !important;
+}
+.kale-text.text-dark-3{
+  color: #3c4b2f !important;
+}
+/* --------- border --------- */
+.kale-border{
+  border:1px solid #5A7247;
+}
+.kale-border.border-light-1{
+  border:1px solid #6e8a56;
+}
+.kale-border.border-light-2{
+  border:1px solid #78975e;
+}
+.kale-border.border-light-3{
+  border:1px solid #8ca975;
+}
+.kale-border.border-dark-1{
+  border:1px solid #50643f;
+}
+.kale-border.border-dark-2{
+  border:1px solid #465837;
+}
+.kale-border.border-dark-3{
+  border:1px solid #3c4b2f;
+}
+/* --------- hazelnut --------- */
+.hazelnut{
+  background-color: #CFB095 !important;
+}
+.hazelnut.light-1{
+  background-color: #d9c0ab !important;
+}
+.hazelnut.light-2{
+  background-color: #dfcbb9 !important;
+}
+.hazelnut.light-3{
+  background-color: #e6d5c7 !important;
+}
+.hazelnut.dark-1{
+  background-color: #ccab8e !important;
+}
+.hazelnut.dark-2{
+  background-color: #c6a180 !important;
+}
+.hazelnut.dark-3{
+  background-color: #c09672 !important;
+}
+/* --------- text --------- */
+.hazelnut-text{
+  color: #CFB095 !important;
+}
+.hazelnut-text.text-light-1{
+  color: #d9c0ab !important;
+}
+.hazelnut-text.text-light-2{
+  color: #dfcbb9 !important;
+}
+.hazelnut-text.text-light-3{
+  color: #e6d5c7 !important;
+}
+.hazelnut-text.text-dark-1{
+  color: #ccab8e !important;
+}
+.hazelnut-text.text-dark-2{
+  color: #c6a180 !important;
+}
+.hazelnut-text.text-dark-3{
+  color: #c09672 !important;
+}
+/* --------- border --------- */
+.hazelnut-border{
+  border:1px solid #CFB095;
+}
+.hazelnut-border.border-light-1{
+  border:1px solid #d9c0ab;
+}
+.hazelnut-border.border-light-2{
+  border:1px solid #dfcbb9;
+}
+.hazelnut-border.border-light-3{
+  border:1px solid #e6d5c7;
+}
+.hazelnut-border.border-dark-1{
+  border:1px solid #ccab8e;
+}
+.hazelnut-border.border-dark-2{
+  border:1px solid #c6a180;
+}
+.hazelnut-border.border-dark-3{
+  border:1px solid #c09672;
+}
+/* --------- gradient --------- */
+.grad-greenery-kale{
+  background: linear-gradient(to right, #88B04B, #5A7247) no-repeat fixed;
+}
+.grad-paleDogwood-pinkYarrow{
+  background: linear-gradient(to right, #EDCDC2, #CE3175) no-repeat fixed;
+}
+.grad-greenery-islandParadise{
+  background: linear-gradient(to right, #88B04B, #95DEE3) no-repeat fixed;
+}
+.grad-niagara-islandParadise{
+  background: linear-gradient(to right, #5484A4, #95DEE3) no-repeat fixed;
+}
+.grad-greenery-primroseYellow-gr{
+  background: linear-gradient(to right, #88B04B, #F6D155, #88B04B) no-repeat fixed;
+}
+
+.grad-pinkYarrow-flame {
+  background: linear-gradient(to right, #CE3175, #F2552C) no-repeat fixed;
+}
+.grad-niagara-lapisBlue-ni{
+  background: linear-gradient(65deg, #5484A4 20%, #004B8D 50%, #5484A4 70%) no-repeat fixed;
+}
+.grad-rainbow-17{
+  background: linear-gradient(65deg, #5484A4, #F6D155, #004B8D, #F2552C, #95DEE3, #EDCDC2, #88B04B, #CE3175, #5A7247, #CFB095) no-repeat fixed;
+}
+.gradient-text { /* -webkit only */
+  font-family: Arial;
+  color: #5A7247;
+  font-size: 50px;
+  font-weight:bold;
+  background: -webkit-linear-gradient(#88B04B, #5A7247);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+
+/* --------- Horizontal Ruler --------- */
+
+hr{
+  border: 0;
+}
+hr.greenery{
+  border-bottom:1px solid #88B04B;
+}
+hr.kale{
+  border-bottom:1px solid #5A7247;
+}
+hr.primroseYellow{
+  border-bottom:1px solid #F6D155;
+}
+hr.paleDogwood{
+  border-bottom:1px solid #EDCDC2;
+}
+hr.hazelnut{
+  border-bottom:1px solid #CFB095;
+}
+hr.islandParadise{
+  border-bottom:1px solid #95DEE3;
+}
+hr.flame{
+  border-bottom:1px solid #F2552C;
+}
+hr.niagara{
+  border-bottom:1px solid #5484A4;
+}
+hr.lapisBlue{
+  border-bottom:1px solid #004B8D;
+}
+hr.pinkYarrow{
+  border-bottom:1px solid #CE3175;
+}
+hr.grad-1-17 {
+  height: 1px;
+  background-image: linear-gradient(to right, #95DEE3, #88B04B, #95DEE3);
+}
+hr.grad-2-17 {
+  height: 1px;
+  background: linear-gradient(to left, #fff 0%, #CE3175 50%);
+}
+hr.grad-3-17 {
+  height: 2px;
+  background-image: linear-gradient(to right, rgba(136, 176, 75, 0), rgba(136, 176, 75, 0.75), rgba(136, 176, 75, 0));
+}

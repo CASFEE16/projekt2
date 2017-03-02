@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {AngularFire, FirebaseAuthState} from "angularfire2";
 import {Observable, Observer} from "rxjs";
+import {ListCache} from "./ListCache";
 
 export class Registration {
   name: string;
@@ -14,6 +15,7 @@ export class RegistrationService {
 
   private _user: firebase.User;
   private _state: FirebaseAuthState;
+  private user: ListCache<Registration> = new ListCache<Registration>();
 
   constructor(private af: AngularFire) {}
 

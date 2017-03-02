@@ -1,6 +1,6 @@
 <div class="show-front-container">
 
-  <md-card>
+  <md-card *ngIf="loggedIn">
     <md-card-content>
         <form (ngSubmit)="onSubmit()">
           <div class="show-new-form">
@@ -28,7 +28,7 @@
         <div md-card-avatar><md-icon>radio</md-icon></div>
         <md-card-title><strong>{{show.title}}</strong> {{show.date | date}}</md-card-title>
       </md-card-header>
-      <md-card-actions>
+      <md-card-actions *ngIf="loggedIn">
         <button md-mini-fab (click)="onEdit(show)"><md-icon>edit</md-icon></button>
         <button md-mini-fab (click)="onDelete(show)"><md-icon>delete</md-icon></button>
       </md-card-actions>

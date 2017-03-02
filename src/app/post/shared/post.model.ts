@@ -1,5 +1,5 @@
 
-import {Observable} from "rxjs";
+import {YoutubeUtils} from "../../core/youtube/YoutubeUtils";
 export class Post {
 
   public Post() {
@@ -8,6 +8,7 @@ export class Post {
   }
 
   text: string;
+  content?: string;
   type?: PostType;
   date?: string;
   user?: string;
@@ -60,4 +61,13 @@ export class PostTypes {
     return types;
   }
 
+}
+
+export class ContentDetector {
+  static isMovie(text: string): boolean {
+    return !!YoutubeUtils.getId(text);
+  }
+  static isWeb(text: string): boolean {
+    return !ContentDetector.isMovie(text) && text.indexOf('http://') >= 0;
+  }
 }
