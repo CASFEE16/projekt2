@@ -85,4 +85,10 @@ export class PostService {
     return this.listCache.update(post, {show_key: show['$key']});
   }
 
+  public setRating(post: Post, rating: number): Observable<Post> {
+    console.log(post, rating);
+    post.rating = rating;
+    return this.listCache.update(post, {rating: rating});
+  }
+
 }

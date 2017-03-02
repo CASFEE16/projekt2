@@ -10,6 +10,8 @@ export class Post {
   text: string;
   content?: string;
   type?: PostType;
+  note?: string;
+  rating?: number = 0;
   date?: string;
   user?: string;
   ts?: number;
@@ -22,9 +24,8 @@ export const POSTS_RESOURCE_PATH: string = '/posts';
 
 export enum PostType {
   Note,
-  Album,
+  Music,
   Movie,
-  MusicVideo,
   Web
 }
 
@@ -37,12 +38,10 @@ export class PostTypes {
 
   static icon(type: PostType): string {
     switch (type) {
-      case PostType.Album:
+      case PostType.Music:
         return 'album';
       case PostType.Movie:
         return 'movie';
-      case PostType.MusicVideo:
-        return 'music_video';
       case PostType.Web:
         return 'web';
       default:
@@ -68,6 +67,7 @@ export class ContentDetector {
     return !!YoutubeUtils.getId(text);
   }
   static isWeb(text: string): boolean {
-    return !ContentDetector.isMovie(text) && text.indexOf('http://') >= 0;
+    return !ContentDetector.isMovie(text) &&
+      (text.indexOf('http://') >= 0 || text.indexOf('https://') >= 0);
   }
 }

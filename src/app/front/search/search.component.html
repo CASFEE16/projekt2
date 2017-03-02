@@ -1,0 +1,25 @@
+<div class="search-container">
+
+  <md-card class="search-card">
+    <form (ngSubmit)="onSubmit()">
+        <div class="search-form">
+          <div class="search-entry">
+            <div class="search-form-text">
+              <md-input-container class="search-input">
+                <input md-input type="text" name="Text" [(ngModel)]="search.text" (ngModelChange)="onTextChanged($event)">
+              </md-input-container>
+            </div>
+            <div class="search-form-button">
+              <button md-fab><md-icon>search</md-icon></button>
+            </div>
+          </div>
+          <div>
+            <md-radio-group name="type" [(ngModel)]="search.type">
+              <md-radio-button *ngFor="let t of typeList" [value]="t.value">{{t.label}} </md-radio-button>
+            </md-radio-group>
+          </div>
+        </div>
+    </form>
+  </md-card>
+
+</div>

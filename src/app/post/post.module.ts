@@ -5,13 +5,15 @@ import {FormsModule} from "@angular/forms";
 import {MaterialModule} from "@angular/material";
 import {CoreModule} from "../core/core.module";
 import {SafePipe} from "../shared/safe.pipe";
+import {SharedModule} from "../shared/shared.module";
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     MaterialModule,
-    CoreModule
+    CoreModule,
+    SharedModule
   ],
   declarations: [
     PostFrontComponent,

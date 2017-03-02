@@ -1,0 +1,26 @@
+.search-container {
+  margin: 20px;
+}
+
+.search-form-text {
+  width: 100%;
+  flex: 1 1;
+}
+
+.search-form-button {
+  flex: 0 0;
+}
+
+.search-entry {
+  display: flex;
+  justify-content: flex-start;
+}
+
+input {
+  width: 100%;
+  min-width: 100%;
+}
+
+.search-input {
+  width: 90%;
+}

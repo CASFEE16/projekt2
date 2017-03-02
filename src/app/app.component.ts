@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, HostListener, Inject} from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import {SessionService, ISessionEvent} from "./core/firebase/session.service";
 import {Observable} from 'rxjs';
@@ -36,15 +36,33 @@ export class AppComponent implements OnInit {
       label: 'About',
       icon: 'info'
     }];
+  sidenavMode: string = 'over';
+  sidenavOpened: boolean = false;
 
-  constructor(private sessionService: SessionService, private dialog: MdDialog) {}
+  constructor(private sessionService: SessionService, private dialog: MdDialog, @Inject("windowObject") private window: Window) {}
 
   ngOnInit() {
-
     // Register for all authentication events like login, logout
     this.sessionService.event.subscribe(
       (event) => this.handleEvent(event)
     );
+    this.updateForWidth(this.window.innerWidth);
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize(event) {
+    this.updateForWidth(event.target.innerWidth);
+  }
+
+  updateForWidth(width: number) {
+    if (width >= 600) {
+      this.sidenavMode = 'side';
+    } else {
+      this.sidenavMode = 'over';
+    }
+    if (width >= 1200) {
+      this.sidenavOpened = true;
+    }
   }
 
   // About Toolbar etc on authentication event

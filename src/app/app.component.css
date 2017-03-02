@@ -67,3 +67,23 @@ html, body, material-app, md-sidenav-container, .my-content {
   word-wrap: normal;
   white-space: nowrap;
 }
+
+@media screen and (min-width : 600px) {
+  .toolbar-nav-menu {
+    display: none;
+  }
+}
+
+@media screen and (max-width : 600px) {
+  .toolbar-nav-button {
+    display: none;
+  }
+}
+
+@media screen and (max-width : 400px) {
+  .toolbar-nav-menu-title {
+    display: none;
+  }
+}
+
+

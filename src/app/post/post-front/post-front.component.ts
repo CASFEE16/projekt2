@@ -10,6 +10,7 @@ import {Show} from "../../show/shared/show.model";
 import {SessionService} from "../../core/firebase/session.service";
 import {YoutubeService} from "../../core/youtube/youtube.service";
 import {YoutubeUtils} from "../../core/youtube/YoutubeUtils";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-post-front',
@@ -30,6 +31,7 @@ export class PostFrontComponent implements OnInit {
     private postService: PostService,
     private showService: ShowService,
     private sessionService: SessionService,
+    private router: Router,
     private snackbar: MdSnackBar) { }
 
   ngOnInit() {
@@ -51,7 +53,7 @@ export class PostFrontComponent implements OnInit {
 
   onSubmit() {
     this.postService.add(this.post).subscribe(
-      result => console.log(result),
+      result => {this.post = new Post();},
       error => this.snackbar.open(error.message)
     );
   }
@@ -61,6 +63,10 @@ export class PostFrontComponent implements OnInit {
         result => console.log(result),
         error => this.snackbar.open(error.message)
       );
+  }
+
+  onEdit(editPost: Post) {
+    this.router.navigate(['/post', editPost['$key']]);
   }
 
   onSelectShow(post: Post, show: Show) {
@@ -80,6 +86,13 @@ export class PostFrontComponent implements OnInit {
       return;
     }
     this.post.type = PostType.Note;
+  }
+
+  onRatingClick(post: Post, rating: number) {
+    this.postService.setRating(post, rating).subscribe(
+      result => console.log(result),
+      error => this.snackbar.open(error.message)
+    );
   }
 
   youtubeURL(post: Post) {

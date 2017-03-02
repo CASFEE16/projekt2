@@ -18,6 +18,8 @@ import 'hammerjs';
 import {PostModule} from "./post/post.module";
 import {ShowModule} from "./show/show.module";
 import {SafePipe} from "./shared/safe.pipe";
+import { RatingComponent } from './shared/rating/rating.component';
+import {SharedModule} from "./shared/shared.module";
 
 export const FIREBASE_CONFIG: FirebaseAppConfig = environment.firebase.config;
 
@@ -36,9 +38,12 @@ export const FIREBASE_CONFIG: FirebaseAppConfig = environment.firebase.config;
     UserModule,
     FrontModule,
     PostModule,
-    ShowModule
+    ShowModule,
+    SharedModule
   ],
-  providers: [],
+  providers: [
+    { provide: "windowObject", useValue: window}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
