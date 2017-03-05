@@ -80,8 +80,9 @@ export class PostService {
   }
 
   public setShow(post: Post, show: Show): Observable<Post> {
-    if (!show['$key'])
-      return null;
+    if (!show || !show['$key']) {
+      return this.listCache.update(post, {show_key: null});
+    }
     return this.listCache.update(post, {show_key: show['$key']});
   }
 

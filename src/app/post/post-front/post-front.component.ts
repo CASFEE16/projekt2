@@ -38,7 +38,6 @@ export class PostFrontComponent implements OnInit {
     this.post = new Post();
     this.post.type = PostType.Note;
     this.typeList = PostTypes.list();
-    this.typeList.push(null);
 
     this.loggedIn = this.sessionService.isLoggedIn();
 
@@ -91,6 +90,13 @@ export class PostFrontComponent implements OnInit {
 
   onRatingClick(post: Post, rating: number) {
     this.postService.setRating(post, rating).subscribe(
+      result => console.log(result),
+      error => this.snackbar.open(error.message)
+    );
+  }
+
+  onRemoveFromShows(post: Post) {
+    this.postService.setShow(post, null).subscribe(
       result => console.log(result),
       error => this.snackbar.open(error.message)
     );

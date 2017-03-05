@@ -5,19 +5,19 @@
       <br>
       <form class="register-form" (ngSubmit)="onSubmit()">
         <md-input-container>
-          <input md-input placeholder="Name" required type="text"
+          <input mdInput placeholder="Name" required type="text"
                  [(ngModel)]="registration.name" name="name">
         </md-input-container>
         <md-input-container>
-          <input md-input placeholder="Email" required type="email"
+          <input mdInput placeholder="Email" required type="email"
                  [(ngModel)]="registration.email" name="email">
         </md-input-container>
         <md-input-container>
-          <input md-input placeholder="Password" type="password" required
+          <input mdInput placeholder="Password" type="password" required
                  [(ngModel)]="registration.password1" name="password">
         </md-input-container>
         <md-input-container>
-          <input md-input placeholder="Password Repeat" type="password" required
+          <input mdInput placeholder="Password Repeat" type="password" required
                  [(ngModel)]="registration.password2" name="password">
         </md-input-container>
         <button md-button type="submit">Register</button>

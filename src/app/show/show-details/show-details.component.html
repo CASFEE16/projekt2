@@ -6,13 +6,13 @@
       <form class="show-form" (ngSubmit)="onSubmit($event)">
         <div>
         <md-input-container>
-          <input md-input placeholder="Title" required type="text"
+          <input mdInput placeholder="Title" required type="text"
                  [(ngModel)]="show.title" name="title">
         </md-input-container>
         </div>
         <div>
         <md-input-container>
-          <input md-input placeholder="Date" type="date" required
+          <input mdInput placeholder="Date" type="date" required
                  [(ngModel)]="show.date" name="date">
         </md-input-container>
         </div>

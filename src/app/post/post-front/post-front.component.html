@@ -6,7 +6,7 @@
           <div class="post-new-form-data">
             <div>
               <md-input-container>
-                <textarea md-input name="post" placeholder="Post" cols="50" rows="2" [(ngModel)]="post.text" (ngModelChange)="onTextChanged($event)"></textarea>
+                <textarea mdInput name="post" placeholder="Post" cols="50" rows="2" [(ngModel)]="post.text" (ngModelChange)="onTextChanged($event)"></textarea>
               </md-input-container>
             </div>
             <div>
@@ -48,8 +48,12 @@
           </md-select>
         </div>
         <div class="post-card-actions" *ngIf="loggedIn">
-          <button md-mini-fab (click)="onEdit(each.post)"><md-icon>edit</md-icon></button>
-          <button md-mini-fab (click)="onDelete(each.post)"><md-icon>delete</md-icon></button>
+          <button md-button [mdMenuTriggerFor]="menu"><md-icon>more_vert</md-icon></button>
+          <md-menu #menu="mdMenu">
+            <button *ngIf="!!each.post.show_key" md-menu-item (click)="onRemoveFromShows(each.post)"><md-icon>clear</md-icon>Remove from show</button>
+            <button md-menu-item (click)="onEdit(each.post)"><md-icon>edit</md-icon>Edit</button>
+            <button md-menu-item (click)="onDelete(each.post)"><md-icon>delete</md-icon>Delete</button>
+          </md-menu>
         </div>
         </div>
       </md-card-actions>
