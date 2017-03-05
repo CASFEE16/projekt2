@@ -2,7 +2,7 @@ import {Component, OnInit, HostListener, Inject, ViewChild, ElementRef} from '@a
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import {SessionService, ISessionEvent} from "./core/firebase/session.service";
 import {Observable} from 'rxjs';
-import {MdDialog, MdDialogConfig, MdSidenav} from "@angular/material";
+import {MdDialog, MdDialogConfig, MdSidenav, MdSidenavToggleResult} from "@angular/material";
 import {UserMenuComponent} from "./front/user-menu/user-menu.component";
 
 export interface NavLink {
@@ -47,10 +47,10 @@ export class AppComponent implements OnInit {
     }];
   toolbarNavLinks: NavLink[] = [];
 
-  @ViewChild('sidenav') sidenav: ElementRef;
-  sn: MdSidenav = null;
+  @ViewChild('sidenav') sidenav: MdSidenav;
   sidenavMode: string = 'over';
   sidenavOpened: boolean = false;
+  sidenavOpenedByUser: boolean = false;
 
   constructor(private sessionService: SessionService, private dialog: MdDialog, @Inject("windowObject") private window: Window) {}
 
@@ -59,7 +59,7 @@ export class AppComponent implements OnInit {
     this.sessionService.event.subscribe(
       (event) => this.handleEvent(event)
     );
-    this.sn = <MdSidenav>this.sidenav.nativeElement;
+    console.log(this, this.sidenav);
     this.updateForWidth(this.window.innerWidth);
   }
 
@@ -75,9 +75,10 @@ export class AppComponent implements OnInit {
       this.sidenavMode = 'over';
     }
     if (width >= 1200) {
-      this.sidenavOpened = true;
-      if (this.sn) {
-        this.sn.open();
+      this.sidenav.open();
+    } else {
+      if (!this.sidenavOpenedByUser) {
+        this.sidenav.close();
       }
     }
     if (width >= 475) {
@@ -87,9 +88,7 @@ export class AppComponent implements OnInit {
       this.toolbarNavLinks.push(...this.navLinks);
       this.toolbarNavLinks.push(...this.userLinks);
       this.sidenavOpened = false;
-      if (this.sn) {
-        this.sn.close();
-      }
+      this.sidenav.close();
     }
   }
 
@@ -108,6 +107,12 @@ export class AppComponent implements OnInit {
         top: '25px',
         right: '25px'
       }
+    });
+  }
+
+  onSidenavToggle() {
+    this.sidenav.toggle().then((result: MdSidenavToggleResult) => {
+      this.sidenavOpenedByUser = (result.type == 'open');
     });
   }
 

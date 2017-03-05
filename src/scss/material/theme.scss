@@ -1,19 +1,22 @@
 @import '~@angular/material/core/theming/_all-theme';
+@import '~@angular/material/core/theming/_theming';
+@import '~@angular/material/core/theming/_palette';
+
 // Plus imports for other components in your app.
 // https://github.com/angular/material2/blob/master/docs/theming.md
 
 // Include the base styles for Angular Material core. We include this here so that you only
 // have to load a single css file for Angular Material in your app.
-@include md-core();
+@include mat-core();
 
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue.
-$primary: md-palette($md-blue-grey);
-$accent:  md-palette($md-light-blue, A200, A100, A400);
+$primary: mat-palette($mat-blue-grey);
+$accent:  mat-palette($mat-light-blue, A200, A100, A400);
 
 // Create the theme object (a Sass map containing all of the palettes).
-$theme: md-light-theme($primary, $accent);
+$theme: mat-light-theme($primary, $accent);
 
 // Include theme styles for core and each component used in your app.
 // Alternatively, you can import and @include the theme mixins for each component
@@ -21,11 +24,11 @@ $theme: md-light-theme($primary, $accent);
 @include angular-material-theme($theme);
 
 .m2app-dark {
-  $dark-primary: md-palette($md-pink, 700, 500, 900);
-  $dark-accent:  md-palette($md-blue-grey, A200, A100, A400);
-  $dark-warn:    md-palette($md-deep-orange);
+  $dark-primary: mat-palette($mat-pink, 700, 500, 900);
+  $dark-accent:  mat-palette($mat-blue-grey, A200, A100, A400);
+  $dark-warn:    mat-palette($mat-deep-orange);
 
-  $dark-theme: md-dark-theme($dark-primary, $dark-accent, $dark-warn);
+  $dark-theme: mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
 
   @include angular-material-theme($dark-theme);
 }

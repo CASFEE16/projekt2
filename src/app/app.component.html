@@ -1,4 +1,4 @@
-<md-sidenav-layout fullscreen>
+<md-sidenav-container fullscreen>
 
   <md-sidenav #sidenav [mode]="sidenavMode" class="app-sidenav" [opened]="sidenavOpened">
     <div class="sidenav-container">
@@ -35,7 +35,7 @@
 
   <md-toolbar color="primary">
     <div>
-      <button md-icon-button class="app-icon-button" (click)="sidenav.toggle()">
+      <button md-icon-button class="app-icon-button" (click)="onSidenavToggle()">
         <md-icon>menu</md-icon>
       </button>
     </div>
@@ -77,4 +77,4 @@
 
   </div>
 
-</md-sidenav-layout>
+</md-sidenav-container>
