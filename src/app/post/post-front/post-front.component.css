@@ -5,26 +5,60 @@
   margin-bottom: 10px;
 }
 .post-new-form {
-  display: flex;
-  flex-direction: row;
+  position: relative;
   margin-bottom: 20px;
 }
-.post-new-form-2 {
-  margin-left: 20px;
-  position: relative;
+.post-new-form-data {
+  display: flex;
+  flex-direction: column;
 }
 
-.post-new-form-2 button {
+.post-new-form-action {
   position: absolute;
-  bottom: 0;
-  left: 0;
+  bottom: -30px;
+  right: -10px;
+}
+
+.card-actions {
+  display: flex;
+}
+
+.post-card-rating {
+  display: block;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.post-card-show {
+  display: block;
+  flex: 1 1;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.post-card-actions {
+  display: block;
+  margin-top: 10px;
 }
 
 .post-card-show-select {
-  float: right;
   width: 300px;
 }
 
 textarea {
   border: none;
+}
+
+md-radio-button {
+  margin-right: 20px;
+}
+
+.app-rating-placeholder {
+  transform: scale(.75);
+  color: rgba(0, 0, 0, 0.38);
+  position: absolute;
+  bottom: 56px;
+  padding: 0 12px;
 }

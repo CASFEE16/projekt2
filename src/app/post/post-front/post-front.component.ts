@@ -38,6 +38,7 @@ export class PostFrontComponent implements OnInit {
     this.post = new Post();
     this.post.type = PostType.Note;
     this.typeList = PostTypes.list();
+    this.typeList.push(null);
 
     this.loggedIn = this.sessionService.isLoggedIn();
 

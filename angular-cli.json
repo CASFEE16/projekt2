@@ -22,7 +22,9 @@
         "scss/material/theme.scss",
         "scss/greenery.css"
       ],
-      "scripts": [],
+      "scripts": [
+        "gapi/gapi.js"
+      ],
       "environments": {
         "source": "environments/environment.ts",
         "dev": "environments/environment.ts",

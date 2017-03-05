@@ -7,10 +7,16 @@
   margin-top: 10px;
 }
 .show-new-form {
+  position: relative;
+}
+.show-new-form-data {
   display: flex;
   flex-direction: row;
   margin-bottom: 20px;
 }
-.show-new-form-2 {
-  margin-left: 20px;
+
+.show-new-form-action {
+  position: absolute;
+  bottom: -30px;
+  right: -10px;
 }

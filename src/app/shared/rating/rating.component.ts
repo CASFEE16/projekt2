@@ -7,17 +7,16 @@ import {Component, Input, Output, EventEmitter, OnChanges, SimpleChanges, OnInit
 })
 export class RatingComponent implements OnInit, OnChanges {
   @Input() rating: number;
+  @Input() readonly: boolean = false;
   @Output() onChanged: EventEmitter<any> = new EventEmitter<any>();
 
   ngOnInit() {
   }
   onClick(rating: number): void {
     this.rating = rating;
-    this.onChanged.emit(this.rating);
-//    this.click.emit({
-//      itemId: this.itemId,
-//      rating: rating
-//    });
+    if (!this.readonly) {
+      this.onChanged.emit(this.rating);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {

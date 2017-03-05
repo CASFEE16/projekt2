@@ -52,7 +52,7 @@
     <div class="toolbar-nav toolbar-nav-menu">
       <button md-button [mdMenuTriggerFor]="menu"><md-icon>more_vert</md-icon> <span class="toolbar-nav-menu-title">Navigation</span></button>
       <md-menu #menu="mdMenu">
-        <button md-menu-item *ngFor="let navLink of navLinks" routerLink="{{navLink.link}}">
+        <button md-menu-item *ngFor="let navLink of toolbarNavLinks" routerLink="{{navLink.link}}">
           <md-icon>{{navLink.icon}}</md-icon> {{navLink.label}}
         </button>
       </md-menu>
@@ -60,7 +60,7 @@
 
     <div class="app-toolbar-filler"></div>
     <!-- <button md-button (click)="isDarkTheme = !isDarkTheme">TOGGLE DARK THEME</button> -->
-    <div>
+    <div class="toolbar-nav-user">
       <div *ngIf="loggedIn | async">
         <div><button md-fab (click)="onUserMenu()"><md-icon>face</md-icon></button></div>
       </div>

@@ -22,14 +22,17 @@ export class YoutubeService {
   constructor(private http: Http) {
     console.log(_window());
     console.log(_gapi());
-    _gapi().client.setApiKey('AIzaSyCNjUMHsV_64Qgh0LM5xUrHf1RMNJ97PGw');
     _gapi().client.load('youtube', 'v3', () => {
+      _gapi().client.setApiKey('AIzaSyCNjUMHsV_64Qgh0LM5xUrHf1RMNJ97PGw');
       this.youtubeApiLoaded = true;
       console.log('Youtube API loaded');
     });
   }
 
   public getVideoInfo(id: string): Observable<any> {
+    if (!this.youtubeApiLoaded) {
+      return Observable.of({});
+    }
     return Observable.create((observer: Observer<any>) => {
     _gapi().client.youtube.videos.list({part: 'snippet', id: id})
       .then(

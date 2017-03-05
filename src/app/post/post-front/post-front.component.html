@@ -3,21 +3,21 @@
   <md-card *ngIf="loggedIn" class="post-card">
       <form (ngSubmit)="onSubmit()">
         <div class="post-new-form">
-        <div class="post-new-form-1">
-          <div>
-            <md-input-container>
-              <textarea md-input name="post" placeholder="Post" cols="50" rows="2" [(ngModel)]="post.text" (ngModelChange)="onTextChanged($event)"></textarea>
-            </md-input-container>
+          <div class="post-new-form-data">
+            <div>
+              <md-input-container>
+                <textarea md-input name="post" placeholder="Post" cols="50" rows="2" [(ngModel)]="post.text" (ngModelChange)="onTextChanged($event)"></textarea>
+              </md-input-container>
+            </div>
+            <div>
+              <md-radio-group name="type" [(ngModel)]="post.type">
+                <md-radio-button *ngFor="let t of typeList" [value]="t.value">{{t.label}}</md-radio-button>
+              </md-radio-group>
+            </div>
           </div>
-          <div>
-            <md-radio-group name="type" [(ngModel)]="post.type">
-              <md-radio-button *ngFor="let t of typeList" [value]="t.value">{{t.label}}</md-radio-button>
-            </md-radio-group>
+          <div class="post-new-form-action">
+            <button md-fab><md-icon>add</md-icon></button>
           </div>
-        </div>
-        <div class="post-new-form-2">
-          <button md-fab><md-icon>add</md-icon></button>
-        </div>
         </div>
       </form>
   </md-card>
@@ -34,15 +34,24 @@
       <md-card-content>
         <iframe *ngIf="youtubeURL(each.post)" width="560" height="315" [src]="youtubeURL(each.post) | safe" frameborder="0" allowfullscreen></iframe>
       </md-card-content>
-      <md-card-actions *ngIf="loggedIn">
-        <button md-mini-fab (click)="onEdit(each.post)"><md-icon>edit</md-icon></button>
-        <button md-mini-fab (click)="onDelete(each.post)"><md-icon>delete</md-icon></button>
-        <app-rating [rating]="each.post.rating" (onChanged)="onRatingClick(each.post, $event)"></app-rating>
-        <md-select class="post-card-show-select" placeholder="Select show" [(ngModel)]="each.post.show_key">
-          <md-option *ngFor="let show of shows | async" [value]="show['$key']" (onSelect)="onSelectShow(each.post, show)">
-            {{ show.title }} {{show.date | date}}
-          </md-option>
-        </md-select>
+      <md-card-actions >
+        <div class="card-actions">
+        <div class="post-card-rating">
+          <span class="app-rating-placeholder md-floating-placeholder">Rating</span>
+          <app-rating [rating]="each.post.rating" [readonly]="!loggedIn" (onChanged)="onRatingClick(each.post, $event)"></app-rating>
+        </div>
+        <div class="post-card-show">
+          <md-select class="post-card-show-select" placeholder="Show" [(ngModel)]="each.post.show_key">
+            <md-option *ngFor="let show of shows | async" [value]="show['$key']" (onSelect)="onSelectShow(each.post, show)">
+              {{ show.title }} {{show.date | date}}
+            </md-option>
+          </md-select>
+        </div>
+        <div class="post-card-actions" *ngIf="loggedIn">
+          <button md-mini-fab (click)="onEdit(each.post)"><md-icon>edit</md-icon></button>
+          <button md-mini-fab (click)="onDelete(each.post)"><md-icon>delete</md-icon></button>
+        </div>
+        </div>
       </md-card-actions>
     </md-card>
 

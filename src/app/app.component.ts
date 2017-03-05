@@ -1,8 +1,8 @@
-import {Component, OnInit, HostListener, Inject} from '@angular/core';
+import {Component, OnInit, HostListener, Inject, ViewChild, ElementRef} from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import {SessionService, ISessionEvent} from "./core/firebase/session.service";
 import {Observable} from 'rxjs';
-import {MdDialog, MdDialogConfig} from "@angular/material";
+import {MdDialog, MdDialogConfig, MdSidenav} from "@angular/material";
 import {UserMenuComponent} from "./front/user-menu/user-menu.component";
 
 export interface NavLink {
@@ -36,6 +36,19 @@ export class AppComponent implements OnInit {
       label: 'About',
       icon: 'info'
     }];
+  userLinks: NavLink[] = [ {
+      link: '/login',
+      label: 'Login',
+      icon: 'login'
+    }, {
+      link: '/register',
+      label: 'Register',
+      icon: 'register'
+    }];
+  toolbarNavLinks: NavLink[] = [];
+
+  @ViewChild('sidenav') sidenav: ElementRef;
+  sn: MdSidenav = null;
   sidenavMode: string = 'over';
   sidenavOpened: boolean = false;
 
@@ -46,6 +59,7 @@ export class AppComponent implements OnInit {
     this.sessionService.event.subscribe(
       (event) => this.handleEvent(event)
     );
+    this.sn = <MdSidenav>this.sidenav.nativeElement;
     this.updateForWidth(this.window.innerWidth);
   }
 
@@ -62,6 +76,20 @@ export class AppComponent implements OnInit {
     }
     if (width >= 1200) {
       this.sidenavOpened = true;
+      if (this.sn) {
+        this.sn.open();
+      }
+    }
+    if (width >= 475) {
+      this.toolbarNavLinks = this.navLinks;
+    } else {
+      this.toolbarNavLinks = [];
+      this.toolbarNavLinks.push(...this.navLinks);
+      this.toolbarNavLinks.push(...this.userLinks);
+      this.sidenavOpened = false;
+      if (this.sn) {
+        this.sn.close();
+      }
     }
   }
 

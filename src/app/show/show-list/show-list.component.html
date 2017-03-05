@@ -4,15 +4,15 @@
     <md-card-content>
         <form (ngSubmit)="onSubmit()">
           <div class="show-new-form">
-            <div class="show-new-form-1">
+            <div class="show-new-form-data">
               <md-input-container>
                 <input md-input placeholder="Title" [(ngModel)]="newShow.title" name="title" required>
               </md-input-container>
-            <md-input-container>
-              <input md-input placeholder="Date" [(ngModel)]="newShow.date" name="date" required type="date">
-            </md-input-container>
+              <md-input-container>
+                <input md-input placeholder="Date" [(ngModel)]="newShow.date" name="date" required type="date">
+              </md-input-container>
             </div>
-            <div class="show-new-form-2">
+            <div class="show-new-form-action">
               <button md-fab><md-icon>add</md-icon></button>
             </div>
           </div>

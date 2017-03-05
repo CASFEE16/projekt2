@@ -24,3 +24,7 @@ input {
 .search-input {
   width: 90%;
 }
+
+md-radio-button {
+  margin-right: 20px;
+}
