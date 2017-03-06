@@ -7,11 +7,8 @@ import {SessionService} from "../../core/firebase/session.service";
 import {DateUtils} from "../../shared/DateUtils";
 import {ListCache} from "../../core/firebase/ListCache";
 import {Show} from "../../show/shared/show.model";
-import {YoutubeUtils} from "../../core/youtube/YoutubeUtils";
-import {YoutubeService} from "../../core/youtube/youtube.service";
-import {SpotifyUtils} from "../../core/spotify/SpotifyUtils";
-import {SpotifyService} from "../../core/spotify/spotify.service";
 import {ContentService} from "../../core/content/content.service";
+import {TraceService} from "../../core/trace/trace.service";
 
 export interface PostShowListEntry {
   post: Post;
@@ -24,6 +21,7 @@ export class PostService {
   private listCache: ListCache<Post> = new ListCache<Post>();
 
   constructor(
+    private trace: TraceService,
     private backend: BackendService,
     private session: SessionService,
     private content: ContentService) { }
@@ -44,7 +42,7 @@ export class PostService {
   }
 
   public add(post: Post): Observable<Post> {
-
+    this.trace.log('PostService', 'add', post);
     if (!post.user) {
       post.user = this.session.currentUser().uid;
     }
@@ -67,7 +65,7 @@ export class PostService {
   }
 
   public delete(post: Post): Observable<Post> {
-
+    this.trace.log('PostService', 'delete', post);
     if (!(post.user === this.session.currentUser().uid)) {
       return Observable.of(null);
     }
@@ -76,13 +74,27 @@ export class PostService {
   }
 
   public setShow(post: Post, show: Show): Observable<Post> {
+    this.trace.log('PostService', 'setShow', post, show);
+
+    if (show && post.show_key == show['$key']) {
+      // This should not happen: Nothing changed
+      return Observable.of(post);
+    }
+
+    // If show is empty, remove post from show
     if (!show || !show['$key']) {
       return this.listCache.update(post, {show_key: null});
     }
+
     return this.listCache.update(post, {show_key: show['$key']});
   }
 
   public setRating(post: Post, rating: number): Observable<Post> {
+    this.trace.log('PostService', 'setRating', post, rating);
+    if (post.rating == rating) {
+      // This should not happen: Nothing changed
+      return Observable.of(post);
+    }
     console.log(post, rating);
     post.rating = rating;
     return this.listCache.update(post, {rating: rating});

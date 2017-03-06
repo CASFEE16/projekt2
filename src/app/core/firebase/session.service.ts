@@ -2,6 +2,7 @@ import { Injectable, Inject } from '@angular/core';
 import {AngularFire, FirebaseListObservable, AuthProviders, AuthMethods, FirebaseAuthState} from 'angularfire2';
 import { EmailPasswordCredentials } from 'angularfire2/auth';
 import {ReplaySubject, Observable, Observer} from 'rxjs';
+import {TraceService} from "../trace/trace.service";
 
 export interface ISessionEvent {
   name: string;
@@ -10,26 +11,31 @@ export interface ISessionEvent {
 }
 
 /**
- * This is a global service! It keeps the authentcation state for the application.
+ * This is a global service! It keeps the authentication state for the application.
  * Use this service to access AngularFire services.
  */
 @Injectable()
 export class SessionService {
 
-  private _user: firebase.User;
-  private _state: FirebaseAuthState;
+  private _user: firebase.User = null;
+  private _state: FirebaseAuthState = null;
+  private _started: boolean = false;
 
-  constructor(private af: AngularFire) {
-    af.auth.subscribe((auth) =>  {
+  constructor(private af: AngularFire, private trace: TraceService) {
+  }
+
+  public start(): Observable<ISessionEvent> {
+    this.af.auth.subscribe((auth) =>  {
+      this.trace.log('SessionService', 'Firebase Auth Event', auth);
+      this._started = true;
+      this._state = auth;
       if(auth == null) {
         this._user = null;
-        this._state = null;
         this.event.next({
           name: 'logout',
           state: null
         });
       } else {
-        this._state = auth;
         this._user = auth.auth;
         this.event.next({
           name: 'login',
@@ -37,6 +43,7 @@ export class SessionService {
         });
       }
     });
+    return this.event;
   }
 
   public event: ReplaySubject<ISessionEvent> = new ReplaySubject();
@@ -65,14 +72,18 @@ export class SessionService {
     });
   }
 
-  public logout(): Promise<void> {
-    return this.af.auth.logout().catch(
-      (error) => this.event.next({
-        name: 'login-error',
-        state: null,
-        error: error
-      })
-    );
+  public logout(): Observable<FirebaseAuthState> {
+    return Observable.create((observer: Observer<any>) => {
+      this.af.auth.logout().catch(
+        (error) => {
+          observer.error(error);
+        }
+      ).then(
+        (result) => {
+          observer.next(result);
+          observer.complete();
+        });
+    });
   }
 
   public currentUser(): firebase.User {
@@ -84,7 +95,11 @@ export class SessionService {
   }
 
   public isLoggedIn(): boolean {
-    return this.currentState() ? true : false;
+    return !!this.currentUser();
+  }
+
+  public isStarted(): boolean {
+    return this._started;
   }
 
   public get username() {

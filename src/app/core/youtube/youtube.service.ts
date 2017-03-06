@@ -7,6 +7,7 @@ import {Observable, Observer} from "rxjs";
 import {ContentInfo} from "../shared/content.model";
 import {YoutubeUtils} from "./YoutubeUtils";
 import {ContentImplService} from "../shared/content-impl.service";
+import {TraceService} from "../trace/trace.service";
 
 function _window(): any {
   // return the global native browser window object
@@ -17,26 +18,27 @@ function _gapi(): any {
   return _window().gapi;
 }
 
+function loadYoutubeApi(): void {
+  _gapi().client.load('youtube', 'v3', () => {
+    _gapi().client.setApiKey('AIzaSyCNjUMHsV_64Qgh0LM5xUrHf1RMNJ97PGw');
+    console.log('Youtube API loaded');
+  })
+}
+
 @Injectable()
 export class YoutubeService implements ContentImplService {
 
-  constructor(private http: Http) {
+  constructor(private http: Http, private trace: TraceService) {
     if (_gapi() && !_gapi().client) {
       this.loadClientApi();
     } else if (_gapi() && _gapi().client) {
-      this.loadYoutubeApi();
+      loadYoutubeApi();
     }
   }
 
   loadClientApi() {
-    _gapi().load('client', this.loadYoutubeApi);
-  }
-
-  loadYoutubeApi(): void {
-    _gapi().client.load('youtube', 'v3', () => {
-      _gapi().client.setApiKey('AIzaSyCNjUMHsV_64Qgh0LM5xUrHf1RMNJ97PGw');
-      console.log('Youtube API loaded');
-    })
+    this.trace.log('YoutubeService', 'Load Google Client API');
+    _gapi().load('client', loadYoutubeApi);
   }
 
   public getTitle(url: string) {

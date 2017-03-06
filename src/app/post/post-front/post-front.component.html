@@ -43,8 +43,8 @@
           <app-rating [rating]="each.post.rating" [readonly]="!loggedIn" (onChanged)="onRatingClick(each.post, $event)"></app-rating>
         </div>
         <div class="post-card-show">
-          <md-select class="post-card-show-select" placeholder="Show" [(ngModel)]="each.post.show_key" [disabled]="!loggedIn">
-            <md-option *ngFor="let show of shows | async" [value]="show['$key']" (onSelect)="onSelectShow(each.post, show)">
+          <md-select class="post-card-show-select" placeholder="Show" [(ngModel)]="each.post.show_key" (ngModelChange)="onSelectShow(each.post, show)" [disabled]="!loggedIn">
+            <md-option *ngFor="let show of shows | async" [value]="show['$key']">
               {{ show.title }} {{show.date | date}}
             </md-option>
           </md-select>

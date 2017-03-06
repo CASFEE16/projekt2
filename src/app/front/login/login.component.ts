@@ -44,11 +44,11 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.sessionService.loginCredentials(this.credentials).subscribe(
       (result) => {
-        // console.log('Loggedin');
+        // console.trace('Loggedin');
         this.router.navigate(['/']);
       },
       (error) => {
-        // console.log('Error');
+        // console.trace('Error');
         this.error = error;
         this.snackbar.open(this.error.message, '', {
           duration: 3000

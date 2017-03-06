@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {MdDialog, MdDialogRef} from '@angular/material';
+import {MdDialog, MdDialogRef, MdSnackBar} from '@angular/material';
 import {SessionService} from "../../core/firebase/session.service";
 
 @Component({
@@ -9,13 +9,19 @@ import {SessionService} from "../../core/firebase/session.service";
 })
 export class UserMenuComponent implements OnInit {
 
-  constructor(private dialogRef: MdDialogRef<UserMenuComponent>, private sessionService: SessionService) { }
+  constructor(
+    private dialogRef: MdDialogRef<UserMenuComponent>,
+    private sessionService: SessionService,
+    private snackbar: MdSnackBar) { }
 
   ngOnInit() {
   }
 
   onLogout() {
-    this.sessionService.logout();
+    this.sessionService.logout().subscribe(
+      (result) => this.snackbar.open('Logged out', null, {duration: 5000}),
+      (error: Error) => this.snackbar.open(error.message, null, {duration: 5000}),
+    );
     this.dialogRef.close();
   }
 

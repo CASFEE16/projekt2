@@ -3,7 +3,7 @@ import {PostService, PostShowListEntry} from "../shared/post.service";
 import {Observable} from "rxjs";
 import {Post, PostTypes, PostType, ContentDetector} from "../shared/post.model";
 import {FirebaseListObservable} from "angularfire2";
-import {MdSnackBar} from "@angular/material";
+import {MdSnackBar, MdSnackBarConfig} from "@angular/material";
 import {BackendService} from "../../core/firebase/backend.service";
 import {ShowService} from "../../show/shared/show.service";
 import {Show} from "../../show/shared/show.model";
@@ -28,6 +28,7 @@ export class PostFrontComponent implements OnInit {
   typeList: any[];
   loggedIn: boolean = false;
   contentDetector: ContentDetector = new ContentDetector();
+  snackbarConfig: MdSnackBarConfig = new MdSnackBarConfig();
 
   constructor(
     private postService: PostService,
@@ -40,6 +41,8 @@ export class PostFrontComponent implements OnInit {
     this.post = new Post();
     this.post.type = PostType.Note;
     this.typeList = PostTypes.list();
+
+    this.snackbarConfig.duration = 5000;
 
     this.loggedIn = this.sessionService.isLoggedIn();
 
@@ -54,45 +57,55 @@ export class PostFrontComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.loading) return;
     this.postService.add(this.post).subscribe(
-      result => {this.post = new Post();},
-      error => this.snackbar.open(error.message)
+      result => {
+        this.snackbar.open('Post added', null, this.snackbarConfig);
+        this.post = new Post();
+      },
+      error => this.snackbar.open(error.message, null, this.snackbarConfig)
     );
   }
 
   onDelete(deletePost: Post) {
+    if (this.loading) return;
     this.postService.delete(deletePost).subscribe(
-        result => console.log(result),
-        error => this.snackbar.open(error.message)
+        result => this.snackbar.open('Post deleted', null, this.snackbarConfig),
+        error => this.snackbar.open(error.message, null, this.snackbarConfig)
       );
   }
 
   onEdit(editPost: Post) {
+    if (this.loading) return;
     this.router.navigate(['/post', editPost['$key']]);
   }
 
   onSelectShow(post: Post, show: Show) {
+    if (this.loading) return;
     this.postService.setShow(post, show).subscribe(
-      result => console.log(result),
-      error => this.snackbar.open(error.message)
+      result => this.snackbar.open('Post updated', null, this.snackbarConfig),
+      error => this.snackbar.open(error.message, null, this.snackbarConfig)
     );
   }
 
   onTextChanged(event: string) {
+    if (this.loading) return;
     this.post.type = this.contentDetector.getType(event);
   }
 
   onRatingClick(post: Post, rating: number) {
+    if (this.loading) return;
     this.postService.setRating(post, rating).subscribe(
-      result => console.log(result),
-      error => this.snackbar.open(error.message)
+      result => this.snackbar.open('Rating updated', null, this.snackbarConfig),
+      error => this.snackbar.open(error.message, null, this.snackbarConfig)
     );
   }
 
   onRemoveFromShows(post: Post) {
+    if (this.loading) return;
     this.postService.setShow(post, null).subscribe(
-      result => console.log(result),
-      error => this.snackbar.open(error.message)
+      result => this.snackbar.open('Removed from show', null, this.snackbarConfig),
+      error => this.snackbar.open(error.message, null, this.snackbarConfig)
     );
   }
 

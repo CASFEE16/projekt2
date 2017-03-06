@@ -21,7 +21,7 @@ export class ListCache<T> {
           observer.next(result);
           observer.complete()
         });
-    })
+    });
   }
 
   public delete(obj: T): Observable<T> {

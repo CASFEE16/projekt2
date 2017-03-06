@@ -20,7 +20,7 @@ export class RatingComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log(changes['rating'].currentValue);
+    // console.log(changes['rating'].currentValue);
   }
 
 }
