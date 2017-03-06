@@ -6,7 +6,7 @@
           <div class="post-new-form-data">
             <div>
               <md-input-container>
-                <textarea mdInput name="post" placeholder="Post" cols="50" rows="2" [(ngModel)]="post.text" (ngModelChange)="onTextChanged($event)"></textarea>
+                <textarea mdInput name="post" placeholder="Post" cols="100" rows="2" [(ngModel)]="post.text" (ngModelChange)="onTextChanged($event)"></textarea>
               </md-input-container>
             </div>
             <div>
@@ -33,6 +33,8 @@
       </md-card-header>
       <md-card-content>
         <iframe *ngIf="youtubeURL(each.post)" width="560" height="315" [src]="youtubeURL(each.post) | safe" frameborder="0" allowfullscreen></iframe>
+        <iframe *ngIf="spotifyURL(each.post)" [src]="spotifyURL(each.post) | safe" width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
+        <p *ngIf="webURL(each.post)"><a [href]="webURL(each.post) | safe">{{each.post.text}}</a></p>
       </md-card-content>
       <md-card-actions >
         <div class="card-actions">
@@ -41,7 +43,7 @@
           <app-rating [rating]="each.post.rating" [readonly]="!loggedIn" (onChanged)="onRatingClick(each.post, $event)"></app-rating>
         </div>
         <div class="post-card-show">
-          <md-select class="post-card-show-select" placeholder="Show" [(ngModel)]="each.post.show_key">
+          <md-select class="post-card-show-select" placeholder="Show" [(ngModel)]="each.post.show_key" [disabled]="!loggedIn">
             <md-option *ngFor="let show of shows | async" [value]="show['$key']" (onSelect)="onSelectShow(each.post, show)">
               {{ show.title }} {{show.date | date}}
             </md-option>

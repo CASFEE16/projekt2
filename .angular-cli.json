@@ -25,7 +25,6 @@
         "scss/material/theme.scss"
       ],
       "scripts": [
-        "gapi/gapi.js"
       ],
       "environmentSource": "environments/environment.ts",
       "environments": {

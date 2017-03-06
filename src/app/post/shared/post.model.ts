@@ -1,5 +1,6 @@
 
 import {YoutubeUtils} from "../../core/youtube/YoutubeUtils";
+import {SpotifyUtils} from "../../core/spotify/SpotifyUtils";
 export class Post {
 
   public Post() {
@@ -63,11 +64,30 @@ export class PostTypes {
 }
 
 export class ContentDetector {
+
+  getType(text: string): PostType {
+    if (ContentDetector.isMovie(text)) {
+      return PostType.Movie;
+    }
+    if (ContentDetector.isMusic(text)) {
+      return PostType.Music;
+    }
+    if (ContentDetector.isWeb(text)) {
+      return PostType.Web;
+    }
+    return PostType.Note;
+  }
+
   static isMovie(text: string): boolean {
     return !!YoutubeUtils.getId(text);
   }
+
   static isWeb(text: string): boolean {
-    return !ContentDetector.isMovie(text) &&
-      (text.indexOf('http://') >= 0 || text.indexOf('https://') >= 0);
+    return (text.indexOf('http://') >= 0 || text.indexOf('https://') >= 0);
   }
+
+  static isMusic(text: string): boolean {
+    return !!SpotifyUtils.getId(text);
+  }
+
 }

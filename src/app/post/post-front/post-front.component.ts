@@ -11,6 +11,7 @@ import {SessionService} from "../../core/firebase/session.service";
 import {YoutubeService} from "../../core/youtube/youtube.service";
 import {YoutubeUtils} from "../../core/youtube/YoutubeUtils";
 import {Router} from "@angular/router";
+import {SpotifyUtils} from "../../core/spotify/SpotifyUtils";
 
 @Component({
   selector: 'app-post-front',
@@ -26,6 +27,7 @@ export class PostFrontComponent implements OnInit {
   loading: boolean = true;
   typeList: any[];
   loggedIn: boolean = false;
+  contentDetector: ContentDetector = new ContentDetector();
 
   constructor(
     private postService: PostService,
@@ -77,15 +79,7 @@ export class PostFrontComponent implements OnInit {
   }
 
   onTextChanged(event: string) {
-    if (ContentDetector.isMovie(event)) {
-      this.post.type = PostType.Movie;
-      return;
-    }
-    if (ContentDetector.isWeb(event)) {
-      this.post.type = PostType.Web;
-      return;
-    }
-    this.post.type = PostType.Note;
+    this.post.type = this.contentDetector.getType(event);
   }
 
   onRatingClick(post: Post, rating: number) {
@@ -109,6 +103,21 @@ export class PostFrontComponent implements OnInit {
     }
     url = YoutubeUtils.getEmbedUrl(YoutubeUtils.getId(post.content));
     return url;
+  }
+
+  spotifyURL(post: Post) {
+    let url = SpotifyUtils.getEmbedUrl(SpotifyUtils.getId(post.content));
+    if (url) {
+      url = url + '&theme=white&view=coverart';
+    }
+    return url;
+  }
+
+  webURL(post: Post) {
+    if (post.type == PostType.Web) {
+      return post.text;
+    }
+    return null;
   }
 
   getIcon(obj: Post) {

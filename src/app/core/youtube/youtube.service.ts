@@ -4,6 +4,9 @@
 import { Injectable } from '@angular/core';
 import {Http, Response} from "@angular/http";
 import {Observable, Observer} from "rxjs";
+import {ContentInfo} from "../shared/content.model";
+import {YoutubeUtils} from "./YoutubeUtils";
+import {ContentImplService} from "../shared/content-impl.service";
 
 function _window(): any {
   // return the global native browser window object
@@ -15,22 +18,35 @@ function _gapi(): any {
 }
 
 @Injectable()
-export class YoutubeService {
-
-  youtubeApiLoaded: boolean = false;
+export class YoutubeService implements ContentImplService {
 
   constructor(private http: Http) {
-    console.log(_window());
-    console.log(_gapi());
-    _gapi().client.load('youtube', 'v3', () => {
-      _gapi().client.setApiKey('AIzaSyCNjUMHsV_64Qgh0LM5xUrHf1RMNJ97PGw');
-      this.youtubeApiLoaded = true;
-      console.log('Youtube API loaded');
-    });
+    if (_gapi() && !_gapi().client) {
+      this.loadClientApi();
+    } else if (_gapi() && _gapi().client) {
+      this.loadYoutubeApi();
+    }
   }
 
-  public getVideoInfo(id: string): Observable<any> {
-    if (!this.youtubeApiLoaded) {
+  loadClientApi() {
+    _gapi().load('client', this.loadYoutubeApi);
+  }
+
+  loadYoutubeApi(): void {
+    _gapi().client.load('youtube', 'v3', () => {
+      _gapi().client.setApiKey('AIzaSyCNjUMHsV_64Qgh0LM5xUrHf1RMNJ97PGw');
+      console.log('Youtube API loaded');
+    })
+  }
+
+  public getTitle(url: string) {
+    return this
+      .getVideoSnippet(YoutubeUtils.getId(url))
+      .map( (snippet) => snippet.title);
+  }
+
+  getVideoSnippet(id: string): Observable<any> {
+    if (!_gapi() || !_gapi().client || !_gapi().client.youtube) {
       return Observable.of({});
     }
     return Observable.create((observer: Observer<any>) => {

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Observable, Observer} from "rxjs";
-import {Post, POSTS_RESOURCE_PATH} from "./post.model";
+import {Post, POSTS_RESOURCE_PATH, ContentDetector} from "./post.model";
 import {BackendService} from "../../core/firebase/backend.service";
 import {FirebaseListObservable} from "angularfire2";
 import {SessionService} from "../../core/firebase/session.service";
@@ -9,6 +9,9 @@ import {ListCache} from "../../core/firebase/ListCache";
 import {Show} from "../../show/shared/show.model";
 import {YoutubeUtils} from "../../core/youtube/YoutubeUtils";
 import {YoutubeService} from "../../core/youtube/youtube.service";
+import {SpotifyUtils} from "../../core/spotify/SpotifyUtils";
+import {SpotifyService} from "../../core/spotify/spotify.service";
+import {ContentService} from "../../core/content/content.service";
 
 export interface PostShowListEntry {
   post: Post;
@@ -23,7 +26,7 @@ export class PostService {
   constructor(
     private backend: BackendService,
     private session: SessionService,
-    private youtube: YoutubeService) { }
+    private content: ContentService) { }
 
   public findFront(): Observable<PostShowListEntry[]> {
     return this.listCache.find(this.backend.database(), POSTS_RESOURCE_PATH, {
@@ -54,20 +57,13 @@ export class PostService {
 
     post.sortKey = 0 - Date.now();
 
-    let youtubeId = YoutubeUtils.getId(post.text);
-    if (youtubeId) {
-      return this.youtube.getVideoInfo(youtubeId)
-        .flatMap(result => {
-          let url = YoutubeUtils.getUrl(post.text);
-          if (url) {
-            post.content = url;
-            post.text = result.title || post.text;
-          }
-          return this.listCache.add(post);
-        });
-    }
-
-    return this.listCache.add(post);
+    return this.content
+      .getInfo(post.text)
+      .flatMap((result) => {
+        post.content = result.contentUrl || post.content || '';
+        post.text = result.title || post.text || '';
+        return this.listCache.add(post);
+      });
   }
 
   public delete(post: Post): Observable<Post> {

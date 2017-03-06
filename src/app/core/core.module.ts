@@ -4,6 +4,8 @@ import {SessionService} from "./firebase/session.service";
 import {RegistrationService} from "./firebase/registration.service";
 import {BackendService} from "./firebase/backend.service";
 import {YoutubeService} from "./youtube/youtube.service";
+import {SpotifyService} from "./spotify/spotify.service";
+import {ContentService} from "./content/content.service";
 
 @NgModule({
   imports: [
@@ -14,7 +16,9 @@ import {YoutubeService} from "./youtube/youtube.service";
     SessionService,
     RegistrationService,
     BackendService,
-    YoutubeService
+    YoutubeService,
+    SpotifyService,
+    ContentService
   ]
 })
 export class CoreModule { }

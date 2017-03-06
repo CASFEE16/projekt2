@@ -4,6 +4,7 @@
  */
 export class YoutubeUtils {
 
+  // Extract Youtube ID from Youtube URL
   public static getId(text: string): string {
     if (!text) return null;
 
@@ -22,6 +23,7 @@ export class YoutubeUtils {
     return null;
   }
 
+  // Geht the Youtube URL for embedded player for an id
   public static getEmbedUrl(id: string) {
     if (!id) {
       return null;
@@ -29,6 +31,7 @@ export class YoutubeUtils {
     return 'https://www.youtube.com/embed/' + id;
   }
 
+  // Look for Youtube URLS in a text
   public static getUrl(text: string): string {
     if (!text) return null;
     let regex = /(http[s]*:\/\/www.youtube.com\/watch\?v=[0-9a-zA-Z]+)/i;
