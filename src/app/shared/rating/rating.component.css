@@ -1,9 +1,46 @@
+.app-rating {
+  display: flex;
+  align-items: flex-start;
+  min-width: 172px;
+  cursor: pointer;
+  position: relative;
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+
+.app-floating-placeholder {
+  top: -14px;
+  left: 0px;
+  text-align: left;
+  transform: scale(.75);
+}
+
+.app-rating-placeholder {
+  position: relative;
+  padding: 0 2px;
+  transform-origin: left top;
+  flex-grow: 1;
+  color: rgba(0, 0, 0, 0.380392);
+}
+
+.app-rating-value {
+  position: absolute;
+  max-width: calc(100% - 18px);
+  flex-grow: 1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  align-items: center;
+}
+
 /***************************
 Pulls the stars container to the left
 ***************************/
 .rating {
   border: none;
   display: inline-block;
+  padding: 0px;
 }
 /***************************
 Hides the radio buttons
@@ -41,15 +78,15 @@ Colour for the applied rating stars
 /***************************
 Colour for hovered stars when increasing the rating
 ***************************/
-.rating:not(:checked) > label:hover,
-.rating:not(:checked) > label:hover ~ label {
+.enabled:not(:checked) > label:hover,
+.enabled:not(:checked) > label:hover ~ label {
   color: gold;
 }
 /***************************
 Colour for hovered stars when decreasing the rating
 ***************************/
-.rating > input:checked ~ label:hover,
-.rating > input:checked ~ label:hover ~ label,
-.rating > label:hover ~ input:checked ~ label {
+.enabled > input:checked ~ label:hover,
+.enabled > input:checked ~ label:hover ~ label,
+.enabled > label:hover ~ input:checked ~ label {
   color: #ea0;
 }

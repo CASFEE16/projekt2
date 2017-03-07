@@ -14,6 +14,7 @@ html, body, material-app, md-sidenav-container, .my-content {
 
 .sidenav-header {
   margin-bottom: 30px;
+  width: 250px;
 }
 
 .sidenav-user {
@@ -68,29 +69,36 @@ html, body, material-app, md-sidenav-container, .my-content {
   white-space: nowrap;
 }
 
-@media screen and (min-width : 750px) {
+.toolbar-nav-menu-button {
+  min-width: 35px;
+  padding: 0px;
+}
+
+
+@media screen and (max-width : 750px) {
+  .toolbar-nav-text {
+    display: none;
+  }
+  .toolbar-nav-button {
+    padding: 10px;
+    min-width: 40px;
+  }
+}
+
+@media screen and (min-width : 500px) {
   .toolbar-nav-menu {
     display: none;
   }
 }
 
-@media screen and (max-width : 750px) {
-  .toolbar-nav-button {
-    display: none;
-  }
-}
-
-@media screen and (max-width : 475px) {
-  .toolbar-nav-button {
-    display: none;
-  }
-  .toolbar-nav-user {
+@media screen and (max-width : 500px) {
+  .toolbar-nav-auth {
     display: none;
   }
 }
 
 @media screen and (max-width : 400px) {
-  .toolbar-nav-menu-title {
+  .toolbar-nav-button {
     display: none;
   }
 }

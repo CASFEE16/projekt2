@@ -33,23 +33,29 @@
   </md-sidenav>
 
   <md-toolbar color="primary">
+
     <div>
       <button md-icon-button class="app-icon-button" (click)="onSidenavToggle()">
         <md-icon>menu</md-icon>
       </button>
     </div>
+
     <div class="toolbar-title">
     Radio App
     </div>
-    <div class="toolbar-nav toolbar-nav-button">
+
+    <div class="toolbar-nav">
         <div *ngFor="let navLink of navLinks">
-          <a md-button class="toolbar-link" routerLink="{{navLink.link}}" routerLinkActive #rla="routerLinkActive">
-            <md-icon>{{navLink.icon}}</md-icon> {{navLink.label}}
+          <a md-button class="toolbar-link toolbar-nav-button" routerLink="{{navLink.link}}" routerLinkActive #rla="routerLinkActive">
+            <md-icon>{{navLink.icon}}</md-icon> <span class="toolbar-nav-text">{{navLink.label}}</span>
           </a>
         </div>
     </div>
+
+    <div class="app-toolbar-filler"></div>
+
     <div class="toolbar-nav toolbar-nav-menu">
-      <button md-button [mdMenuTriggerFor]="menu"><md-icon>more_vert</md-icon> <span class="toolbar-nav-menu-title">Navigation</span></button>
+      <button class="toolbar-nav-menu-button" md-button [mdMenuTriggerFor]="menu"><md-icon>more_vert</md-icon> <span class="toolbar-nav-menu-title"></span></button>
       <md-menu #menu="mdMenu">
         <button md-menu-item *ngFor="let navLink of toolbarNavLinks" routerLink="{{navLink.link}}">
           <md-icon>{{navLink.icon}}</md-icon> {{navLink.label}}
@@ -57,17 +63,17 @@
       </md-menu>
     </div>
 
-    <div class="app-toolbar-filler"></div>
     <!-- <button md-button (click)="isDarkTheme = !isDarkTheme">TOGGLE DARK THEME</button> -->
     <div class="toolbar-nav-user">
       <div *ngIf="loggedIn | async">
         <div><button md-fab (click)="onUserMenu()"><md-icon>face</md-icon></button></div>
       </div>
-      <div class="toolbar-nav" *ngIf="!(loggedIn | async)">
+      <div class="toolbar-nav toolbar-nav-auth" *ngIf="!(loggedIn | async)">
         <div><a md-button class="toolbar-link" routerLink="/login">Login</a></div>
         <div><a md-button class="toolbar-link" routerLink="/register">Register</a></div>
       </div>
     </div>
+
   </md-toolbar>
 
   <div class="app-content">

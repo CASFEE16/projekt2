@@ -81,8 +81,8 @@ export class AppComponent implements OnInit {
         this.sidenav.close();
       }
     }
-    if (width >= 475) {
-      this.toolbarNavLinks = this.navLinks;
+    if (width >= 400) {
+      this.toolbarNavLinks = this.userLinks;
     } else {
       this.toolbarNavLinks = [];
       this.toolbarNavLinks.push(...this.navLinks);

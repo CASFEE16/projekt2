@@ -8,8 +8,8 @@ import {StartedGuard} from "./core/auth/StartedGuard";
 export const ROUTE_CONFIG: Routes = [
   { path: '', component: HomeComponent, canActivate: [StartedGuard] },
   { path: 'about', component: AboutComponent },
-  { path: 'login', component: LoginComponent, canActivate: [StartedGuard, NotAuthGuard] },
-  { path: 'register', component: RegisterComponent, canActivate: [StartedGuard, NotAuthGuard] },
+  { path: 'login', component: LoginComponent, canActivate: [NotAuthGuard] },
+  { path: 'register', component: RegisterComponent, canActivate: [NotAuthGuard] },
   { path: 'search', component: SearchComponent, canActivate: [StartedGuard]},
-  { path: 'user', component: UserMenuComponent, canActivate: [StartedGuard, AuthGuard]}
+  { path: 'user', component: UserMenuComponent, canActivate: [AuthGuard]}
 ];

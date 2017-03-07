@@ -1,13 +1,16 @@
 .post-front-container {
   heigth: 100%;
 }
+
 .post-card {
   margin-bottom: 10px;
 }
+
 .post-new-form {
   position: relative;
   margin-bottom: 20px;
 }
+
 .post-new-form-data {
   display: flex;
   flex-direction: column;
@@ -19,27 +22,27 @@
   right: -10px;
 }
 
-.card-actions {
+.post-card-actions {
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .post-card-rating {
-  display: block;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  margin-top: 12px;
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 30px;
 }
 
 .post-card-show {
-  display: block;
-  flex: 1 1;
   margin-top: 20px;
   margin-left: 10px;
   margin-right: 10px;
 }
 
-.post-card-actions {
-  display: block;
+.post-card-menu {
   margin-top: 10px;
 }
 
@@ -53,12 +56,4 @@ textarea {
 
 md-radio-button {
   margin-right: 20px;
-}
-
-.app-rating-placeholder {
-  transform: scale(.75);
-  color: rgba(0, 0, 0, 0.38);
-  position: absolute;
-  bottom: 56px;
-  padding: 0 12px;
 }

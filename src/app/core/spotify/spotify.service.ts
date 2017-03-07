@@ -29,7 +29,7 @@ export class SpotifyService implements ContentImplService {
   public getTitle(url: string): Observable<string> {
     let uri = SpotifyUtils.getUri(url);
     if (uri.type == 'album') {
-      return this.getAlbum(uri.id).map( (album) => album.name);
+      return this.getAlbum(uri.id).map( (album) => album.name + ' / ' + album.artists[0].name + ' / ' + album.release_date);
     }
     if (uri.type == 'track') {
       return this.getTrack(uri.id).map( (track) => track.name);

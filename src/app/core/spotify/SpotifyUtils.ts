@@ -3,7 +3,7 @@ import {SpotifyUri} from "./spotify.model";
 
 export class SpotifyUtils {
 
-  static regex = /http[s]*:\/\/open.spotify.com\/([a-zA-Z\/]+)\/([0-9a-zA-Z]+)/i;
+  static regex = /http[s]*:\/\/[a-z]+.spotify.com\/([a-zA-Z\/]+)\/([0-9a-zA-Z]+)/i;
 
   // https://open.spotify.com/user/spotify_germany/playlist/3OpgAAPHJRk2rSCz3jTcpp
   // https://open.spotify.com/album/3T4tUhGYeRNVUGevb0wThu
