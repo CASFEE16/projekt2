@@ -85,12 +85,6 @@ html, body, material-app, md-sidenav-container, .my-content {
   }
 }
 
-@media screen and (min-width : 500px) {
-  .toolbar-nav-menu {
-    display: none;
-  }
-}
-
 @media screen and (max-width : 500px) {
   .toolbar-nav-auth {
     display: none;

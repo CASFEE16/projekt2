@@ -73,29 +73,14 @@ export class PostService {
     return this.listCache.delete(post);
   }
 
-  public setShow(post: Post, show: Show): Observable<Post> {
-    this.trace.log('PostService', 'setShow', post, show);
-
-    if (show && post.show_key == show['$key']) {
-      // This should not happen: Nothing changed
-      return Observable.of(post);
-    }
-
-    // If show is empty, remove post from show
-    if (!show || !show['$key']) {
-      return this.listCache.update(post, {show_key: null});
-    }
-
-    return this.listCache.update(post, {show_key: show['$key']});
+  public setShow(post: Post, showKey: string): Observable<Post> {
+    this.trace.log('PostService', 'setShow', post, showKey);
+    post.show_key = showKey;
+    return this.listCache.update(post, {show_key: showKey});
   }
 
   public setRating(post: Post, rating: number): Observable<Post> {
     this.trace.log('PostService', 'setRating', post, rating);
-    if (post.rating == rating) {
-      // This should not happen: Nothing changed
-      return Observable.of(post);
-    }
-    console.log(post, rating);
     post.rating = rating;
     return this.listCache.update(post, {rating: rating});
   }

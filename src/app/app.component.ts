@@ -4,6 +4,8 @@ import {SessionService, ISessionEvent} from "./core/firebase/session.service";
 import {Observable} from 'rxjs';
 import {MdDialog, MdDialogConfig, MdSidenav, MdSidenavToggleResult} from "@angular/material";
 import {UserMenuComponent} from "./front/user-menu/user-menu.component";
+import {TraceService} from "./core/trace/trace.service";
+import {Router} from "@angular/router";
 
 export interface NavLink {
   link: string;
@@ -52,15 +54,23 @@ export class AppComponent implements OnInit {
   sidenavOpened: boolean = false;
   sidenavOpenedByUser: boolean = false;
 
-  constructor(private sessionService: SessionService, private dialog: MdDialog, @Inject("windowObject") private window: Window) {}
+  loggedIn: Observable<boolean> = null;
+
+  constructor(
+    private sessionService: SessionService,
+    private trace: TraceService,
+    private dialog: MdDialog,
+    private router: Router,
+    @Inject("windowObject") private window: Window) {}
 
   ngOnInit() {
     // Register for all authentication events like login, logout
     this.sessionService.event.subscribe(
-      (event) => this.handleEvent(event)
+      (event) => this.handleSessionEvent(event)
     );
-    console.log(this, this.sidenav);
+    this.loggedIn = this.sessionService.watchLoggedIn();
     this.updateForWidth(this.window.innerWidth);
+
   }
 
   @HostListener('window:resize', ['$event'])
@@ -81,24 +91,26 @@ export class AppComponent implements OnInit {
         this.sidenav.close();
       }
     }
-    if (width >= 400) {
-      this.toolbarNavLinks = this.userLinks;
-    } else {
-      this.toolbarNavLinks = [];
+    this.toolbarNavLinks = [];
+    if (width >= 400 && width < 500) {
+      if (!this.sessionService.isLoggedIn()) {
+        this.toolbarNavLinks = this.userLinks;
+      }
+    }
+    if (width < 400) {
       this.toolbarNavLinks.push(...this.navLinks);
-      this.toolbarNavLinks.push(...this.userLinks);
+      if (!this.sessionService.isLoggedIn()) {
+        this.toolbarNavLinks.push(...this.userLinks);
+      }
       this.sidenavOpened = false;
       this.sidenav.close();
     }
+
   }
 
   // About Toolbar etc on authentication event
-  handleEvent(event: ISessionEvent) {
-
-  }
-
-  get loggedIn(): Observable<boolean> {
-    return this.sessionService.event.map((event) => event.name === 'login' && !event.state.anonymous);
+  handleSessionEvent(event: ISessionEvent) {
+    this.trace.log('AppComponent', 'Session event', event);
   }
 
   onUserMenu() {

@@ -102,6 +102,14 @@ export class SessionService {
     return this._started;
   }
 
+  public watchLoggedIn(): Observable<boolean> {
+    let obs: Observable<ISessionEvent> = this.event;
+    return obs
+      .map((event) => {
+        return event.state !== null;
+      });
+  }
+
   public get username() {
     let user = this.currentUser();
     if (user) {

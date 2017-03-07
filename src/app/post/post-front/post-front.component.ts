@@ -26,7 +26,7 @@ export class PostFrontComponent implements OnInit {
   shows: Observable<Show[]> = null;
   loading: boolean = true;
   typeList: any[];
-  loggedIn: boolean = false;
+  loggedIn: Observable<boolean> = null;
   contentDetector: ContentDetector = new ContentDetector();
   snackbarConfig: MdSnackBarConfig = new MdSnackBarConfig();
 
@@ -44,7 +44,7 @@ export class PostFrontComponent implements OnInit {
 
     this.snackbarConfig.duration = 5000;
 
-    this.loggedIn = this.sessionService.isLoggedIn();
+    this.loggedIn = this.sessionService.watchLoggedIn();
 
     this.showService.findUpcoming()
       .subscribe(result => {
@@ -80,9 +80,9 @@ export class PostFrontComponent implements OnInit {
     this.router.navigate(['/post', editPost['$key']]);
   }
 
-  onSelectShow(post: Post, show: Show) {
+  onSelectShow(post: Post, showKey: string) {
     if (this.loading) return;
-    this.postService.setShow(post, show).subscribe(
+    this.postService.setShow(post, showKey).subscribe(
       result => this.snackbar.open('Post updated', null, this.snackbarConfig),
       error => this.snackbar.open(error.message, null, this.snackbarConfig)
     );

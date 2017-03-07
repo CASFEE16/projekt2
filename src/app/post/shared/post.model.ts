@@ -17,7 +17,7 @@ export class Post {
   user?: string;
   ts?: number;
   sortKey?: number;
-  show_key?: number;
+  show_key?: string;
 
 }
 
