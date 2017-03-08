@@ -6,6 +6,7 @@ import {MaterialModule} from "@angular/material";
 import {CoreModule} from "../core/core.module";
 import {SafePipe} from "../shared/safe.pipe";
 import {SharedModule} from "../shared/shared.module";
+import { PostComponent } from './post/post.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import {SharedModule} from "../shared/shared.module";
   ],
   declarations: [
     PostFrontComponent,
-    SafePipe
+    SafePipe,
+    PostComponent
   ],
   exports: [PostFrontComponent]
 })

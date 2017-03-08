@@ -17,12 +17,12 @@ export class ShowListComponent implements OnInit {
   newShow: Show = null;
   shows: Observable<Show[]> = null;
   loading: boolean = true;
-  loggedIn: boolean = false;
+  loggedIn: Observable<boolean> = null;
 
   constructor(private showService: ShowService, private sessionService: SessionService, private snackbar: MdSnackBar, private router: Router) { }
 
   ngOnInit() {
-    this.loggedIn = this.sessionService.isLoggedIn();
+    this.loggedIn = this.sessionService.watchLoggedIn();
     if (this.loggedIn) {
       this.newShow = this.showService.newDefault();
     }

@@ -1,0 +1,31 @@
+.post-card {
+  margin-bottom: 10px;
+}
+
+.post-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.post-card-rating {
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+  height: 30px;
+}
+
+.post-card-show {
+  margin-top: 20px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.post-card-menu {
+  margin-top: 10px;
+}
+
+.post-card-show-select {
+  width: 300px;
+}
