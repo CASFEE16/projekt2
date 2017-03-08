@@ -1,0 +1,32 @@
+.show-container {
+  margin: 20px;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+}
+
+.left {
+  flex: 1 1;
+}
+
+.middle {
+  margin-top: 25px;
+}
+
+.action {
+  font-size: 48px;
+  height: 50px;
+  width: 50px;
+}
+
+.right {
+  flex: 0 0;
+}
+
+.on-air {
+  background-color: red;
+}

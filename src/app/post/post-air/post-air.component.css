@@ -33,3 +33,7 @@
 .avatar {
   font-size: 32px;
 }
+
+.done {
+  display: none;
+}

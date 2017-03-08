@@ -24,7 +24,9 @@ export class ShowService {
     let show: Show = new Show();
     show.title = 'New Show';
     show.date = DateUtils.todayISOString();
-    show.user = this.session.currentUser().uid;
+    if (this.session && this.session.currentUser()) {
+      show.user = this.session.currentUser().uid;
+    }
     show.ts = Date.now();
     return show;
   }
@@ -62,6 +64,15 @@ export class ShowService {
       }}).map(each => this.map(each));
   }
 
+  public findPostsForShow(show: Show): Observable<Post[]> {
+    return this.backend.database().list(POSTS_RESOURCE_PATH, {
+      query: {
+        limitToLast: 100,
+        orderByChild: 'show_key',
+        equalTo: show['$key']
+      }});
+  }
+
   map(list: Show[]): Show[] {
     let newList: Show[] = list.map(each => Object.assign(new Show(), each));
     return newList;
@@ -93,6 +104,5 @@ export class ShowService {
 
     return this.listCache.delete(show);
   }
-
 
 }

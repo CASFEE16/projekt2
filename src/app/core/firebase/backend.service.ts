@@ -12,4 +12,12 @@ export class BackendService {
     return this.af.database;
   }
 
+  public list(resource: string, options?: any): Observable<any> {
+    return this.database().list(resource, options);
+  }
+
+  public get(resource: string, id: string, options?: any): Observable<any> {
+    return this.database().list(resource + '/' + id, options);
+  }
+
 }

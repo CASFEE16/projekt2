@@ -8,6 +8,10 @@ import {SHOW_ROUTE_CONFIG} from './show-route-config';
 import {ShowListComponent} from "./show-list/show-list.component";
 import { ShowFrontComponent } from './show-front/show-front.component';
 import { ShowDetailsComponent } from './show-details/show-details.component';
+import { ShowComponent } from './show/show.component';
+import {SharedModule} from "../shared/shared.module";
+import { ShowAirComponent } from './show-air/show-air.component';
+import {PostModule} from "../post/post.module";
 
 @NgModule({
   imports: [
@@ -15,12 +19,14 @@ import { ShowDetailsComponent } from './show-details/show-details.component';
     FormsModule,
     MaterialModule,
     CoreModule,
-    RouterModule.forChild(SHOW_ROUTE_CONFIG)
+    SharedModule,
+    RouterModule.forChild(SHOW_ROUTE_CONFIG),
+    PostModule
   ],
   exports: [
     RouterModule,
     ShowFrontComponent
   ],
-  declarations: [ShowListComponent, ShowFrontComponent, ShowDetailsComponent]
+  declarations: [ShowListComponent, ShowFrontComponent, ShowDetailsComponent, ShowComponent, ShowAirComponent]
 })
 export class ShowModule { }

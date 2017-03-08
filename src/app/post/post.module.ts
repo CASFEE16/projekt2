@@ -7,6 +7,7 @@ import {CoreModule} from "../core/core.module";
 import {SafePipe} from "../shared/safe.pipe";
 import {SharedModule} from "../shared/shared.module";
 import { PostComponent } from './post/post.component';
+import { PostAirComponent } from './post-air/post-air.component';
 
 @NgModule({
   imports: [
@@ -19,8 +20,9 @@ import { PostComponent } from './post/post.component';
   declarations: [
     PostFrontComponent,
     SafePipe,
-    PostComponent
+    PostComponent,
+    PostAirComponent
   ],
-  exports: [PostFrontComponent]
+  exports: [PostFrontComponent, PostAirComponent]
 })
 export class PostModule { }

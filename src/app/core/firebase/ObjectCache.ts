@@ -8,12 +8,19 @@ import {Observable, Observer} from "rxjs";
 export class ObjectCache<T> {
 
   object: FirebaseObjectObservable<T> = null;
+  afDatabase: AngularFireDatabase = null;
 
-  constructor() {
+  constructor(afDatabase?: AngularFireDatabase) {
+    this.afDatabase = afDatabase;
   }
 
-  public get(afDatabase: AngularFireDatabase, resource: string, options?: any): FirebaseObjectObservable<T> {
-    this.object = afDatabase.object(resource, options);
+  public get(resource: string, options?: any): FirebaseObjectObservable<T> {
+    this.object = this.afDatabase.object(resource, options);
+    return this.object;
+  }
+
+  public getId(resource: string, id: string, options?: any): FirebaseObjectObservable<T> {
+    this.object = this.afDatabase.object(resource + '/' + id, options);
     return this.object;
   }
 

@@ -1,16 +1,16 @@
 <div>
   <md-card class="post-card">
     <md-card-header>
-      <div md-card-avatar><md-icon>{{getIcon(each.post)}}</md-icon></div>
+      <div md-card-avatar><md-icon class="avatar" color="primary">{{getIcon(each.post)}}</md-icon></div>
       <md-card-title><strong>{{each.post.text}}</strong></md-card-title>
       <md-card-subtitle>{{each.post.date | date}}</md-card-subtitle>
     </md-card-header>
     <md-card-content>
-      <!-- width="560" height="315" / width="300" height="80" -->
+      <!-- width="560" height="315" /  -->
       <iframe *ngIf="youtubeURL(each.post)"  [src]="youtubeURL(each.post) | safe"
               frameborder="0" allowfullscreen></iframe>
       <iframe *ngIf="spotifyURL(each.post)" [src]="spotifyURL(each.post) | safe"
-              frameborder="0" allowtransparency="true"></iframe>
+              width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
       <p *ngIf="webURL(each.post)">
         <a [href]="webURL(each.post) | safe">{{each.post.text}}</a>
       </p>

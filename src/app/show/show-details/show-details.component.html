@@ -16,9 +16,18 @@
                  [(ngModel)]="show.date" name="date">
         </md-input-container>
         </div>
-        <button md-button type="button" (click)="onSubmit($event)">OK</button>
-        <button md-button type="button" (click)="onCancel()">Cancel</button>
+
+        <table>
+          <tr *ngFor="let post of posts | async">
+            <td [class]="getPostClass(post)">{{post.text}}</td>
+            <td><button md-button type="button" (click)="onRemovePost(post)"><md-icon>clear</md-icon></button></td>
+          </tr>
+        </table>
+
+        <button md-button type="button" (click)="onSubmit($event)"><md-icon>save</md-icon>Save</button>
+        <button md-button type="button" (click)="onCancel()"><md-icon>cancel</md-icon>Cancel</button>
       </form>
+
     </md-card-content>
   </md-card>
 </div>

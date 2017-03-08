@@ -27,7 +27,7 @@
 
   <div>
     <div *ngFor="let each of posts | async">
-      <app-post [each]="each">
+      <app-post [each]="each" [shows]="shows">
       </app-post>
     </div>
   </div>

@@ -8,7 +8,7 @@
               <md-input-container>
                 <input mdInput placeholder="Title" [(ngModel)]="newShow.title" name="title" required>
               </md-input-container>
-              <md-input-container>
+              <md-input-container class="input-date">
                 <input mdInput placeholder="Date" [(ngModel)]="newShow.date" name="date" required type="date">
               </md-input-container>
             </div>
@@ -23,16 +23,8 @@
   <md-spinner *ngIf="loading"></md-spinner>
 
   <div>
-    <md-card class="show-card" *ngFor="let show of shows | async">
-      <md-card-header>
-        <div md-card-avatar><md-icon>radio</md-icon></div>
-        <md-card-title><strong>{{show.title}}</strong> {{show.date | date}}</md-card-title>
-      </md-card-header>
-      <md-card-actions *ngIf="loggedIn | async">
-        <button md-mini-fab (click)="onEdit(show)"><md-icon>edit</md-icon></button>
-        <button md-mini-fab (click)="onDelete(show)"><md-icon>delete</md-icon></button>
-      </md-card-actions>
-    </md-card>
-
+    <div class="show-card" *ngFor="let show of shows | async">
+      <app-show [show]="show"></app-show>
+    </div>
   </div>
 </div>

@@ -19,7 +19,10 @@ export class ShowListComponent implements OnInit {
   loading: boolean = true;
   loggedIn: Observable<boolean> = null;
 
-  constructor(private showService: ShowService, private sessionService: SessionService, private snackbar: MdSnackBar, private router: Router) { }
+  constructor(
+    private showService: ShowService,
+    private sessionService: SessionService,
+    private snackbar: MdSnackBar) { }
 
   ngOnInit() {
     this.loggedIn = this.sessionService.watchLoggedIn();
@@ -35,17 +38,6 @@ export class ShowListComponent implements OnInit {
       result => {this.newShow = this.showService.newDefault()},
       error => {this.snackbar.open(error.message)}
     );
-  }
-
-  onDelete(obj: Show) {
-    this.showService.delete(obj).subscribe(
-      result => console.log(result),
-      error => this.snackbar.open(error.message)
-    );
-  }
-
-  onEdit(obj: Show) {
-    this.router.navigate(['/show', obj['$key']]);
   }
 
 }

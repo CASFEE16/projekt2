@@ -1,0 +1,18 @@
+table {
+  border-collapse: collapse;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+tr {
+  border: solid 1px rgba(0, 0, 0, 0.117647);
+  padding: 5px;
+}
+
+td {
+  padding: 0px 10px;
+}
+
+.post-removed {
+  text-decoration: line-through;
+}

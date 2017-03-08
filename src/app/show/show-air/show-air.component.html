@@ -1,0 +1,25 @@
+<div class="show-container">
+  <md-card class="show-card" [ngClass]="{'on-air': onAir}">
+    <md-toolbar color="primary" [ngClass]="{'on-air': onAir}">
+      <div class="toolbar">
+        <div class="left"><h1>{{show?.title}}</h1></div>
+        <div class="middle">
+          <button class="action" md-button type="button" (click)="onSubmit($event)"><md-icon class="action">play_circle_outline</md-icon></button>
+          <button class="action" md-button type="button" (click)="onCancel($event)"><md-icon class="action">pause_circle_outline</md-icon></button>
+        </div>
+        <div class="right">
+          <h1>{{currentDateTime | date:'medium'}}</h1>
+        </div>
+      </div>
+    </md-toolbar>
+    <md-card-content>
+
+        <div>
+          <div *ngFor="let post of posts | async">
+            <app-post-air [post]="post"></app-post-air>
+          </div>
+        </div>
+
+    </md-card-content>
+  </md-card>
+</div>

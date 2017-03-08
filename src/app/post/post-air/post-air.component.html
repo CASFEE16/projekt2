@@ -1,0 +1,29 @@
+<div>
+  <md-card class="post-card">
+    <md-card-header>
+      <div md-card-avatar><md-icon class="avatar" color="primary">{{getIcon(post)}}</md-icon></div>
+      <md-card-title><strong>{{post.text}}</strong></md-card-title>
+      <md-card-subtitle>{{post.date | date}}</md-card-subtitle>
+    </md-card-header>
+    <md-card-content [ngClass]="{'done': done}">
+      <iframe *ngIf="youtubeURL(post)"  [src]="youtubeURL(post) | safe"
+              width="560" height="315" frameborder="0" allowfullscreen></iframe>
+      <iframe *ngIf="spotifyURL(post)" [src]="spotifyURL(post) | safe"
+              width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
+      <p *ngIf="webURL(post)">
+        <a [href]="webURL(post) | safe">{{post.text}}</a>
+      </p>
+    </md-card-content>
+    <md-card-actions >
+      <div class="post-card-actions">
+        <div class="post-card-rating">
+          <app-rating [rating]="post.rating" [disabled]="true"></app-rating>
+        </div>
+        <div class="post-card-menu">
+            <button md-fab (click)="onClear()"><md-icon>clear</md-icon></button>
+        </div>
+      </div>
+    </md-card-actions>
+  </md-card>
+
+</div>

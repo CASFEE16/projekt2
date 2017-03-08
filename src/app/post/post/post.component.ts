@@ -6,6 +6,7 @@ import {PostService} from "../shared/post.service";
 import {SessionService} from "../../core/firebase/session.service";
 import {YoutubeUtils} from "../../core/youtube/YoutubeUtils";
 import {SpotifyUtils} from "../../core/spotify/SpotifyUtils";
+import {Show} from '../../show/shared/show.model';
 
 @Component({
   selector: 'app-post',
@@ -15,6 +16,7 @@ import {SpotifyUtils} from "../../core/spotify/SpotifyUtils";
 export class PostComponent implements OnInit {
 
   @Input() each: any = null;
+  @Input() shows: Observable<Show[]> = null;
   loggedIn: Observable<boolean> = null;
   snackbarConfig: MdSnackBarConfig = new MdSnackBarConfig();
 
@@ -24,7 +26,7 @@ export class PostComponent implements OnInit {
     private snackbar: MdSnackBar) { }
 
   ngOnInit() {
-    this.snackbarConfig.duration = 5000;
+    this.snackbarConfig.duration = 2000;
     this.loggedIn = this.sessionService.watchLoggedIn();
   }
 
