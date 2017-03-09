@@ -1,6 +1,5 @@
-/* tslint:disable:no-unused-variable */
+import { TestBed, inject } from '@angular/core/testing';
 
-import { TestBed, async, inject } from '@angular/core/testing';
 import { ShowService } from './show.service';
 
 describe('ShowService', () => {

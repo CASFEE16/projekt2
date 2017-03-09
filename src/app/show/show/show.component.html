@@ -1,15 +1,16 @@
 <md-card class="show-card">
   <md-card-header>
     <div md-card-avatar><md-icon>radio</md-icon></div>
-    <md-card-title><strong>{{show.title}}</strong> {{show.date | date}}</md-card-title>
+    <md-card-title><strong>{{show.title}}</strong></md-card-title>
+    <md-card-subtitle>{{show.date | date}}</md-card-subtitle>
   </md-card-header>
   <md-card-content>
     <p>{{show.description}}</p>
-    <ul>
-      <li *ngFor="let post of posts">
-        {{post.text}}
-      </li>
-    </ul>
+    <table>
+      <tr *ngFor="let post of posts">
+        <td><md-icon>{{postUtils.getIcon(post)}}</md-icon></td><td>{{post.text}}</td>
+      </tr>
+    </table>
   </md-card-content>
   <md-card-actions *ngIf="loggedIn | async">
     <button md-mini-fab (click)="onAir(show)"><md-icon>play_arrow</md-icon></button>

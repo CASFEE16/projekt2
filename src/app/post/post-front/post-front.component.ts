@@ -3,7 +3,7 @@ import {PostService} from "../shared/post.service";
 import {Observable} from "rxjs";
 import {Post, PostTypes, PostType, ContentDetector} from "../shared/post.model";
 import {MdSnackBar, MdSnackBarConfig} from "@angular/material";
-import {ShowService} from "../../show/shared/show.service";
+import {ShowListService} from "../../show/shared/show-list.service";
 import {Show} from "../../show/shared/show.model";
 import {SessionService} from "../../core/firebase/session.service";
 import {Router} from "@angular/router";
@@ -14,7 +14,7 @@ import {PostUtils} from "../shared/post-utils.service";
   selector: 'app-post-front',
   templateUrl: './post-front.component.html',
   styleUrls: ['./post-front.component.css'],
-  providers: [PostService, ShowService]
+  providers: [PostService, ShowListService]
 })
 export class PostFrontComponent implements OnInit {
 
@@ -29,7 +29,7 @@ export class PostFrontComponent implements OnInit {
 
   constructor(
     private postService: PostService,
-    private showService: ShowService,
+    private showService: ShowListService,
     private sessionService: SessionService,
     private router: Router,
     private snackbar: MdSnackBar) { }

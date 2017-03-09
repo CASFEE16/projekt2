@@ -1,6 +1,5 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {Show} from "../shared/show.model";
-import {ShowService} from "../shared/show.service";
 import {Observable} from "rxjs";
 import {SessionService} from "../../core/firebase/session.service";
 import {MdSnackBar} from "@angular/material";
@@ -9,6 +8,8 @@ import {Router} from "@angular/router";
 import {Post} from "../../post/shared/post.model";
 import {SubmitDialogComponent} from "../../shared/submit-dialog/submit-dialog.component";
 import {ShowPostsService} from "../shared/show-posts.service";
+import {PostUtils} from "../../post/shared/post-utils.service";
+import {ShowService} from "../shared/show.service";
 
 @Component({
   selector: 'app-show',
@@ -25,6 +26,7 @@ export class ShowComponent implements OnInit {
   constructor(
     private showService: ShowService,
     private showPostsService: ShowPostsService,
+    private postUtils: PostUtils,
     private sessionService: SessionService,
     private snackbar: MdSnackBar,
     private dialog: MdDialog,

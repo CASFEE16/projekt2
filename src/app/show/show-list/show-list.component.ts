@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ShowService} from "../shared/show.service";
+import {ShowListService} from "../shared/show-list.service";
 import {Show, SHOWS_RESOURCE_PATH} from "../shared/show.model";
 import {Observable} from "rxjs";
 import {MdSnackBar, MdDialog} from "@angular/material";
@@ -9,7 +9,7 @@ import {SessionService} from "../../core/firebase/session.service";
   selector: 'app-show-edit',
   templateUrl: 'show-list.component.html',
   styleUrls: ['show-list.component.css'],
-  providers: [ShowService]
+  providers: [ShowListService]
 })
 export class ShowListComponent implements OnInit {
 
@@ -19,7 +19,7 @@ export class ShowListComponent implements OnInit {
   loggedIn: Observable<boolean> = null;
 
   constructor(
-    private showService: ShowService,
+    private showService: ShowListService,
     private sessionService: SessionService,
     private snackbar: MdSnackBar) { }
 

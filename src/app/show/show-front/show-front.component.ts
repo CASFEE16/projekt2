@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import {ShowService, ShowWithPosts} from "../shared/show.service";
+import {ShowListService, ShowWithPosts} from "../shared/show-list.service";
 import {Show} from '../shared/show.model';
 import {Observable} from "rxjs";
 import {SessionService} from "../../core/firebase/session.service";
 import {Router} from "@angular/router";
 import {ShowPostsService} from "../shared/show-posts.service";
+import {PostUtils} from "../../post/shared/post-utils.service";
 
 @Component({
   selector: 'app-show-front',
   templateUrl: './show-front.component.html',
   styleUrls: ['./show-front.component.css'],
-  providers: [ShowService, ShowPostsService]
+  providers: [ShowListService, ShowPostsService]
 })
 export class ShowFrontComponent implements OnInit {
 
@@ -18,7 +19,11 @@ export class ShowFrontComponent implements OnInit {
   loading: boolean = true;
   loggedIn: Observable<boolean>;
 
-  constructor(private showService: ShowService, private sessionService: SessionService, private router: Router) { }
+  constructor(
+    private showService: ShowListService,
+    private sessionService: SessionService,
+    private postUtils: PostUtils,
+    private router: Router) { }
 
   ngOnInit() {
     this.loggedIn = this.sessionService.watchLoggedIn();

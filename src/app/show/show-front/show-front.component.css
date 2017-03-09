@@ -10,3 +10,7 @@ md-card-actions {
   display: flex;
   justify-content: flex-end;
 }
+
+table {
+  margin: 2px 20px;
+}
