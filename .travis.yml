@@ -10,7 +10,7 @@ before_script:
 script:
   - npm run-script build --prod
 after_success:
-  - npm run-script deploy --token "$FIREBASE_TOKEN"
+  - npm run-script deploy
 env:
   global:
   - AUTHOR_EMAIL: "travis@build.local"
