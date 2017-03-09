@@ -24,8 +24,8 @@ export class ObjectCache<T> {
     return this.object;
   }
 
-  public add(afDatabase: AngularFireDatabase, resource: string, id: string, obj: T): Observable<T> {
-    this.object = afDatabase.object(`${resource}/${id}`);
+  public add(resource: string, id: string, obj: T): Observable<T> {
+    this.object = this.afDatabase.object(`${resource}/${id}`);
     return Observable.create((observer: Observer<T>) => {
       return this.object.set(obj)
         .catch(error => observer.error(error))

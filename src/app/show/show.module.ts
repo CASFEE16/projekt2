@@ -12,6 +12,7 @@ import { ShowComponent } from './show/show.component';
 import {SharedModule} from "../shared/shared.module";
 import { ShowAirComponent } from './show-air/show-air.component';
 import {PostModule} from "../post/post.module";
+import {ShowPostsService} from "./shared/show-posts.service";
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import {PostModule} from "../post/post.module";
     RouterModule,
     ShowFrontComponent
   ],
-  declarations: [ShowListComponent, ShowFrontComponent, ShowDetailsComponent, ShowComponent, ShowAirComponent]
+  declarations: [ShowListComponent, ShowFrontComponent, ShowDetailsComponent, ShowComponent, ShowAirComponent],
+  providers: [ShowPostsService]
 })
 export class ShowModule { }

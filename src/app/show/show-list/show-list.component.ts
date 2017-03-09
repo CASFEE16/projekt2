@@ -3,7 +3,6 @@ import {ShowService} from "../shared/show.service";
 import {Show, SHOWS_RESOURCE_PATH} from "../shared/show.model";
 import {Observable} from "rxjs";
 import {MdSnackBar, MdDialog} from "@angular/material";
-import {Router} from "@angular/router";
 import {SessionService} from "../../core/firebase/session.service";
 
 @Component({

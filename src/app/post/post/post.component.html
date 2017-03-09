@@ -1,18 +1,18 @@
 <div>
   <md-card class="post-card">
     <md-card-header>
-      <div md-card-avatar><md-icon class="avatar" color="primary">{{getIcon(each.post)}}</md-icon></div>
+      <div md-card-avatar><md-icon class="avatar" color="primary">{{postUtils.getIcon(each.post)}}</md-icon></div>
       <md-card-title><strong>{{each.post.text}}</strong></md-card-title>
       <md-card-subtitle>{{each.post.date | date}}</md-card-subtitle>
     </md-card-header>
     <md-card-content>
       <!-- width="560" height="315" /  -->
-      <iframe *ngIf="youtubeURL(each.post)"  [src]="youtubeURL(each.post) | safe"
+      <iframe *ngIf="postUtils.youtubeURL(each.post)"  [src]="postUtils.youtubeURL(each.post) | safe"
               frameborder="0" allowfullscreen></iframe>
-      <iframe *ngIf="spotifyURL(each.post)" [src]="spotifyURL(each.post) | safe"
+      <iframe *ngIf="postUtils.spotifyURL(each.post)" [src]="postUtils.spotifyURL(each.post) | safe"
               width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
-      <p *ngIf="webURL(each.post)">
-        <a [href]="webURL(each.post) | safe">{{each.post.text}}</a>
+      <p *ngIf="postUtils.webURL(each.post)">
+        <a [href]="postUtils.webURL(each.post) | safe">{{each.post.text}}</a>
       </p>
     </md-card-content>
     <md-card-actions >
@@ -23,7 +23,7 @@
         </div>
         <div class="post-card-show">
           <md-select class="post-card-show-select" placeholder="Show"
-                     [(ngModel)]="each.post.show_key" (ngModelChange)="onSelectShow(each.post, $event)"
+                     [(ngModel)]="each.post.show.key" (ngModelChange)="onSelectShow(each.post, $event)"
                      [disabled]="!(loggedIn | async)">
             <md-option *ngFor="let show of shows | async" [value]="show['$key']">
               {{ show.title }} {{show.date | date}}

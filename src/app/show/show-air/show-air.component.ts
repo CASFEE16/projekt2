@@ -5,12 +5,13 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {MdSnackBar} from "@angular/material";
 import {Post} from "../../post/shared/post.model";
 import {Observable} from "rxjs";
+import {ShowPostsService} from "../shared/show-posts.service";
 
 @Component({
   selector: 'app-show-air',
   templateUrl: './show-air.component.html',
   styleUrls: ['./show-air.component.css'],
-  providers: [ShowDetailsService]
+  providers: [ShowDetailsService, ShowPostsService]
 })
 export class ShowAirComponent implements OnInit {
 
@@ -21,13 +22,18 @@ export class ShowAirComponent implements OnInit {
   currentDateTime: Date = new Date();
   routeSubscription = null;
 
-  constructor(private showDetailsService: ShowDetailsService, private route: ActivatedRoute, private router: Router, private snackbar: MdSnackBar) { }
+  constructor(
+    private showDetailsService: ShowDetailsService,
+    private showPostsService: ShowPostsService,
+    private route: ActivatedRoute,
+    private router: Router,
+    private snackbar: MdSnackBar) { }
 
   ngOnInit() {
     this.routeSubscription = this.route.params.subscribe(params => {
       this.showDetailsService.get(params['id']).subscribe(show => {
         this.show = show;
-        this.posts = this.showDetailsService.findPostsForShow(show);
+        this.posts = this.showPostsService.findPostsForShow(show);
       });
     });
     setInterval(() => {

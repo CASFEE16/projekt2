@@ -1,0 +1,29 @@
+.user-front-container {
+  heigth: 100%;
+  margin: 20px;
+}
+
+.user-card {
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.user-new-form {
+  position: relative;
+}
+
+.user-new-form-data {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.user-new-form-action {
+  position: absolute;
+  bottom: -30px;
+  right: -10px;
+}
+
+.input-date {
+  width: 100px;
+}

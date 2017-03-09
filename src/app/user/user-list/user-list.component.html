@@ -1,0 +1,41 @@
+<div class="user-front-container">
+
+  <md-card *ngIf="loggedIn | async">
+    <md-card-content>
+      <form (ngSubmit)="onSubmit()">
+        <div class="user-new-form">
+          <div class="user-new-form-data">
+            <md-input-container>
+              <input mdInput placeholder="Name" required type="text"
+                     [(ngModel)]="registration.name" name="name">
+            </md-input-container>
+            <md-input-container>
+              <input mdInput placeholder="Email" required type="email"
+                     [(ngModel)]="registration.email" name="email">
+            </md-input-container>
+            <md-input-container>
+              <input mdInput placeholder="Password" type="password" required
+                     [(ngModel)]="registration.password1" name="password">
+            </md-input-container>
+            <md-input-container>
+              <input mdInput placeholder="Password Repeat" type="password" required
+                     [(ngModel)]="registration.password2" name="password">
+            </md-input-container>
+          </div>
+          <div class="user-new-form-action">
+            <button md-fab><md-icon>add</md-icon></button>
+          </div>
+        </div>
+      </form>
+    </md-card-content>
+  </md-card>
+
+  <md-spinner *ngIf="loading"></md-spinner>
+
+  <div>
+
+    <div class="user-card" *ngFor="let user of users | async">
+     <app-user [user]="user"></app-user>
+    </div>
+  </div>
+</div>

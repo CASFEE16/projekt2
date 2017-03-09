@@ -1,17 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {PostService, PostShowListEntry} from "../shared/post.service";
+import {PostService} from "../shared/post.service";
 import {Observable} from "rxjs";
 import {Post, PostTypes, PostType, ContentDetector} from "../shared/post.model";
-import {FirebaseListObservable} from "angularfire2";
 import {MdSnackBar, MdSnackBarConfig} from "@angular/material";
-import {BackendService} from "../../core/firebase/backend.service";
 import {ShowService} from "../../show/shared/show.service";
 import {Show} from "../../show/shared/show.model";
 import {SessionService} from "../../core/firebase/session.service";
-import {YoutubeService} from "../../core/youtube/youtube.service";
-import {YoutubeUtils} from "../../core/youtube/YoutubeUtils";
 import {Router} from "@angular/router";
-import {SpotifyUtils} from "../../core/spotify/SpotifyUtils";
+import {PostShowListEntry} from "../shared/post-show.model";
+import {PostUtils} from "../shared/post-utils.service";
 
 @Component({
   selector: 'app-post-front',
@@ -41,9 +38,7 @@ export class PostFrontComponent implements OnInit {
     this.post = new Post();
     this.post.type = PostType.Note;
     this.typeList = PostTypes.list();
-
     this.snackbarConfig.duration = 5000;
-
     this.loggedIn = this.sessionService.watchLoggedIn();
 
     this.showService.findUpcoming()
@@ -107,34 +102,6 @@ export class PostFrontComponent implements OnInit {
       result => this.snackbar.open('Removed from show', null, this.snackbarConfig),
       error => this.snackbar.open(error.message, null, this.snackbarConfig)
     );
-  }
-
-  youtubeURL(post: Post) {
-    let url = YoutubeUtils.getEmbedUrl(YoutubeUtils.getId(post.text));
-    if (url) {
-      return url;
-    }
-    url = YoutubeUtils.getEmbedUrl(YoutubeUtils.getId(post.content));
-    return url;
-  }
-
-  spotifyURL(post: Post) {
-    let url = SpotifyUtils.getEmbedUrl(SpotifyUtils.getId(post.content));
-    if (url) {
-      url = url + '&theme=white&view=coverart';
-    }
-    return url;
-  }
-
-  webURL(post: Post) {
-    if (post.type == PostType.Web) {
-      return post.text;
-    }
-    return null;
-  }
-
-  getIcon(obj: Post) {
-    return PostTypes.icon(obj.type);
   }
 
 }

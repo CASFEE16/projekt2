@@ -5,3 +5,8 @@
 .show-upcoming-card {
   background-color: #cfd8dc;
 }
+
+md-card-actions {
+  display: flex;
+  justify-content: flex-end;
+}

@@ -1,19 +1,14 @@
 import { Injectable } from '@angular/core';
-import {Observable, Observer} from "rxjs";
-import {Post, POSTS_RESOURCE_PATH, ContentDetector} from "./post.model";
+import {Observable} from "rxjs";
+import {Post, POSTS_RESOURCE_PATH} from "./post.model";
 import {BackendService} from "../../core/firebase/backend.service";
 import {FirebaseListObservable} from "angularfire2";
 import {SessionService} from "../../core/firebase/session.service";
 import {DateUtils} from "../../shared/DateUtils";
 import {ListCache} from "../../core/firebase/ListCache";
-import {Show} from "../../show/shared/show.model";
 import {ContentService} from "../../core/content/content.service";
 import {TraceService} from "../../core/trace/trace.service";
-
-export interface PostShowListEntry {
-  post: Post;
-  show: Show;
-}
+import {PostShowListEntry} from "./post-show.model";
 
 @Injectable()
 export class PostService {
@@ -69,14 +64,19 @@ export class PostService {
     if (!(post.user === this.session.currentUser().uid)) {
       return Observable.of(null);
     }
-
     return this.listCache.delete(post);
   }
 
   public setShow(post: Post, showKey: string): Observable<Post> {
     this.trace.log('PostService', 'setShow', post, showKey);
-    post.show_key = showKey;
-    return this.listCache.update(post, {show_key: showKey});
+    if (!post.show) {
+      post.show = {key: null, index: null};
+    }
+    post.show.key = showKey;
+    if (!post.show.index) {
+      post.show.index = Date.now();
+    }
+    return this.listCache.update(post, {show_key: null, show: post.show});
   }
 
   public setRating(post: Post, rating: number): Observable<Post> {

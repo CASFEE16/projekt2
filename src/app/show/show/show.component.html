@@ -4,6 +4,7 @@
     <md-card-title><strong>{{show.title}}</strong> {{show.date | date}}</md-card-title>
   </md-card-header>
   <md-card-content>
+    <p>{{show.description}}</p>
     <ul>
       <li *ngFor="let post of posts">
         {{post.text}}

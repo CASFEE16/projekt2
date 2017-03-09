@@ -3,29 +3,37 @@
     <md-toolbar color="primary">{{show?.title}}</md-toolbar>
     <md-card-content>
       <br>
-      <form class="show-form" (ngSubmit)="onSubmit($event)">
+      <form class="show-form" #form="ngForm" (ngSubmit)="onSubmit($event)">
         <div>
-        <md-input-container>
-          <input mdInput placeholder="Title" required type="text"
-                 [(ngModel)]="show.title" name="title">
-        </md-input-container>
+          <md-input-container>
+            <input mdInput placeholder="Title" required type="text"
+                   [(ngModel)]="show.title" name="title">
+          </md-input-container>
         </div>
         <div>
-        <md-input-container>
-          <input mdInput placeholder="Date" type="date" required
-                 [(ngModel)]="show.date" name="date">
-        </md-input-container>
+          <md-input-container>
+            <textarea mdInput name="description" placeholder="Description" cols="100" rows="2"
+                      [(ngModel)]="show.description"></textarea>
+          </md-input-container>
         </div>
-
-        <table>
-          <tr *ngFor="let post of posts | async">
-            <td [class]="getPostClass(post)">{{post.text}}</td>
-            <td><button md-button type="button" (click)="onRemovePost(post)"><md-icon>clear</md-icon></button></td>
-          </tr>
-        </table>
-
-        <button md-button type="button" (click)="onSubmit($event)"><md-icon>save</md-icon>Save</button>
-        <button md-button type="button" (click)="onCancel()"><md-icon>cancel</md-icon>Cancel</button>
+        <div>
+          <md-input-container>
+            <input mdInput placeholder="Date" type="date" required
+                   [(ngModel)]="show.date" name="date">
+          </md-input-container>
+        </div>
+        <div>
+          <table>
+            <tr *ngFor="let post of posts">
+              <td [class]="getPostClass(post)"><md-icon>{{postUtils.getIcon(post)}}</md-icon> {{post.text}}</td>
+              <td><button md-button type="button" (click)="onRemovePost(post)"><md-icon>clear</md-icon></button></td>
+              <td><button md-button type="button" (click)="onMovePostUp(post)"><md-icon>arrow_upward</md-icon></button></td>
+              <td><button md-button type="button" (click)="onMovePostDown(post)"><md-icon>arrow_downward</md-icon></button></td>
+            </tr>
+          </table>
+        </div>
+        <button md-raised-button type="button" [disabled]="!dirty" (click)="onSubmit($event)"><md-icon>save</md-icon>Save</button>
+        <button md-raised-button type="button" (click)="onCancel()"><md-icon>cancel</md-icon>Cancel</button>
       </form>
 
     </md-card-content>

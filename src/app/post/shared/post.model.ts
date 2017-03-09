@@ -1,6 +1,11 @@
-
 import {YoutubeUtils} from "../../core/youtube/YoutubeUtils";
 import {SpotifyUtils} from "../../core/spotify/SpotifyUtils";
+
+export interface ShowRef {
+  key: string;
+  index: number;
+}
+
 export class Post {
 
   public Post() {
@@ -17,7 +22,7 @@ export class Post {
   user?: string;
   ts?: number;
   sortKey?: number;
-  show_key?: string;
+  show?: ShowRef;
 
 }
 
@@ -91,3 +96,4 @@ export class ContentDetector {
   }
 
 }
+

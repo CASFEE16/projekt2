@@ -7,6 +7,7 @@ import {FirebaseListObservable} from "angularfire2";
 import {DateUtils} from "../../shared/DateUtils";
 import {ListCache} from "../../core/firebase/ListCache";
 import {Post, POSTS_RESOURCE_PATH} from "../../post/shared/post.model";
+import {ShowPostsService} from "./show-posts.service";
 
 export interface ShowWithPosts {
   show: Show;
@@ -18,16 +19,14 @@ export class ShowService {
 
   private listCache: ListCache<Show> = new ListCache<Show>();
 
-  constructor(private backend: BackendService, private session: SessionService) { }
+  constructor(private backend: BackendService, private session: SessionService, private showPostsService: ShowPostsService) { }
 
   public newDefault(): Show {
-    let show: Show = new Show();
+    let show: Show = Show.newDefault();
     show.title = 'New Show';
-    show.date = DateUtils.todayISOString();
     if (this.session && this.session.currentUser()) {
       show.user = this.session.currentUser().uid;
     }
-    show.ts = Date.now();
     return show;
   }
 
@@ -44,12 +43,7 @@ export class ShowService {
     return this.findUpcoming().flatMap(shows => {
       return Observable.of(
         shows.map(show => {
-          let posts: Observable<Post[]> = this.backend.database().list(POSTS_RESOURCE_PATH, {
-            query: {
-              limitToLast: 10,
-              orderByChild: 'show_key',
-              equalTo: show['$key']
-            }});
+          let posts: Observable<Post[]> = this.showPostsService.findPostsForShow(show);
           return {show: show, posts: posts};
         })
       );
@@ -62,15 +56,6 @@ export class ShowService {
         limitToLast: 100,
         orderByChild: 'sortKey'
       }}).map(each => this.map(each));
-  }
-
-  public findPostsForShow(show: Show): Observable<Post[]> {
-    return this.backend.database().list(POSTS_RESOURCE_PATH, {
-      query: {
-        limitToLast: 100,
-        orderByChild: 'show_key',
-        equalTo: show['$key']
-      }});
   }
 
   map(list: Show[]): Show[] {
@@ -97,11 +82,9 @@ export class ShowService {
   }
 
   public delete(show: Show): Observable<Show> {
-
     if (!(show.user === this.session.currentUser().uid)) {
       return Observable.of(null);
     }
-
     return this.listCache.delete(show);
   }
 

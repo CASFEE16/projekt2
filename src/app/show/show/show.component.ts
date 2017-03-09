@@ -8,11 +8,13 @@ import {MdDialog} from '@angular/material';
 import {Router} from "@angular/router";
 import {Post} from "../../post/shared/post.model";
 import {SubmitDialogComponent} from "../../shared/submit-dialog/submit-dialog.component";
+import {ShowPostsService} from "../shared/show-posts.service";
 
 @Component({
   selector: 'app-show',
   templateUrl: './show.component.html',
-  styleUrls: ['./show.component.css']
+  styleUrls: ['./show.component.css'],
+  providers: [ShowService, ShowPostsService]
 })
 export class ShowComponent implements OnInit {
 
@@ -22,6 +24,7 @@ export class ShowComponent implements OnInit {
 
   constructor(
     private showService: ShowService,
+    private showPostsService: ShowPostsService,
     private sessionService: SessionService,
     private snackbar: MdSnackBar,
     private dialog: MdDialog,
@@ -29,10 +32,12 @@ export class ShowComponent implements OnInit {
 
   ngOnInit() {
     this.loggedIn = this.sessionService.watchLoggedIn();
-    this.showService.findPostsForShow(this.show)
+    this.showPostsService.findPostsForShow(this.show)
       .take(1)
       .subscribe(
-        result => this.posts = result,
+        result => {
+          this.posts = result;
+        },
         error => this.snackbar.open(error.message, null, {duration: 5000})
       );
   }

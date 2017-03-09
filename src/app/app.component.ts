@@ -111,6 +111,18 @@ export class AppComponent implements OnInit {
   // About Toolbar etc on authentication event
   handleSessionEvent(event: ISessionEvent) {
     this.trace.log('AppComponent', 'Session event', event);
+    if (event.name === 'login') {
+      let link = this.navLinks.find(each => each.link == '/users');
+      if (!link) {
+        this.navLinks.push({
+          link: '/users',
+          label: 'Users',
+          icon: 'supervisor_account'
+        });
+      }
+    } else {
+      this.navLinks = this.navLinks.filter(each => each.link !== '/users');
+    }
   }
 
   onUserMenu() {

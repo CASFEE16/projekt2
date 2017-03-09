@@ -6,7 +6,9 @@ import {PostService} from "../shared/post.service";
 import {SessionService} from "../../core/firebase/session.service";
 import {YoutubeUtils} from "../../core/youtube/YoutubeUtils";
 import {SpotifyUtils} from "../../core/spotify/SpotifyUtils";
-import {Show} from '../../show/shared/show.model';
+import {Show} from "../../show/shared/show.model";
+import {PostShowListEntry} from "../shared/post-show.model";
+import {PostUtils} from "../shared/post-utils.service";
 
 @Component({
   selector: 'app-post',
@@ -15,19 +17,23 @@ import {Show} from '../../show/shared/show.model';
 })
 export class PostComponent implements OnInit {
 
-  @Input() each: any = null;
+  @Input() each: PostShowListEntry = null;
   @Input() shows: Observable<Show[]> = null;
   loggedIn: Observable<boolean> = null;
   snackbarConfig: MdSnackBarConfig = new MdSnackBarConfig();
 
   constructor(
     private postService: PostService,
+    private postUtils: PostUtils,
     private sessionService: SessionService,
     private snackbar: MdSnackBar) { }
 
   ngOnInit() {
     this.snackbarConfig.duration = 2000;
     this.loggedIn = this.sessionService.watchLoggedIn();
+    if (!this.each.post.show) {
+      this.each.post.show = {key: null, index: null};
+    }
   }
 
   onDelete(deletePost: Post) {
@@ -60,34 +66,6 @@ export class PostComponent implements OnInit {
       result => this.snackbar.open('Removed from show', null, this.snackbarConfig),
       error => this.snackbar.open(error.message, null, this.snackbarConfig)
     );
-  }
-
-  youtubeURL(post: Post) {
-    let url = YoutubeUtils.getEmbedUrl(YoutubeUtils.getId(post.text));
-    if (url) {
-      return url;
-    }
-    url = YoutubeUtils.getEmbedUrl(YoutubeUtils.getId(post.content));
-    return url;
-  }
-
-  spotifyURL(post: Post) {
-    let url = SpotifyUtils.getEmbedUrl(SpotifyUtils.getId(post.content));
-    if (url) {
-      url = url + '&theme=white&view=coverart';
-    }
-    return url;
-  }
-
-  webURL(post: Post) {
-    if (post.type == PostType.Web) {
-      return post.text;
-    }
-    return null;
-  }
-
-  getIcon(obj: Post) {
-    return PostTypes.icon(obj.type);
   }
 
 }

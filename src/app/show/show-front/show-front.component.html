@@ -18,6 +18,10 @@
           </li>
         </ul>
       </md-card-content>
+      <md-card-actions *ngIf="loggedIn | async">
+        <button md-mini-fab (click)="onAir(each?.show)"><md-icon>play_arrow</md-icon></button>
+        <button md-mini-fab (click)="onEdit(each?.show)"><md-icon>edit</md-icon></button>
+      </md-card-actions>
     </md-card>
   </md-card-content>
 </md-card>

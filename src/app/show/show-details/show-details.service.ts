@@ -22,11 +22,9 @@ export class ShowDetailsService {
   }
 
   public delete(show: Show): Observable<Show> {
-
     if (!(show.user === this.session.currentUser().uid)) {
       return Observable.of(null);
     }
-
     return this.object.delete();
   }
 
@@ -34,20 +32,32 @@ export class ShowDetailsService {
     return this.object.update(changes);
   }
 
-  public findPostsForShow(show: Show): Observable<Post[]> {
-    return this.backend.list(POSTS_RESOURCE_PATH, {
-      query: {
-        limitToLast: 100,
-        orderByChild: 'show_key',
-        equalTo: show['$key']
-      }});
-  }
-
   public removePost(post: Post): Observable<Post> {
     let obj: ObjectCache<Post> = new ObjectCache<Post>(this.backend.database());
     return obj.getId(POSTS_RESOURCE_PATH, post['$key']).flatMap(
-      result => obj.update({show_key: null})
+      result => obj.update({show: {key: null, index: null}})
     );
+  }
+
+  // TODO: Find out how to do multiple or batch updates within one observable
+  public updatePosts(posts: Post[]): void {
+
+    let idx = 0;
+    posts.forEach(each => each.show.index = idx++);
+
+    let obj: ObjectCache<Post> = new ObjectCache<Post>(this.backend.database());
+    posts.forEach(each => {
+      console.log(each.show);
+      obj.getId(POSTS_RESOURCE_PATH, each['$key']).subscribe(
+        result => {
+          obj.update({show: each.show}).subscribe(
+            result => {},
+            error => console.log(error)
+          );
+        },
+         error => console.log(error)
+      );
+    });
   }
 
 }
