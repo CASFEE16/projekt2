@@ -1,12 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {Post, PostType, PostTypes} from "../shared/post.model";
 import {Observable} from "rxjs";
-import {MdSnackBarConfig, MdSnackBar} from "@angular/material";
-import {PostService} from "../shared/post.service";
-import {SessionService} from "../../core/firebase/session.service";
-import {YoutubeUtils} from "../../core/youtube/YoutubeUtils";
-import {SpotifyUtils} from "../../core/spotify/SpotifyUtils";
-import {Show} from '../../show/shared/show.model';
+import {MdSnackBarConfig} from "@angular/material";
 import {PostUtils} from "../shared/post-utils.service";
 
 @Component({
@@ -20,6 +15,7 @@ export class PostAirComponent implements OnInit {
   loggedIn: Observable<boolean> = null;
   snackbarConfig: MdSnackBarConfig = new MdSnackBarConfig();
   done: boolean = false;
+  action: string = 'check';
 
   constructor(private postUtils: PostUtils) { }
 
@@ -27,8 +23,13 @@ export class PostAirComponent implements OnInit {
   }
 
   onClear() {
-    console.log('Done');
-    this.done = true;
+    if (this.done) {
+      this.done = false;
+      this.action = 'check';
+    } else {
+      this.done = true;
+      this.action = 'expand_more';
+    }
   }
 
 }

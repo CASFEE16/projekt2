@@ -6,6 +6,7 @@ import {MdDialog, MdDialogConfig, MdSidenav, MdSidenavToggleResult, MdSidenavCon
 import {UserMenuComponent} from "./front/user-menu/user-menu.component";
 import {TraceService} from "./core/trace/trace.service";
 import {Router} from "@angular/router";
+import {EventService, IEvent} from "./core/event/event.service";
 
 export interface NavLink {
   link: string;
@@ -55,10 +56,13 @@ export class AppComponent implements OnInit {
   sidenavOpened: boolean = false;
   sidenavOpenedByUser: boolean = false;
 
+  sidenavRightShow: boolean = true;
+
   loggedIn: Observable<boolean> = null;
 
   constructor(
     private sessionService: SessionService,
+    private eventService: EventService,
     private trace: TraceService,
     private dialog: MdDialog,
     private router: Router,
@@ -69,6 +73,9 @@ export class AppComponent implements OnInit {
     // Register for all authentication events like login, logout
     this.sessionService.event.subscribe(
       (event) => this.handleSessionEvent(event)
+    );
+    this.eventService.event.subscribe(
+      (event) => this.handleAppEvent(event)
     );
     this.loggedIn = this.sessionService.watchLoggedIn();
     this.updateForWidth(this.window.innerWidth);
@@ -116,6 +123,14 @@ export class AppComponent implements OnInit {
       this.sidenav.close();
     }
 
+  }
+
+  handleAppEvent(event: IEvent) {
+    if (event.name === 'SidenavRight') {
+      if (event.data === true) {
+        this.sidenavRightShow = (event.data === true);
+      }
+    }
   }
 
   // About Toolbar etc on authentication event

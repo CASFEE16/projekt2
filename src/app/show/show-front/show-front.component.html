@@ -16,8 +16,8 @@
         </table>
       </md-card-content>
       <md-card-actions *ngIf="loggedIn | async">
-        <button md-button (click)="onAir(show)"><md-icon>play_arrow</md-icon></button>
-        <button md-button (click)="onEdit(show)"><md-icon>edit</md-icon></button>
+        <button md-button (click)="onAir(each?.show)"><md-icon>play_arrow</md-icon></button>
+        <button md-button (click)="onEdit(each?.show)"><md-icon>edit</md-icon></button>
       </md-card-actions>
     </md-card>
 </div>

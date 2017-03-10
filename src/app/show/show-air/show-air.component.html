@@ -1,25 +1,26 @@
-<div class="show-container">
-  <md-card class="show-card" [ngClass]="{'on-air': onAir}">
-    <md-toolbar color="primary" [ngClass]="{'on-air': onAir}">
+<div class="show-container" [ngClass]="{'on-air': onAir, 'fullscreen': fullscreen}">
+
+  <div class="show-content">
+
+    <header class="toolbar" [ngClass]="{'on-air': onAir}">
       <div class="toolbar">
-        <div class="left"><h2>{{show?.title}}</h2></div>
+        <div class="left">
+          <h2>{{show?.title}}</h2></div>
         <div class="middle">
-          <button class="action" md-button type="button" (click)="onSubmit($event)"><md-icon class="action">play_circle_outline</md-icon></button>
-          <button class="action" md-button type="button" (click)="onCancel($event)"><md-icon class="action">pause_circle_outline</md-icon></button>
-        </div>
-        <div class="right">
           <h2>{{currentDateTime | date:'medium'}}</h2>
         </div>
-      </div>
-    </md-toolbar>
-    <md-card-content>
-
-        <div>
-          <div *ngFor="let post of posts | async">
-            <app-post-air [post]="post"></app-post-air>
-          </div>
+        <div class="right">
+          <button class="action" md-button type="button" (click)="toggleState($event)"><md-icon class="action">{{state}}</md-icon></button>
+          <button class="action" md-button type="button" (click)="toggleMode($event)"><md-icon class="action">{{screenAction}}</md-icon></button>
         </div>
+      </div>
+    </header>
 
-    </md-card-content>
-  </md-card>
+    <div class="content">
+      <div *ngFor="let post of posts | async">
+        <app-post-air [post]="post"></app-post-air>
+      </div>
+    </div>
+
+  </div>
 </div>

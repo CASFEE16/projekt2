@@ -23,7 +23,10 @@
 }
 
 .post-card-menu {
-  margin-top: 10px;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 10px 10px;
 }
 
 .post-card-show-select {
@@ -34,6 +37,6 @@
   font-size: 32px;
 }
 
-.done {
-  display: none;
+.content {
+  overflow: hidden;
 }

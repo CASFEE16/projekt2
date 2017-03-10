@@ -1,4 +1,19 @@
 .show-container {
+}
+
+.fullscreen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: white;
+  z-index: 100;
+  overflow: scroll;
+  height: 100%;
+  transition: width 2s ease-in-out;
+}
+
+.show-content {
   margin: 20px;
 }
 
@@ -11,20 +26,23 @@
 
 .left {
   flex: 1 1;
+  margin: 0px 10px;
 }
 
 .middle {
-  margin-top: 25px;
-}
-
-.action {
-  font-size: 48px;
-  height: 50px;
-  width: 50px;
+  flex: 1 1;
+  margin: 0px 10px;
 }
 
 .right {
+  margin: auto;
+}
+
+.action {
   flex: 0 0;
+  font-size: 48px;
+  height: 50px;
+  width: 50px;
 }
 
 .on-air {

@@ -21,6 +21,9 @@ export class ShowAirComponent implements OnInit {
   onAir: boolean = false;
   currentDateTime: Date = new Date();
   routeSubscription = null;
+  state = 'play_circle_outline';
+  fullscreen = false;
+  screenAction = 'fullscreen';
 
   constructor(
     private showDetailsService: ShowDetailsService,
@@ -47,18 +50,26 @@ export class ShowAirComponent implements OnInit {
     }
   }
 
-  public onSubmit(event: Event) {
+  public toggleState(event: Event) {
     event.preventDefault();
-    this.onAir = true;
+    if (this.onAir) {
+      this.onAir = false;
+      this.state = 'play_circle_outline';
+    } else {
+      this.onAir = true;
+      this.state = 'pause_circle_outline';
+    }
   }
 
-  public onCancel(event: Event) {
+  public toggleMode(event: Event) {
     event.preventDefault();
-    this.onAir = false;
-  }
-
-  public onDonePost(post: Post) {
-
+    if (this.fullscreen) {
+      this.fullscreen = false;
+      this.screenAction = 'fullscreen';
+    } else {
+      this.fullscreen = true;
+      this.screenAction = 'fullscreen_exit';
+    }
   }
 
 }

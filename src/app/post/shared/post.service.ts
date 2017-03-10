@@ -54,7 +54,7 @@ export class PostService {
       .getInfo(post.text)
       .flatMap((result) => {
         post.content = result.contentUrl || post.content || '';
-        post.text = (result.title || post.text || '').substr(0, 50);
+        post.text = (result.title || post.text || '');
         return this.listCache.add(post);
       });
   }

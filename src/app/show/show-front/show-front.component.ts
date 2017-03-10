@@ -35,16 +35,10 @@ export class ShowFrontComponent implements OnInit {
   }
 
   onEdit(obj: Show) {
-    if (!obj) {
-      return;
-    }
     this.router.navigate(['/show', obj['$key']]);
   }
 
   onAir(obj: Show) {
-    if (!obj) {
-      return;
-    }
     this.router.navigate(['/air', obj['$key']]);
   }
 

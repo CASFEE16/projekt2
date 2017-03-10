@@ -10,6 +10,7 @@ import {TraceService} from "./trace/trace.service";
 import {AuthGuard} from "./auth/AuthGuard";
 import {NotAuthGuard} from "./auth/NotAuthGuard";
 import {StartedGuard} from "./auth/StartedGuard";
+import {EventService} from "./event/event.service";
 
 @NgModule({
   imports: [
@@ -26,7 +27,8 @@ import {StartedGuard} from "./auth/StartedGuard";
     TraceService,
     AuthGuard,
     NotAuthGuard,
-    StartedGuard
+    StartedGuard,
+    EventService
   ]
 })
 export class CoreModule { }
