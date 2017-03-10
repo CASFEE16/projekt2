@@ -1,8 +1,8 @@
-import {Component, OnInit, HostListener, Inject, ViewChild, ElementRef} from '@angular/core';
+import {Component, OnInit, HostListener, Inject, ViewChild, ElementRef, ContentChild} from '@angular/core';
 import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import {SessionService, ISessionEvent} from "./core/firebase/session.service";
 import {Observable} from 'rxjs';
-import {MdDialog, MdDialogConfig, MdSidenav, MdSidenavToggleResult} from "@angular/material";
+import {MdDialog, MdDialogConfig, MdSidenav, MdSidenavToggleResult, MdSidenavContainer} from "@angular/material";
 import {UserMenuComponent} from "./front/user-menu/user-menu.component";
 import {TraceService} from "./core/trace/trace.service";
 import {Router} from "@angular/router";
@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
   navLinks: NavLink[] = [
     {
       link: '/',
-      label: 'Home',
+      label: 'Posts',
       icon: 'home'
     }, {
       link: '/show',
@@ -50,6 +50,7 @@ export class AppComponent implements OnInit {
   toolbarNavLinks: NavLink[] = [];
 
   @ViewChild('sidenav') sidenav: MdSidenav;
+  @ViewChild('sidenavcontainer') sidenavContainer: MdSidenavContainer;
   sidenavMode: string = 'over';
   sidenavOpened: boolean = false;
   sidenavOpenedByUser: boolean = false;
@@ -61,7 +62,8 @@ export class AppComponent implements OnInit {
     private trace: TraceService,
     private dialog: MdDialog,
     private router: Router,
-    @Inject("windowObject") private window: Window) {}
+    @Inject("windowObject") private window: any,
+    private element: ElementRef) {}
 
   ngOnInit() {
     // Register for all authentication events like login, logout
@@ -70,6 +72,14 @@ export class AppComponent implements OnInit {
     );
     this.loggedIn = this.sessionService.watchLoggedIn();
     this.updateForWidth(this.window.innerWidth);
+
+    if (this.element) {
+      let cnt = this.element.nativeElement.getElementsByClassName('mat-sidenav-content');
+      if (cnt) {
+        console.log(cnt);
+        cnt[0].style.overflow = 'hidden';
+      }
+    }
 
   }
 

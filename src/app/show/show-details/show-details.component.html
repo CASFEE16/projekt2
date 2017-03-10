@@ -26,9 +26,9 @@
           <table>
             <tr *ngFor="let post of posts">
               <td [class]="getPostClass(post)"><md-icon>{{postUtils.getIcon(post)}}</md-icon> {{post.text}}</td>
-              <td><button md-button type="button" (click)="onRemovePost(post)"><md-icon>clear</md-icon></button></td>
-              <td><button md-button type="button" (click)="onMovePostUp(post)"><md-icon>arrow_upward</md-icon></button></td>
-              <td><button md-button type="button" (click)="onMovePostDown(post)"><md-icon>arrow_downward</md-icon></button></td>
+              <td><button md-button type="button" title="Remove Post" (click)="onRemovePost(post)"><md-icon>clear</md-icon></button></td>
+              <td><button md-button type="button" title="Move Post Up" (click)="onMovePostUp(post)"><md-icon>arrow_upward</md-icon></button></td>
+              <td><button md-button type="button" title="Move Post Down" (click)="onMovePostDown(post)"><md-icon>arrow_downward</md-icon></button></td>
             </tr>
           </table>
         </div>

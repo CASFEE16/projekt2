@@ -24,7 +24,7 @@ export class PostService {
   public findFront(): Observable<PostShowListEntry[]> {
     return this.listCache.find(this.backend.database(), POSTS_RESOURCE_PATH, {
       query: {
-        limitToLast: 10,
+        limitToLast: 100,
         orderByChild: 'sortKey'
       }}).map(posts => {
           return posts.map(post => {
@@ -54,7 +54,7 @@ export class PostService {
       .getInfo(post.text)
       .flatMap((result) => {
         post.content = result.contentUrl || post.content || '';
-        post.text = result.title || post.text || '';
+        post.text = (result.title || post.text || '').substr(0, 50);
         return this.listCache.add(post);
       });
   }

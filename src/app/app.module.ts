@@ -31,7 +31,7 @@ export const FIREBASE_CONFIG: FirebaseAppConfig = environment.firebase.config;
     BrowserModule,
     FormsModule,
     HttpModule,
-    MaterialModule.forRoot(),
+    MaterialModule,
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     RouterModule.forRoot(ROUTE_CONFIG),
     CoreModule,

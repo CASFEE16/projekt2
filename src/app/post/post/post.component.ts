@@ -22,6 +22,9 @@ export class PostComponent implements OnInit {
   loggedIn: Observable<boolean> = null;
   snackbarConfig: MdSnackBarConfig = new MdSnackBarConfig();
 
+  postContentType: string = 'text';
+  postContent: string = '';
+
   constructor(
     private postService: PostService,
     private postUtils: PostUtils,
@@ -33,6 +36,21 @@ export class PostComponent implements OnInit {
     this.loggedIn = this.sessionService.watchLoggedIn();
     if (!this.each.post.show) {
       this.each.post.show = {key: null, index: null};
+    }
+
+    this.postContentType = 'youtube';
+    this.postContent = this.postUtils.youtubeURL(this.each.post);
+    if (!this.postContent) {
+      this.postContentType = 'spotify';
+      this.postContent = this.postUtils.spotifyURL(this.each.post);
+      if (!this.postContent) {
+        this.postContentType = 'web';
+        this.postContent = this.postUtils.webURL(this.each.post);
+        if (!this.postContent) {
+          this.postContentType = 'text';
+          this.postContent = this.each.post.content;
+        }
+      }
     }
   }
 

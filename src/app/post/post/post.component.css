@@ -22,14 +22,31 @@
   margin-right: 10px;
 }
 
-.post-card-menu {
-  margin-top: 10px;
+.menu-button {
+  min-width: 35px;
+  padding: 0px;
+}
+
+.card-menu {
+  flex: 0 0;
 }
 
 .post-card-show-select {
-  width: 300px;
+  width: 250px;
+  font-size: 14px;
 }
 
 .avatar {
   font-size: 32px;
+  margin-right: 10px;
+}
+
+md-card-title {
+  white-space: nowrap;
+  text-wrap: none;
+}
+
+.center {
+  margin: auto;
+  width: 50%;
 }

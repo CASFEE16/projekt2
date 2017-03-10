@@ -1,7 +1,4 @@
-<md-card class="show-upcoming-card">
-  <md-toolbar color="primary">Upcoming shows</md-toolbar>
-  <md-card-content>
-    <br>
+<div>
     <md-spinner *ngIf="loading"></md-spinner>
     <md-card class="show-card" *ngFor="let each of shows | async">
       <md-card-header>
@@ -19,9 +16,8 @@
         </table>
       </md-card-content>
       <md-card-actions *ngIf="loggedIn | async">
-        <button md-mini-fab (click)="onAir(show)"><md-icon>play_arrow</md-icon></button>
-        <button md-mini-fab (click)="onEdit(show)"><md-icon>edit</md-icon></button>
+        <button md-button (click)="onAir(show)"><md-icon>play_arrow</md-icon></button>
+        <button md-button (click)="onEdit(show)"><md-icon>edit</md-icon></button>
       </md-card-actions>
     </md-card>
-  </md-card-content>
-</md-card>
+</div>

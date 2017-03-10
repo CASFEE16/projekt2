@@ -11,7 +11,7 @@
     "pree2e": "webdriver-manager update",
     "e2e": "protractor",
     "build": "ng build",
-    "deploy": "firebase deploy"
+    "deploy": "firebase deploy --only hosting --project hsr-fee16-projekt2"
   },
   "private": true,
   "dependencies": {

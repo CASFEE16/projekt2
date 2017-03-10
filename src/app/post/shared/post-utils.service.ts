@@ -25,7 +25,7 @@ export class PostUtils {
 
   webURL(post: Post) {
     if (post.type == PostType.Web) {
-      return post.text;
+      return post.content;
     }
     return null;
   }

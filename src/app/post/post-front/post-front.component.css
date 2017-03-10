@@ -1,5 +1,6 @@
 .post-front-container {
   heigth: 100%;
+  overflow: hidden;
 }
 
 .post-card {
@@ -57,3 +58,9 @@ textarea {
 md-radio-button {
   margin-right: 20px;
 }
+
+.post-list {
+  // max-height: 100vh;
+  overflow: auto;
+}
+

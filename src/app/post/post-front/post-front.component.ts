@@ -51,7 +51,8 @@ export class PostFrontComponent implements OnInit {
 
   }
 
-  onSubmit() {
+  onSubmit(event: Event) {
+    event.preventDefault();
     if (this.loading) return;
     this.postService.add(this.post).subscribe(
       result => {

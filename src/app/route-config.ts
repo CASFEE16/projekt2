@@ -4,9 +4,10 @@ import {AuthGuard} from "./core/auth/AuthGuard";
 import {NotAuthGuard} from "./core/auth/NotAuthGuard";
 import {StartedGuard} from "./core/auth/StartedGuard";
 import {UserListComponent} from "./user/user-list/user-list.component";
+import {PostFrontComponent} from "./post/post-front/post-front.component";
 
 export const ROUTE_CONFIG: Routes = [
-  { path: '', component: HomeComponent, canActivate: [StartedGuard] },
+  { path: '', component: PostFrontComponent, canActivate: [StartedGuard] },
   { path: 'about', component: AboutComponent },
   { path: 'login', component: LoginComponent, canActivate: [NotAuthGuard] },
   { path: 'register', component: RegisterComponent, canActivate: [NotAuthGuard] },
