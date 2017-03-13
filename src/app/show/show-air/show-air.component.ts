@@ -1,11 +1,11 @@
 import {Component, OnInit, OnDestroy} from '@angular/core';
-import {Show} from "../shared/show.model";
-import {ShowDetailsService} from "../show-details/show-details.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {MdSnackBar} from "@angular/material";
-import {Post} from "../../post/shared/post.model";
-import {Observable} from "rxjs";
-import {ShowPostsService} from "../shared/show-posts.service";
+import {Show} from '../shared/show.model';
+import {ShowDetailsService} from '../show-details/show-details.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MdSnackBar} from '@angular/material';
+import {Post} from '../../post/shared/post.model';
+import {Observable} from 'rxjs/Observable';
+import {ShowPostsService} from '../shared/show-posts.service';
 
 @Component({
   selector: 'app-show-air',
@@ -13,12 +13,12 @@ import {ShowPostsService} from "../shared/show-posts.service";
   styleUrls: ['./show-air.component.css'],
   providers: [ShowDetailsService, ShowPostsService]
 })
-export class ShowAirComponent implements OnInit {
+export class ShowAirComponent implements OnInit, OnDestroy {
 
 
   show: Show = null;
   posts: Observable<Post[]> = null;
-  onAir: boolean = false;
+  onAir = false;
   currentDateTime: Date = new Date();
   routeSubscription = null;
   state = 'play_circle_outline';

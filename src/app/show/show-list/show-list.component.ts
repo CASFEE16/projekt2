@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {ShowListService} from "../shared/show-list.service";
-import {Show, SHOWS_RESOURCE_PATH} from "../shared/show.model";
-import {Observable} from "rxjs";
-import {MdSnackBar, MdDialog} from "@angular/material";
-import {SessionService} from "../../core/firebase/session.service";
+import {ShowListService} from '../shared/show-list.service';
+import {Show} from '../shared/show.model';
+import {Observable} from 'rxjs/Observable';
+import {MdSnackBar, MdDialog} from '@angular/material';
+import {SessionService} from '../../core/firebase/session.service';
 
 @Component({
   selector: 'app-show-edit',
@@ -15,7 +15,7 @@ export class ShowListComponent implements OnInit {
 
   newShow: Show = null;
   shows: Observable<Show[]> = null;
-  loading: boolean = true;
+  loading = true;
   loggedIn: Observable<boolean> = null;
 
   constructor(
@@ -34,8 +34,12 @@ export class ShowListComponent implements OnInit {
 
   onSubmit() {
     this.showService.add(this.newShow).subscribe(
-      result => {this.newShow = this.showService.newDefault()},
-      error => {this.snackbar.open(error.message)}
+      result => {
+        this.newShow = this.showService.newDefault();
+      },
+      error => {
+        this.snackbar.open(error.message);
+      }
     );
   }
 

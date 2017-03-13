@@ -1,8 +1,10 @@
 import { Injectable, Inject } from '@angular/core';
 import {AngularFire, FirebaseListObservable, AuthProviders, AuthMethods, FirebaseAuthState} from 'angularfire2';
 import { EmailPasswordCredentials } from 'angularfire2/auth';
-import {ReplaySubject, Observable, Observer} from 'rxjs';
-import {TraceService} from "../trace/trace.service";
+import {ReplaySubject} from 'rxjs/ReplaySubject';
+import {Observer} from 'rxjs/Observer';
+import {Observable} from 'rxjs/Observable';
+import {TraceService} from '../trace/trace.service';
 
 export interface ISessionEvent {
   name: string;
@@ -19,7 +21,8 @@ export class SessionService {
 
   private _user: firebase.User = null;
   private _state: FirebaseAuthState = null;
-  private _started: boolean = false;
+  private _started = false;
+  public event: ReplaySubject<ISessionEvent> = new ReplaySubject();
 
   constructor(private af: AngularFire, private trace: TraceService) {
   }
@@ -29,7 +32,7 @@ export class SessionService {
       this.trace.log('SessionService', 'Firebase Auth Event', auth);
       this._started = true;
       this._state = auth;
-      if(auth == null) {
+      if (auth == null) {
         this._user = null;
         this.event.next({
           name: 'logout',
@@ -45,8 +48,6 @@ export class SessionService {
     });
     return this.event;
   }
-
-  public event: ReplaySubject<ISessionEvent> = new ReplaySubject();
 
   public loginAnonymous() {
     this.af.auth.login({
@@ -103,7 +104,7 @@ export class SessionService {
   }
 
   public watchLoggedIn(): Observable<boolean> {
-    let obs: Observable<ISessionEvent> = this.event;
+    const obs: Observable<ISessionEvent> = this.event;
     return obs
       .map((event) => {
         return event.state !== null;
@@ -111,7 +112,7 @@ export class SessionService {
   }
 
   public get username() {
-    let user = this.currentUser();
+    const user = this.currentUser();
     if (user) {
       return user.displayName || user.email || 'unknown';
     }

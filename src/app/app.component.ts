@@ -1,12 +1,11 @@
-import {Component, OnInit, HostListener, Inject, ViewChild, ElementRef, ContentChild} from '@angular/core';
-import { AngularFire, FirebaseListObservable } from 'angularfire2';
-import {SessionService, ISessionEvent} from "./core/firebase/session.service";
-import {Observable} from 'rxjs';
-import {MdDialog, MdDialogConfig, MdSidenav, MdSidenavToggleResult, MdSidenavContainer} from "@angular/material";
-import {UserMenuComponent} from "./front/user-menu/user-menu.component";
-import {TraceService} from "./core/trace/trace.service";
-import {Router} from "@angular/router";
-import {EventService, IEvent} from "./core/event/event.service";
+import {Component, OnInit, HostListener, Inject, ViewChild, ElementRef} from '@angular/core';
+import {SessionService, ISessionEvent} from './core/firebase/session.service';
+import {MdDialog, MdSidenav, MdSidenavToggleResult, MdSidenavContainer} from '@angular/material';
+import {UserMenuComponent} from './front/user-menu/user-menu.component';
+import {TraceService} from './core/trace/trace.service';
+import {Router} from '@angular/router';
+import {EventService, IEvent} from './core/event/event.service';
+import {Observable} from 'rxjs/Observable';
 
 export interface NavLink {
   link: string;
@@ -52,13 +51,17 @@ export class AppComponent implements OnInit {
 
   @ViewChild('sidenav') sidenav: MdSidenav;
   @ViewChild('sidenavcontainer') sidenavContainer: MdSidenavContainer;
-  sidenavMode: string = 'over';
-  sidenavOpened: boolean = false;
-  sidenavOpenedByUser: boolean = false;
+  sidenavMode = 'over';
+  sidenavOpened = false;
+  sidenavOpenedByUser = false;
 
-  sidenavRightShow: boolean = true;
+  sidenavRightShow = true;
 
   loggedIn: Observable<boolean> = null;
+
+  get username(): string {
+    return this.sessionService.username;
+  }
 
   constructor(
     private sessionService: SessionService,
@@ -66,7 +69,7 @@ export class AppComponent implements OnInit {
     private trace: TraceService,
     private dialog: MdDialog,
     private router: Router,
-    @Inject("windowObject") private window: any,
+    @Inject('windowObject') private window: any,
     private element: ElementRef) {}
 
   ngOnInit() {
@@ -81,7 +84,7 @@ export class AppComponent implements OnInit {
     this.updateForWidth(this.window.innerWidth);
 
     if (this.element) {
-      let cnt = this.element.nativeElement.getElementsByClassName('mat-sidenav-content');
+      const cnt = this.element.nativeElement.getElementsByClassName('mat-sidenav-content');
       if (cnt) {
         console.log(cnt);
         cnt[0].style.overflow = 'hidden';
@@ -137,7 +140,7 @@ export class AppComponent implements OnInit {
   handleSessionEvent(event: ISessionEvent) {
     this.trace.log('AppComponent', 'Session event', event);
     if (event.name === 'login') {
-      let link = this.navLinks.find(each => each.link == '/users');
+      const link = this.navLinks.find(each => each.link === '/users');
       if (!link) {
         this.navLinks.push({
           link: '/users',
@@ -151,7 +154,7 @@ export class AppComponent implements OnInit {
   }
 
   onUserMenu() {
-    let dialogRef = this.dialog.open(UserMenuComponent, {
+    const dialogRef = this.dialog.open(UserMenuComponent, {
       position: {
         top: '25px',
         right: '25px'
@@ -161,7 +164,7 @@ export class AppComponent implements OnInit {
 
   onSidenavToggle() {
     this.sidenav.toggle().then((result: MdSidenavToggleResult) => {
-      this.sidenavOpenedByUser = (result.type == 'open');
+      this.sidenavOpenedByUser = (result.type === 'open');
     });
   }
 

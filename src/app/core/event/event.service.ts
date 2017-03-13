@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {ReplaySubject, Observable, Observer} from 'rxjs';
+import {ReplaySubject} from 'rxjs/ReplaySubject';
 
 export interface IEvent {
   name: string;

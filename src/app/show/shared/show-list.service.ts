@@ -1,13 +1,12 @@
 import { Injectable } from '@angular/core';
-import {BackendService} from "../../core/firebase/backend.service";
-import {SessionService} from "../../core/firebase/session.service";
-import {Show, SHOWS_RESOURCE_PATH} from "./show.model";
-import {Observable} from "rxjs";
-import {FirebaseListObservable} from "angularfire2";
-import {DateUtils} from "../../shared/DateUtils";
-import {ListCache} from "../../core/firebase/ListCache";
-import {Post, POSTS_RESOURCE_PATH} from "../../post/shared/post.model";
-import {ShowPostsService} from "./show-posts.service";
+import {BackendService} from '../../core/firebase/backend.service';
+import {SessionService} from '../../core/firebase/session.service';
+import {Show, SHOWS_RESOURCE_PATH} from './show.model';
+import {Observable} from 'rxjs/Observable';
+import {DateUtils} from '../../shared/DateUtils';
+import {ListCache} from '../../core/firebase/ListCache';
+import {Post} from '../../post/shared/post.model';
+import {ShowPostsService} from './show-posts.service';
 
 export interface ShowWithPosts {
   show: Show;
@@ -22,7 +21,7 @@ export class ShowListService {
   constructor(private backend: BackendService, private session: SessionService, private showPostsService: ShowPostsService) { }
 
   public newDefault(): Show {
-    let show: Show = Show.newDefault();
+    const show: Show = Show.newDefault();
     show.title = 'New Show';
     if (this.session && this.session.currentUser()) {
       show.user = this.session.currentUser().uid;
@@ -43,7 +42,7 @@ export class ShowListService {
     return this.findUpcoming().flatMap(shows => {
       return Observable.of(
         shows.map(show => {
-          let posts: Observable<Post[]> = this.showPostsService.findPostsForShow(show);
+          const posts: Observable<Post[]> = this.showPostsService.findPostsForShow(show);
           return {show: show, posts: posts};
         })
       );
@@ -59,7 +58,7 @@ export class ShowListService {
   }
 
   map(list: Show[]): Show[] {
-    let newList: Show[] = list.map(each => Object.assign(new Show(), each));
+    const newList: Show[] = list.map(each => Object.assign(new Show(), each));
     return newList;
   }
 
@@ -75,7 +74,7 @@ export class ShowListService {
       show.date = DateUtils.todayISOString();
     }
 
-    let time: number = new Date(show.date).getTime();
+    const time: number = new Date(show.date).getTime();
     show.sortKey = 0 - time;
 
     return this.listCache.add(show);

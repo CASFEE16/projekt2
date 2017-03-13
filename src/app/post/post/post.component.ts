@@ -1,14 +1,12 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {Post, PostType, PostTypes} from "../shared/post.model";
-import {Observable} from "rxjs";
-import {MdSnackBarConfig, MdSnackBar} from "@angular/material";
-import {PostService} from "../shared/post.service";
-import {SessionService} from "../../core/firebase/session.service";
-import {YoutubeUtils} from "../../core/youtube/YoutubeUtils";
-import {SpotifyUtils} from "../../core/spotify/SpotifyUtils";
-import {Show} from "../../show/shared/show.model";
-import {PostShowListEntry} from "../shared/post-show.model";
-import {PostUtils} from "../shared/post-utils.service";
+import {Post} from '../shared/post.model';
+import {Observable} from 'rxjs/Observable';
+import {MdSnackBarConfig, MdSnackBar} from '@angular/material';
+import {PostService} from '../shared/post.service';
+import {SessionService} from '../../core/firebase/session.service';
+import {Show} from '../../show/shared/show.model';
+import {PostShowListEntry} from '../shared/post-show.model';
+import {PostUtils} from '../shared/post-utils.service';
 
 @Component({
   selector: 'app-post',
@@ -22,12 +20,12 @@ export class PostComponent implements OnInit {
   loggedIn: Observable<boolean> = null;
   snackbarConfig: MdSnackBarConfig = new MdSnackBarConfig();
 
-  postContentType: string = 'text';
-  postContent: string = '';
+  postContentType = 'text';
+  postContent = '';
 
   constructor(
+    public postUtils: PostUtils,
     private postService: PostService,
-    private postUtils: PostUtils,
     private sessionService: SessionService,
     private snackbar: MdSnackBar) { }
 

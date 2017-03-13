@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {RatingComponent} from "./rating/rating.component";
+import {RatingComponent} from './rating/rating.component';
 import { SubmitDialogComponent } from './submit-dialog/submit-dialog.component';
 
 @NgModule({

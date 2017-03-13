@@ -1,5 +1,5 @@
 
-import {SpotifyUri} from "./spotify.model";
+import {SpotifyUri} from './spotify.model';
 
 export class SpotifyUtils {
 
@@ -9,10 +9,14 @@ export class SpotifyUtils {
   // https://open.spotify.com/album/3T4tUhGYeRNVUGevb0wThu
   // https://open.spotify.com/track/7oolFzHipTMg2nL7shhdz2
   public static getUri(text: string): SpotifyUri {
-    if (!text) return null;
-    let match = SpotifyUtils.regex.exec(text);
-    if (!match) {return null;}
-    switch(match[1]) {
+    if (!text) {
+      return null;
+    }
+    const match = SpotifyUtils.regex.exec(text);
+    if (!match) {
+      return null;
+    }
+    switch (match[1]) {
       case 'album':
         return new SpotifyUri('album', match[2]);
       case 'track':
@@ -22,21 +26,29 @@ export class SpotifyUtils {
   }
 
   public static getId(text: string): string {
-    let uri = SpotifyUtils.getUri(text);
-    if (!uri) return null;
+    const uri = SpotifyUtils.getUri(text);
+    if (!uri) {
+      return null;
+    }
     return uri.toString();
   }
 
   // Return Spotify URL for embedded player
   public static getEmbedUrl(id: string) {
-    if (!id) {return null;}
+    if (!id) {
+      return null;
+    }
     return 'https://embed.spotify.com/?uri=' + id;
   }
 
   public static getUrl(text: string): string {
-    if (!text) return null;
-    let match = SpotifyUtils.regex.exec(text);
-    if (!match) {return null;}
+    if (!text) {
+      return null;
+    }
+    const match = SpotifyUtils.regex.exec(text);
+    if (!match) {
+      return null;
+    }
     return match[0];
   }
 

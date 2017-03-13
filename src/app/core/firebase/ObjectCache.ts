@@ -1,5 +1,6 @@
-import {FirebaseListObservable, AngularFireDatabase, FirebaseObjectObservable} from "angularfire2";
-import {Observable, Observer} from "rxjs";
+import {FirebaseListObservable, AngularFireDatabase, FirebaseObjectObservable} from 'angularfire2';
+import {Observable} from 'rxjs/Observable';
+import {Observer} from 'rxjs/Observer';
 
 /*
  * Wrapper class for FirebaseObjectObservable, which responds Observables instead of Promises for most operations.
@@ -14,12 +15,12 @@ export class ObjectCache<T> {
     this.afDatabase = afDatabase;
   }
 
-  public get(resource: string, options?: any): FirebaseObjectObservable<T> {
+  public get(resource: string, options?: any): Observable<T> {
     this.object = this.afDatabase.object(resource, options);
     return this.object;
   }
 
-  public getId(resource: string, id: string, options?: any): FirebaseObjectObservable<T> {
+  public getId(resource: string, id: string, options?: any): Observable<T> {
     this.object = this.afDatabase.object(resource + '/' + id, options);
     return this.object;
   }
@@ -31,7 +32,7 @@ export class ObjectCache<T> {
         .catch(error => observer.error(error))
         .then(result => {
           observer.next(result);
-          observer.complete()
+          observer.complete();
         });
     });
   }
@@ -42,9 +43,9 @@ export class ObjectCache<T> {
         .catch(error => observer.error(error))
         .then(result => {
           observer.next(result);
-          observer.complete()
+          observer.complete();
         });
-    })
+    });
   }
 
   public update(changes: any): Observable<T> {
@@ -58,9 +59,9 @@ export class ObjectCache<T> {
         .catch(error => observer.error(error))
         .then(result => {
           observer.next(result);
-          observer.complete()
+          observer.complete();
         });
-    })
+    });
   }
 
   public set(obj: any): Observable<T> {
@@ -74,9 +75,9 @@ export class ObjectCache<T> {
         .catch(error => observer.error(error))
         .then(result => {
           observer.next(result);
-          observer.complete()
+          observer.complete();
         });
-    })
+    });
   }
 
 }

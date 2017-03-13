@@ -1,4 +1,4 @@
-import {DateUtils} from "../../shared/DateUtils";
+import {DateUtils} from '../../shared/DateUtils';
 
 export class Show {
   title: string;    // Title of the show
@@ -10,7 +10,7 @@ export class Show {
   // posts: string[];  // Keys of posts for this show (currently this is implemented on posts !!!)
 
   static newDefault(): Show {
-    let show: Show = new Show();
+    const show: Show = new Show();
     show.date = DateUtils.todayISOString();
     show.ts = Date.now();
 //    show.posts = [];
@@ -20,5 +20,5 @@ export class Show {
 }
 
 
-export const SHOWS_RESOURCE_PATH: string = '/shows';
+export const SHOWS_RESOURCE_PATH = '/shows';
 

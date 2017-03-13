@@ -1,28 +1,35 @@
 import { Injectable } from '@angular/core';
-import {SpotifyService} from "../spotify/spotify.service";
-import {YoutubeService} from "../youtube/youtube.service";
-import {Observable} from "rxjs";
-import {ContentInfo} from "../shared/content.model";
-import {YoutubeUtils} from "../youtube/YoutubeUtils";
-import {SpotifyUtils} from "../spotify/SpotifyUtils";
-import {ContentImplService} from "../shared/content-impl.service";
+import {SpotifyService} from '../spotify/spotify.service';
+import {YoutubeService} from '../youtube/youtube.service';
+import {Observable} from 'rxjs/Observable';
+import {ContentInfo} from '../shared/content.model';
+import {YoutubeUtils} from '../youtube/YoutubeUtils';
+import {SpotifyUtils} from '../spotify/SpotifyUtils';
+import {ContentImplService} from '../shared/content-impl.service';
 
 export class UrlService implements ContentImplService {
+
+  static MAXLEN = 20;
+
   public getTitle(url: string): Observable<string> {
-    if (!url) return Observable.of(null);
-    let regex = /http[s]*:\/\/([a-zA-Z0-9_.\-]+)\//i;
-    let match = regex.exec(url);
+    if (!url) {
+      return Observable.of(null);
+    }
+    const regex = /http[s]*:\/\/([a-zA-Z0-9_.\-]+)\//i;
+    const match = regex.exec(url);
     if (match) {
       return Observable.of(match[1]);
     }
-    return Observable.of(url.substr(0,20) + '...' );
+    return Observable.of(url.substr(0, UrlService.MAXLEN) + '...' );
   }
 }
 
 export class TextService implements ContentImplService {
   public getTitle(url: string): Observable<string> {
-    if (!url) return Observable.of(null);
-    return Observable.of(url.substr(0,20) + '...' );
+    if (!url) {
+      return Observable.of(null);
+    }
+    return Observable.of(url.substr(0, UrlService.MAXLEN) + '...' );
   }
 }
 
@@ -36,7 +43,7 @@ export class ContentService {
 
   public getInfo(text: string): Observable<ContentInfo> {
 
-    let contentInfo: ContentInfo = {
+    const contentInfo: ContentInfo = {
       title: null,
       contentUrl: null
     };

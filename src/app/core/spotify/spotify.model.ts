@@ -5,7 +5,7 @@
 
 export class SpotifyUri {
 
-  app: string = 'spotify';
+  app = 'spotify';
   type: string;
   id: string;
 

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import {AngularFire, FirebaseListObservable, AngularFireDatabase} from "angularfire2";
-import {Observable, Observer} from "rxjs";
-import {SessionService} from "./session.service";
+import {AngularFire, AngularFireDatabase} from 'angularfire2';
+import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class BackendService {

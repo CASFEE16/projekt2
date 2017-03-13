@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import {AngularFire, FirebaseAuthState} from "angularfire2";
-import {Observable, Observer} from "rxjs";
-import {ObjectCache} from "./ObjectCache";
+import {AngularFire, FirebaseAuthState} from 'angularfire2';
+import {Observable} from 'rxjs/Observable';
+import {Observer} from 'rxjs/Observer';
+import {ObjectCache} from './ObjectCache';
 import {User, USERS_RESOURCE_PATH} from '../../user/shared/user.model';
 
 export class Registration {
@@ -18,9 +19,8 @@ export class RegistrationService {
 
   public register(registration: Registration): Observable<any> {
 
-    let userRef: ObjectCache<User> = new ObjectCache<User>(this.af.database);
-
-    let user: User = User.newDefault();
+    const userRef: ObjectCache<User> = new ObjectCache<User>(this.af.database);
+    const user: User = User.newDefault();
     user.name = registration.name;
     user.email = registration.email;
 
@@ -35,21 +35,17 @@ export class RegistrationService {
           observer.error(error);
         }
       ).then(
-        (result: FirebaseAuthState) => {
-          user.uid = result.uid;
-          userRef.add(USERS_RESOURCE_PATH, result.uid, user).subscribe(
-            (user) => {
-              observer.next(user);
+        (createUserResult: FirebaseAuthState) => {
+          user.uid = createUserResult.uid;
+          userRef.add(USERS_RESOURCE_PATH, createUserResult.uid, user).subscribe(
+            (userAddResult) => {
+              observer.next(userAddResult);
               observer.complete();
             },
             (error) => observer.error(error)
           );
         });
     });
-  }
-
-  public disable(uid: string) {
-    this.af.auth
   }
 
 }

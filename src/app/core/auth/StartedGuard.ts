@@ -4,8 +4,8 @@ import { Observable } from 'rxjs/Observable';
 
 import { Injectable } from '@angular/core';
 import { CanActivate, Router, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
-import {SessionService} from "../firebase/session.service";
-import {TraceService} from "../trace/trace.service";
+import {SessionService} from '../firebase/session.service';
+import {TraceService} from '../trace/trace.service';
 
 @Injectable()
 export class StartedGuard implements CanActivate {
@@ -26,7 +26,7 @@ export class StartedGuard implements CanActivate {
 
     return this.sessionService.event.map(
       (event) => {
-        let started = this.sessionService.isStarted();
+        const started = this.sessionService.isStarted();
         this.trace.log('StartedGuard', 'canActivate', started);
         return started;
       });

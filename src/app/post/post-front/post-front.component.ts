@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import {PostService} from "../shared/post.service";
-import {Observable} from "rxjs";
-import {Post, PostTypes, PostType, ContentDetector} from "../shared/post.model";
-import {MdSnackBar, MdSnackBarConfig} from "@angular/material";
-import {ShowListService} from "../../show/shared/show-list.service";
-import {Show} from "../../show/shared/show.model";
-import {SessionService} from "../../core/firebase/session.service";
-import {Router} from "@angular/router";
-import {PostShowListEntry} from "../shared/post-show.model";
-import {PostUtils} from "../shared/post-utils.service";
+import {PostService} from '../shared/post.service';
+import {Observable} from 'rxjs/Observable';
+import {Post, PostTypes, PostType, ContentDetector} from '../shared/post.model';
+import {MdSnackBar, MdSnackBarConfig} from '@angular/material';
+import {ShowListService} from '../../show/shared/show-list.service';
+import {Show} from '../../show/shared/show.model';
+import {SessionService} from '../../core/firebase/session.service';
+import {Router} from '@angular/router';
+import {PostShowListEntry} from '../shared/post-show.model';
 
 @Component({
   selector: 'app-post-front',
@@ -21,7 +20,7 @@ export class PostFrontComponent implements OnInit {
   post: Post = null;
   posts: Observable<PostShowListEntry[]> = null;
   shows: Observable<Show[]> = null;
-  loading: boolean = true;
+  loading = true;
   typeList: any[];
   loggedIn: Observable<boolean> = null;
   contentDetector: ContentDetector = new ContentDetector();
@@ -53,7 +52,9 @@ export class PostFrontComponent implements OnInit {
 
   onSubmit(event: Event) {
     event.preventDefault();
-    if (this.loading) return;
+    if (this.loading) {
+      return;
+    }
     this.postService.add(this.post).subscribe(
       result => {
         this.snackbar.open('Post added', null, this.snackbarConfig);
@@ -64,7 +65,9 @@ export class PostFrontComponent implements OnInit {
   }
 
   onDelete(deletePost: Post) {
-    if (this.loading) return;
+    if (this.loading) {
+      return;
+    }
     this.postService.delete(deletePost).subscribe(
         result => this.snackbar.open('Post deleted', null, this.snackbarConfig),
         error => this.snackbar.open(error.message, null, this.snackbarConfig)
@@ -72,12 +75,16 @@ export class PostFrontComponent implements OnInit {
   }
 
   onEdit(editPost: Post) {
-    if (this.loading) return;
+    if (this.loading) {
+      return;
+    }
     this.router.navigate(['/post', editPost['$key']]);
   }
 
   onSelectShow(post: Post, showKey: string) {
-    if (this.loading) return;
+    if (this.loading) {
+      return;
+    }
     this.postService.setShow(post, showKey).subscribe(
       result => this.snackbar.open('Post updated', null, this.snackbarConfig),
       error => this.snackbar.open(error.message, null, this.snackbarConfig)
@@ -85,12 +92,16 @@ export class PostFrontComponent implements OnInit {
   }
 
   onTextChanged(event: string) {
-    if (this.loading) return;
+    if (this.loading) {
+      return;
+    }
     this.post.type = this.contentDetector.getType(event);
   }
 
   onRatingClick(post: Post, rating: number) {
-    if (this.loading) return;
+    if (this.loading) {
+      return;
+    }
     this.postService.setRating(post, rating).subscribe(
       result => this.snackbar.open('Rating updated', null, this.snackbarConfig),
       error => this.snackbar.open(error.message, null, this.snackbarConfig)
@@ -98,7 +109,9 @@ export class PostFrontComponent implements OnInit {
   }
 
   onRemoveFromShows(post: Post) {
-    if (this.loading) return;
+    if (this.loading) {
+      return;
+    }
     this.postService.setShow(post, null).subscribe(
       result => this.snackbar.open('Removed from show', null, this.snackbarConfig),
       error => this.snackbar.open(error.message, null, this.snackbarConfig)

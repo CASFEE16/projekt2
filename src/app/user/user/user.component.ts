@@ -1,13 +1,13 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {User} from "../shared/user.model";
-import {UserService} from "../shared/user.service";
-import {Observable} from "rxjs";
-import {SessionService} from "../../core/firebase/session.service";
-import {MdSnackBar} from "@angular/material";
+import {User} from '../shared/user.model';
+import {UserService} from '../shared/user.service';
+import {Observable} from 'rxjs/Observable';
+import {SessionService} from '../../core/firebase/session.service';
+import {MdSnackBar} from '@angular/material';
 import {MdDialog} from '@angular/material';
-import {Router} from "@angular/router";
-import {Post} from "../../post/shared/post.model";
-import {SubmitDialogComponent} from "../../shared/submit-dialog/submit-dialog.component";
+import {Router} from '@angular/router';
+import {Post} from '../../post/shared/post.model';
+import {SubmitDialogComponent} from '../../shared/submit-dialog/submit-dialog.component';
 
 @Component({
   selector: 'app-user',
@@ -32,9 +32,9 @@ export class UserComponent implements OnInit {
   }
 
   onDelete(obj: User) {
-    let dialogRef = this.dialog.open(SubmitDialogComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 'ok') {
+    const dialogRef = this.dialog.open(SubmitDialogComponent);
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult === 'ok') {
         this.userService.delete(obj).subscribe(
           result => this.snackbar.open('User deleted', null, {duration: 5000}),
           error => this.snackbar.open(error.message, null, {duration: 5000})

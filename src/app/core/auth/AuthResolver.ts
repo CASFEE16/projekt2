@@ -1,6 +1,6 @@
-import {Resolve, Router, ActivatedRouteSnapshot, RouterStateSnapshot} from "@angular/router";
-import {SessionService, ISessionEvent} from "../firebase/session.service";
-import {Observable} from "rxjs";
+import {Resolve, Router, ActivatedRouteSnapshot, RouterStateSnapshot} from '@angular/router';
+import {SessionService, ISessionEvent} from '../firebase/session.service';
+import {Observable} from 'rxjs/Observable';
 
 export class AuthResolver implements Resolve<ISessionEvent> {
   constructor(private sessionService: SessionService) {}

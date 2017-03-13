@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {BackendService} from "../../core/firebase/backend.service";
-import {SessionService} from "../../core/firebase/session.service";
-import {Observable} from "rxjs";
-import {ObjectCache} from "../../core/firebase/ObjectCache";
-import {SHOWS_RESOURCE_PATH, Show} from "../shared/show.model";
-import {Post, POSTS_RESOURCE_PATH} from "../../post/shared/post.model";
+import {BackendService} from '../../core/firebase/backend.service';
+import {SessionService} from '../../core/firebase/session.service';
+import {Observable} from 'rxjs/Observable';
+import {ObjectCache} from '../../core/firebase/ObjectCache';
+import {SHOWS_RESOURCE_PATH, Show} from '../shared/show.model';
+import {Post, POSTS_RESOURCE_PATH} from '../../post/shared/post.model';
 
 
 @Injectable()
@@ -33,7 +33,7 @@ export class ShowDetailsService {
   }
 
   public removePost(post: Post): Observable<Post> {
-    let obj: ObjectCache<Post> = new ObjectCache<Post>(this.backend.database());
+    const obj: ObjectCache<Post> = new ObjectCache<Post>(this.backend.database());
     return obj.getId(POSTS_RESOURCE_PATH, post['$key']).flatMap(
       result => obj.update({show: {key: null, index: null}})
     );
@@ -45,13 +45,13 @@ export class ShowDetailsService {
     let idx = 0;
     posts.forEach(each => each.show.index = idx++);
 
-    let obj: ObjectCache<Post> = new ObjectCache<Post>(this.backend.database());
+    const obj: ObjectCache<Post> = new ObjectCache<Post>(this.backend.database());
     posts.forEach(each => {
       console.log(each.show);
       obj.getId(POSTS_RESOURCE_PATH, each['$key']).subscribe(
-        result => {
+        getIdResult => {
           obj.update({show: each.show}).subscribe(
-            result => {},
+            updateResult => {},
             error => console.log(error)
           );
         },

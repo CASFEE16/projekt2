@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {MdDialog, MdDialogRef, MdSnackBar} from '@angular/material';
-import {SessionService} from "../../core/firebase/session.service";
+import {SessionService} from '../../core/firebase/session.service';
 
 @Component({
   selector: 'app-user-menu',
@@ -8,6 +8,10 @@ import {SessionService} from "../../core/firebase/session.service";
   styleUrls: ['./user-menu.component.css']
 })
 export class UserMenuComponent implements OnInit {
+
+  get username(): string {
+    return this.sessionService.username;
+  }
 
   constructor(
     private dialogRef: MdDialogRef<UserMenuComponent>,

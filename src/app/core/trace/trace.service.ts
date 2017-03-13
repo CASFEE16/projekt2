@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class TraceService {
 
-  enabled: boolean = true;
+  enabled = true;
 
   constructor() { }
 

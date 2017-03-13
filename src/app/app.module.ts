@@ -12,14 +12,14 @@ import {AppComponent} from './app.component';
 import {UserModule} from './user/user.module';
 import {CoreModule} from './core/core.module';
 import {FrontModule} from './front/front.module';
-import {environment} from "../environments/environment";
+import {environment} from '../environments/environment';
 
 import 'hammerjs';
-import {PostModule} from "./post/post.module";
-import {ShowModule} from "./show/show.module";
-import {SafePipe} from "./shared/safe.pipe";
+import {PostModule} from './post/post.module';
+import {ShowModule} from './show/show.module';
+import {SafePipe} from './shared/safe.pipe';
 import { RatingComponent } from './shared/rating/rating.component';
-import {SharedModule} from "./shared/shared.module";
+import {SharedModule} from './shared/shared.module';
 
 export const FIREBASE_CONFIG: FirebaseAppConfig = environment.firebase.config;
 
@@ -42,7 +42,7 @@ export const FIREBASE_CONFIG: FirebaseAppConfig = environment.firebase.config;
     SharedModule
   ],
   providers: [
-    { provide: "windowObject", useValue: window}
+    { provide: 'windowObject', useValue: window}
   ],
   bootstrap: [AppComponent]
 })

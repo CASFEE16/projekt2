@@ -5,12 +5,12 @@ export class DateUtils {
   }
 
   static yesterday(): Date {
-    let today = DateUtils.today();
-    return new Date(today.setDate(today.getDate() - 1))
+    const today = DateUtils.today();
+    return new Date(today.setDate(today.getDate() - 1));
   }
 
   static toISOString(date: Date): string {
-    return date.toISOString().substr(0,10);
+    return date.toISOString().substr(0, 10);
   }
 
   static todayISOString(): string {

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {BackendService} from "../../core/firebase/backend.service";
-import {User, USERS_RESOURCE_PATH} from "./user.model";
-import {DateUtils} from "../../shared/DateUtils";
-import {Observable} from "rxjs";
-import {ListCache} from "../../core/firebase/ListCache";
+import {BackendService} from '../../core/firebase/backend.service';
+import {User, USERS_RESOURCE_PATH} from './user.model';
+import {DateUtils} from '../../shared/DateUtils';
+import {Observable} from 'rxjs/Observable';
+import {ListCache} from '../../core/firebase/ListCache';
 
 @Injectable()
 export class UserService {

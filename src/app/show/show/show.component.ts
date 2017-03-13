@@ -1,15 +1,15 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {Show} from "../shared/show.model";
-import {Observable} from "rxjs";
-import {SessionService} from "../../core/firebase/session.service";
-import {MdSnackBar} from "@angular/material";
+import {Show} from '../shared/show.model';
+import {Observable} from 'rxjs/Observable';
+import {SessionService} from '../../core/firebase/session.service';
+import {MdSnackBar} from '@angular/material';
 import {MdDialog} from '@angular/material';
-import {Router} from "@angular/router";
-import {Post} from "../../post/shared/post.model";
-import {SubmitDialogComponent} from "../../shared/submit-dialog/submit-dialog.component";
-import {ShowPostsService} from "../shared/show-posts.service";
-import {PostUtils} from "../../post/shared/post-utils.service";
-import {ShowService} from "../shared/show.service";
+import {Router} from '@angular/router';
+import {Post} from '../../post/shared/post.model';
+import {SubmitDialogComponent} from '../../shared/submit-dialog/submit-dialog.component';
+import {ShowPostsService} from '../shared/show-posts.service';
+import {PostUtils} from '../../post/shared/post-utils.service';
+import {ShowService} from '../shared/show.service';
 
 @Component({
   selector: 'app-show',
@@ -26,7 +26,7 @@ export class ShowComponent implements OnInit {
   constructor(
     private showService: ShowService,
     private showPostsService: ShowPostsService,
-    private postUtils: PostUtils,
+    public  postUtils: PostUtils,
     private sessionService: SessionService,
     private snackbar: MdSnackBar,
     private dialog: MdDialog,
@@ -45,9 +45,9 @@ export class ShowComponent implements OnInit {
   }
 
   onDelete(obj: Show) {
-    let dialogRef = this.dialog.open(SubmitDialogComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      if (result === 'ok') {
+    const dialogRef = this.dialog.open(SubmitDialogComponent);
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult === 'ok') {
         this.showService.delete(obj).subscribe(
           result => this.snackbar.open('Show deleted', null, {duration: 5000}),
           error => this.snackbar.open(error.message, null, {duration: 5000})

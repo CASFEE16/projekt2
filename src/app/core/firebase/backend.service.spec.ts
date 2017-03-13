@@ -2,7 +2,7 @@
 
 import { TestBed, async, inject } from '@angular/core/testing';
 import { BackendService } from './backend.service';
-import {Observable} from "rxjs";
+import {Observable} from 'rxjs/Observable';
 import { AngularFire } from 'angularfire2';
 
 const data: any = [{1: 'Test'}];

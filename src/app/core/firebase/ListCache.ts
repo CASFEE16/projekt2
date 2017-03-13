@@ -1,5 +1,6 @@
-import {FirebaseListObservable, AngularFireDatabase} from "angularfire2";
-import {Observable, Observer} from "rxjs";
+import {FirebaseListObservable, AngularFireDatabase} from 'angularfire2';
+import {Observable} from 'rxjs/Observable';
+import {Observer} from 'rxjs/Observer';
 
 export class ListCache<T> {
 
@@ -19,7 +20,7 @@ export class ListCache<T> {
         .catch(error => observer.error(error))
         .then(result => {
           observer.next(result);
-          observer.complete()
+          observer.complete();
         });
     });
   }
@@ -30,9 +31,9 @@ export class ListCache<T> {
         .catch(error => observer.error(error))
         .then(result => {
           observer.next(result);
-          observer.complete()
+          observer.complete();
         });
-    })
+    });
   }
 
   public update(obj: T, changes: any): Observable<T> {
@@ -41,9 +42,9 @@ export class ListCache<T> {
         .catch(error => observer.error(error))
         .then(result => {
           observer.next(result);
-          observer.complete()
+          observer.complete();
         });
-    })
+    });
   }
 
 }

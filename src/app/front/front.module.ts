@@ -6,8 +6,8 @@ import {LoginComponent} from './login/login.component';
 import {FormsModule} from '@angular/forms';
 import {RegisterComponent} from './register/register.component';
 import {UserMenuComponent} from './user-menu/user-menu.component';
-import {PostModule} from "../post/post.module";
-import {ShowModule} from "../show/show.module";
+import {PostModule} from '../post/post.module';
+import {ShowModule} from '../show/show.module';
 import {SearchComponent} from './search/search.component';
 
 @NgModule({

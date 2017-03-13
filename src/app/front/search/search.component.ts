@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {PostType, PostTypes} from "../../post/shared/post.model";
+import {PostType, PostTypes} from '../../post/shared/post.model';
 
 interface Search {
   text: string;

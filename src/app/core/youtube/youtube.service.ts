@@ -2,12 +2,12 @@
 /// <reference types="gapi.youtube" />
 
 import { Injectable } from '@angular/core';
-import {Http, Response} from "@angular/http";
-import {Observable, Observer} from "rxjs";
-import {ContentInfo} from "../shared/content.model";
-import {YoutubeUtils} from "./YoutubeUtils";
-import {ContentImplService} from "../shared/content-impl.service";
-import {TraceService} from "../trace/trace.service";
+import {Http, Response} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import {Observer} from 'rxjs/Observer';
+import {YoutubeUtils} from './YoutubeUtils';
+import {ContentImplService} from '../shared/content-impl.service';
+import {TraceService} from '../trace/trace.service';
 
 function _window(): any {
   // return the global native browser window object
@@ -22,7 +22,7 @@ function loadYoutubeApi(): void {
   _gapi().client.load('youtube', 'v3', () => {
     _gapi().client.setApiKey('AIzaSyCNjUMHsV_64Qgh0LM5xUrHf1RMNJ97PGw');
     console.log('Youtube API loaded');
-  })
+  });
 }
 
 @Injectable()
@@ -64,11 +64,11 @@ export class YoutubeService implements ContentImplService {
   }
 
   handleResult(response: Response): any {
-    let formData = response.text()
+    const formData = response.text()
       .split('&')
       .map(each => each.split('='))
       .map(each => {
-        let result = {};
+        const result = {};
         each.forEach(data => result[data[0]] = data[1]);
         return result;
       });

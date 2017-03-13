@@ -1,5 +1,5 @@
-import {YoutubeUtils} from "../../core/youtube/YoutubeUtils";
-import {SpotifyUtils} from "../../core/spotify/SpotifyUtils";
+import {YoutubeUtils} from '../../core/youtube/YoutubeUtils';
+import {SpotifyUtils} from '../../core/spotify/SpotifyUtils';
 
 export interface ShowRef {
   key: string;
@@ -7,26 +7,25 @@ export interface ShowRef {
 }
 
 export class Post {
-
-  public Post() {
-    this.text = '';
-    this.type = PostType.Note;
-  }
-
   text: string;
   content?: string;
   type?: PostType;
   note?: string;
-  rating?: number = 0;
+  rating? = 0;
   date?: string;
   user?: string;
   ts?: number;
   sortKey?: number;
   show?: ShowRef;
 
+  public Post() {
+    this.text = '';
+    this.type = PostType.Note;
+  }
+
 }
 
-export const POSTS_RESOURCE_PATH: string = '/posts';
+export const POSTS_RESOURCE_PATH = '/posts';
 
 export enum PostType {
   Note,
@@ -56,12 +55,14 @@ export class PostTypes {
   }
 
   static list(): any[] {
-    let types: any[] = [];
-    for(let n in PostType) {
-      if(typeof PostType[n] === 'number') types.push({
-        value: PostType[n],
-        label: n
-      });
+    const types: any[] = [];
+    for (const n in PostType) {
+      if (typeof PostType[n] === 'number') {
+        types.push({
+          value: PostType[n],
+          label: n
+        });
+      }
     }
     return types;
   }
@@ -69,6 +70,18 @@ export class PostTypes {
 }
 
 export class ContentDetector {
+
+  static isMovie(text: string): boolean {
+    return !!YoutubeUtils.getId(text);
+  }
+
+  static isWeb(text: string): boolean {
+    return (text.indexOf('http://') >= 0 || text.indexOf('https://') >= 0);
+  }
+
+  static isMusic(text: string): boolean {
+    return !!SpotifyUtils.getId(text);
+  }
 
   getType(text: string): PostType {
     if (ContentDetector.isMovie(text)) {
@@ -81,18 +94,6 @@ export class ContentDetector {
       return PostType.Web;
     }
     return PostType.Note;
-  }
-
-  static isMovie(text: string): boolean {
-    return !!YoutubeUtils.getId(text);
-  }
-
-  static isWeb(text: string): boolean {
-    return (text.indexOf('http://') >= 0 || text.indexOf('https://') >= 0);
-  }
-
-  static isMusic(text: string): boolean {
-    return !!SpotifyUtils.getId(text);
   }
 
 }

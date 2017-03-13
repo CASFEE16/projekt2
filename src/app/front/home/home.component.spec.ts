@@ -4,8 +4,7 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { HomeComponent } from './home.component';
-import {Observable} from 'rxjs';
-import {WelcomeService} from "./welcome.service";
+import {Observable} from 'rxjs/Observable';
 
 const data: any = ['Test'];
 
@@ -23,13 +22,11 @@ describe('HomeComponent', () => {
 
     TestBed.configureTestingModule({
       providers: [
-        {provide: WelcomeService, useClass: MockWelcomeService},
       ],
       declarations: [ HomeComponent ]
     }).overrideComponent(HomeComponent, {
       set: {
         providers: [
-          {provide: WelcomeService, useClass: MockWelcomeService}
         ]
       }})
     .compileComponents();
@@ -41,7 +38,7 @@ describe('HomeComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', inject([WelcomeService], () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
-  }));
+  });
 });

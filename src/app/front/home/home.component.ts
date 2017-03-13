@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Observable} from "rxjs";
-import {FirebaseListObservable} from "angularfire2";
+import {FirebaseListObservable} from 'angularfire2';
 
 @Component({
   selector: 'app-home',

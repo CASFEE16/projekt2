@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {Http} from "@angular/http";
-import {Observable} from "rxjs";
-import {Album, Track} from "./spotify.model";
-import {ContentImplService} from "../shared/content-impl.service";
-import {SpotifyUtils} from "./SpotifyUtils";
+import {Http} from '@angular/http';
+import {Observable} from 'rxjs/Observable';
+import {Album, Track} from './spotify.model';
+import {ContentImplService} from '../shared/content-impl.service';
+import {SpotifyUtils} from './SpotifyUtils';
 
 @Injectable()
 export class SpotifyService implements ContentImplService {
@@ -27,11 +27,11 @@ export class SpotifyService implements ContentImplService {
   }
 
   public getTitle(url: string): Observable<string> {
-    let uri = SpotifyUtils.getUri(url);
-    if (uri.type == 'album') {
+    const uri = SpotifyUtils.getUri(url);
+    if (uri.type === 'album') {
       return this.getAlbum(uri.id).map( (album) => album.name + ' / ' + album.artists[0].name + ' / ' + album.release_date);
     }
-    if (uri.type == 'track') {
+    if (uri.type === 'track') {
       return this.getTrack(uri.id).map( (track) => track.name);
     }
     return Observable.of(null);

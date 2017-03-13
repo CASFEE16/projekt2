@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import {BackendService} from "../../core/firebase/backend.service";
-import {Show} from "./show.model";
-import {Observable} from "rxjs";
-import {Post, POSTS_RESOURCE_PATH} from "../../post/shared/post.model";
+import {BackendService} from '../../core/firebase/backend.service';
+import {Show} from './show.model';
+import {Observable} from 'rxjs/Observable';
+import {Post, POSTS_RESOURCE_PATH} from '../../post/shared/post.model';
 
 export interface ShowWithPosts {
   show: Show;

@@ -7,7 +7,9 @@ export class YoutubeUtils {
 
   // Extract Youtube ID from Youtube URL
   public static getId(text: string): string {
-    if (!text) return null;
+    if (!text) {
+      return null;
+    }
 
     let regex = /www.youtube.com\/watch\?v=([_0-9a-zA-Z]+)/i;
     let match = regex.exec(text);
@@ -34,7 +36,9 @@ export class YoutubeUtils {
 
   // Look for Youtube URLS in a text
   public static getUrl(text: string): string {
-    if (!text) return null;
+    if (!text) {
+      return null;
+    }
     let regex = /(http[s]*:\/\/www.youtube.com\/watch\?v=[_0-9a-zA-Z]+)/i;
     let match = regex.exec(text);
     if (match) {

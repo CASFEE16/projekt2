@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import {Post, PostType, PostTypes} from "./post.model";
-import {YoutubeUtils} from "../../core/youtube/YoutubeUtils";
-import {SpotifyUtils} from "../../core/spotify/SpotifyUtils";
+import {Post, PostType, PostTypes} from './post.model';
+import {YoutubeUtils} from '../../core/youtube/YoutubeUtils';
+import {SpotifyUtils} from '../../core/spotify/SpotifyUtils';
 
 @Injectable()
 export class PostUtils {
@@ -24,7 +24,7 @@ export class PostUtils {
   }
 
   webURL(post: Post) {
-    if (post.type == PostType.Web) {
+    if (post.type === PostType.Web) {
       return post.content;
     }
     return null;

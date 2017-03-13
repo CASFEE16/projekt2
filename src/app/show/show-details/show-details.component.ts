@@ -1,13 +1,12 @@
 import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import {Location} from '@angular/common';
-import {Show} from "../shared/show.model";
-import {ShowDetailsService} from "./show-details.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {MdSnackBar} from "@angular/material";
-import {Post} from "../../post/shared/post.model";
-import {Observable} from "rxjs";
-import {ShowPostsService} from "../shared/show-posts.service";
-import {PostUtils} from "../../post/shared/post-utils.service";
+import {Show} from '../shared/show.model';
+import {ShowDetailsService} from './show-details.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MdSnackBar} from '@angular/material';
+import {Post} from '../../post/shared/post.model';
+import {ShowPostsService} from '../shared/show-posts.service';
+import {PostUtils} from '../../post/shared/post-utils.service';
 
 @Component({
   selector: 'app-show-edit',
@@ -21,14 +20,14 @@ export class ShowDetailsComponent implements OnInit, OnDestroy {
   posts: Post[] = [];
   postsToRemove: Post[] = [];
   routeSubscription = null;
-  dirty: boolean = false;
+  dirty = false;
 
   @ViewChild('form') form: any;
 
   constructor(
     private showDetailsService: ShowDetailsService,
     private showPostsService: ShowPostsService,
-    private postUtils: PostUtils,
+    public postUtils: PostUtils,
     private route: ActivatedRoute,
     private router: Router,
     private location: Location,
@@ -74,8 +73,8 @@ export class ShowDetailsComponent implements OnInit, OnDestroy {
     this.showDetailsService.save(this.show)
       .subscribe(
         (result) => {
-          this.snackbar.open('Show saved', null, {duration: 2000})
-          this.router.navigate(['/show'])
+          this.snackbar.open('Show saved', null, {duration: 2000});
+          this.router.navigate(['/show']);
           },
         (error) => this.snackbar.open(error.message, null, {duration: 2000})
       );
@@ -84,7 +83,6 @@ export class ShowDetailsComponent implements OnInit, OnDestroy {
   }
 
   public onCancel() {
-    //this.router.navigate(['/show']);
     this.location.back();
   }
 
@@ -98,22 +96,22 @@ export class ShowDetailsComponent implements OnInit, OnDestroy {
   }
 
   public onMovePostUp(post: Post) {
-    let idx = this.posts.findIndex(each => each === post);
+    const idx = this.posts.findIndex(each => each === post);
     if (idx < 0 || idx === 0) {
       return;
     }
-    let previousPost = this.posts[idx - 1];
+    const previousPost = this.posts[idx - 1];
     this.posts[idx - 1] = post;
     this.posts[idx] = previousPost;
     this.dirty = true;
   }
 
   public onMovePostDown(post: Post) {
-    let idx = this.posts.findIndex(each => each === post);
+    const idx = this.posts.findIndex(each => each === post);
     if (idx < 0 || idx >= this.posts.length - 1) {
       return;
     }
-    let nextPost = this.posts[idx + 1];
+    const nextPost = this.posts[idx + 1];
     this.posts[idx + 1] = post;
     this.posts[idx] = nextPost;
     this.dirty = true;

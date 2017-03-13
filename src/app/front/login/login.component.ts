@@ -1,23 +1,21 @@
-import {Component, OnInit, OnDestroy} from '@angular/core';
-import {EmailPasswordCredentials} from "angularfire2/auth";
-import {SessionService, ISessionEvent} from "../../core/firebase/session.service";
-import {Subscription} from "rxjs";
-import {MdSnackBar} from "@angular/material";
-import {Router} from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {EmailPasswordCredentials} from 'angularfire2/auth';
+import {SessionService} from '../../core/firebase/session.service';
+import {MdSnackBar} from '@angular/material';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginComponent implements OnInit {
 
   submitted = false;
   credentials: EmailPasswordCredentials = {
     email: '',
     password: ''
   };
-  subscription: Subscription;
   formErrors = {
     'email': '',
     'password': ''
@@ -28,15 +26,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.error = null;
-    //this.subscription = this.sessionService.event.subscribe(
-    //  (event) => this.handleEvent(event)
-    //)
-  }
-
-  ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
   }
 
   onSubmit() {
@@ -44,7 +33,6 @@ export class LoginComponent implements OnInit, OnDestroy {
 
     this.sessionService.loginCredentials(this.credentials).subscribe(
       (result) => {
-        // console.trace('Loggedin');
         this.router.navigate(['/']);
       },
       (error) => {

@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from "../shared/user.service";
-import {User} from "../shared/user.model";
-import {Observable} from "rxjs";
-import {MdSnackBar, MdDialog} from "@angular/material";
-import {SessionService} from "../../core/firebase/session.service";
-import {Registration, RegistrationService} from "../../core/firebase/registration.service";
+import {UserService} from '../shared/user.service';
+import {User} from '../shared/user.model';
+import {Observable} from 'rxjs/Observable';
+import {MdSnackBar} from '@angular/material';
+import {SessionService} from '../../core/firebase/session.service';
+import {Registration, RegistrationService} from '../../core/firebase/registration.service';
 
 @Component({
   selector: 'app-user-list',
@@ -16,7 +16,7 @@ export class UserListComponent implements OnInit {
 
   registration: Registration = new Registration();
   users: Observable<User[]> = null;
-  loading: boolean = true;
+  loading = true;
   loggedIn: Observable<boolean> = null;
 
   constructor(
@@ -34,8 +34,12 @@ export class UserListComponent implements OnInit {
 
   onSubmit() {
     this.registrationService.register(this.registration).subscribe(
-      result => {this.registration = new Registration()},
-      error => {this.snackbar.open(error.message, null, {duration: 2000})}
+      result => {
+        this.registration = new Registration();
+      },
+      error => {
+        this.snackbar.open(error.message, null, {duration: 2000});
+      }
     );
   }
 

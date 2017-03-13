@@ -1,4 +1,4 @@
-import {Routes} from "@angular/router";
+import {Routes} from '@angular/router';
 import {ShowListComponent} from './show-list/show-list.component';
 import {ShowDetailsComponent} from './show-details/show-details.component';
 import {ShowAirComponent} from './show-air/show-air.component';
