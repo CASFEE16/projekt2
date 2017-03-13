@@ -12,7 +12,6 @@ export class PostAirComponent implements OnInit {
 
   @Input() post: any = null;
   loggedIn: Observable<boolean> = null;
-  snackbarConfig: MdSnackBarConfig = new MdSnackBarConfig();
   done = false;
   action = 'check';
 

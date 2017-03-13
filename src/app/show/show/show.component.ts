@@ -1,12 +1,12 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {Show} from '../shared/show.model';
 import {Observable} from 'rxjs/Observable';
+import {Subscription} from 'rxjs/Subscription';
 import {SessionService} from '../../core/firebase/session.service';
 import {MdSnackBar} from '@angular/material';
 import {MdDialog} from '@angular/material';
 import {Router} from '@angular/router';
 import {Post} from '../../post/shared/post.model';
-import {SubmitDialogComponent} from '../../shared/submit-dialog/submit-dialog.component';
 import {ShowPostsService} from '../shared/show-posts.service';
 import {PostUtils} from '../../post/shared/post-utils.service';
 import {ShowService} from '../shared/show.service';
@@ -25,6 +25,7 @@ export class ShowComponent implements OnInit {
   posts: Observable<Post[]> = null;
   loggedIn: Observable<boolean> = null;
   postWithFocus: Post = null;
+  subscription: Subscription;
 
   constructor(
     private showService: ShowService,
@@ -45,7 +46,7 @@ export class ShowComponent implements OnInit {
       this.posts = this.showPostsService.findPostsForShow(this.show);
     } else {
       this.showPostsService.findPostsForShow(this.show)
-        .take(1)
+        .first()
         .subscribe(
           result => {
             this.posts = Observable.of(result);
@@ -60,7 +61,9 @@ export class ShowComponent implements OnInit {
   onDelete(obj: Show) {
     const dialogRef = this.dialogService.confirmDelete(obj.title).subscribe(dialogResult => {
     if (dialogResult) {
-        this.showService.delete(obj).subscribe(
+        this.showService.delete(obj)
+          .first()
+          .subscribe(
           result => this.snackbar.open('Show deleted', null, {duration: 2000}),
           error => this.snackbar.open(error.message, null, {duration: 2000})
         );
@@ -82,17 +85,24 @@ export class ShowComponent implements OnInit {
   }
 
   onPostRemove(obj: Post) {
-    const dialogRef = this.dialogService.confirmDelete(obj.text).subscribe(dialogResult => {
+    const dialogRef = this.dialogService.confirm('Confirm', 'Remove ' + obj.text + '?').subscribe(dialogResult => {
       if (dialogResult) {
-
-        this.showPostsService.removeFromShow(obj, this.show).subscribe(
+        this.subscription =  this.showPostsService.removeFromShow(obj, this.show)
+          .first()
+          .subscribe(
           result => {
+            console.log('ShowPostsService.removeFromShow', result);
             if (!this.live) {
               this.onPostRefresh();
             }
             this.snackbar.open('Post removed', null, {duration: 2000});
           },
-          error => this.snackbar.open(error.message, null, {duration: 2000})
+          error => this.snackbar.open(error.message, null, {duration: 2000}),
+          () => {
+            if (this.subscription) {
+              this.subscription.unsubscribe();
+            }
+          }
         );
       }
     });

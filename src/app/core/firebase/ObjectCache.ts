@@ -62,7 +62,6 @@ export class ObjectCache<T> {
       return this.object.update(newObj)
         .catch(error => observer.error(error))
         .then(result => {
-          console.log('RESULT', result);
           observer.next(result);
           observer.complete();
         }, error => {

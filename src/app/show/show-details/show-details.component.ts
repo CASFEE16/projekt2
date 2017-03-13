@@ -9,6 +9,7 @@ import {ShowPostsService} from '../shared/show-posts.service';
 import {PostUtils} from '../../post/shared/post-utils.service';
 import {CanComponentDeactivate} from '../../shared/can-deactivate-guard.service';
 import {Observable} from 'rxjs/Observable';
+import {DialogService} from "../../shared/dialog.service";
 
 @Component({
   selector: 'app-show-edit',
@@ -30,6 +31,7 @@ export class ShowDetailsComponent implements OnInit, OnDestroy, CanComponentDeac
     private showDetailsService: ShowDetailsService,
     private showPostsService: ShowPostsService,
     public postUtils: PostUtils,
+    private dialogService: DialogService,
     private route: ActivatedRoute,
     private router: Router,
     private location: Location,
@@ -131,7 +133,7 @@ export class ShowDetailsComponent implements OnInit, OnDestroy, CanComponentDeac
     }
     // Otherwise ask the user with the dialog service and return its
     // promise which resolves to true or false when the user decides
-    return this.dialog.confirm('Discard changes?');
+    return this.dialogService.confirmDiscardChanges();
   }
 
 }

@@ -74,9 +74,8 @@ export class PostService {
       post.show = {key: null, index: null};
     }
     post.show.key = showKey;
-    if (!post.show.index) {
-      post.show.index = Date.now();
-    }
+    post.show.index = Date.now();
+
     return this.listCache.update(post, {show_key: null, show: post.show});
   }
 

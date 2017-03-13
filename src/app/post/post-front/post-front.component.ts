@@ -8,7 +8,6 @@ import {Show} from '../../show/shared/show.model';
 import {SessionService} from '../../core/firebase/session.service';
 import {Router} from '@angular/router';
 import {PostShowListEntry} from '../shared/post-show.model';
-import {SubmitDialogComponent} from "../../shared/submit-dialog/submit-dialog.component";
 import {DialogService} from "../../shared/dialog.service";
 
 @Component({
@@ -51,77 +50,6 @@ export class PostFrontComponent implements OnInit {
     this.posts = this.postService.findFront()
       .do(each => this.loading = false);
 
-  }
-
-  onSubmit(event: Event) {
-    event.preventDefault();
-    if (this.loading) {
-      return;
-    }
-    this.postService.add(this.post).subscribe(
-      result => {
-        this.snackbar.open('Post added', null, this.snackbarConfig);
-        this.post = new Post();
-      },
-      error => this.snackbar.open(error.message, null, this.snackbarConfig)
-    );
-  }
-
-  onDelete(deletePost: Post) {
-    if (this.loading) {
-      return;
-    }
-    const dialogRef = this.dialogService.confirmDelete(deletePost.text).subscribe(dialogResult => {
-      if (dialogResult) {
-        this.postService.delete(deletePost).subscribe(
-          result => this.snackbar.open('Post deleted', null, this.snackbarConfig),
-          error => this.snackbar.open(error.message, null, this.snackbarConfig)
-        );
-      }});
-  }
-
-  onEdit(editPost: Post) {
-    if (this.loading) {
-      return;
-    }
-    this.router.navigate(['/post', editPost['$key']]);
-  }
-
-  onSelectShow(post: Post, showKey: string) {
-    if (this.loading) {
-      return;
-    }
-    this.postService.setShow(post, showKey).subscribe(
-      result => this.snackbar.open('Post updated', null, this.snackbarConfig),
-      error => this.snackbar.open(error.message, null, this.snackbarConfig)
-    );
-  }
-
-  onTextChanged(event: string) {
-    if (this.loading) {
-      return;
-    }
-    this.post.type = this.contentDetector.getType(event);
-  }
-
-  onRatingClick(post: Post, rating: number) {
-    if (this.loading) {
-      return;
-    }
-    this.postService.setRating(post, rating).subscribe(
-      result => this.snackbar.open('Rating updated', null, this.snackbarConfig),
-      error => this.snackbar.open(error.message, null, this.snackbarConfig)
-    );
-  }
-
-  onRemoveFromShows(post: Post) {
-    if (this.loading) {
-      return;
-    }
-    this.postService.setShow(post, null).subscribe(
-      result => this.snackbar.open('Removed from show', null, this.snackbarConfig),
-      error => this.snackbar.open(error.message, null, this.snackbarConfig)
-    );
   }
 
 }

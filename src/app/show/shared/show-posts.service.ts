@@ -28,7 +28,6 @@ export class ShowPostsService {
         equalTo: show['$key']
       }})
       .map(posts => {
-        console.log('POSTS', posts, show);
         return posts.sort((a, b) => a.show.index - b.show.index);
       });
   }

@@ -4,10 +4,8 @@ import {UserService} from '../shared/user.service';
 import {Observable} from 'rxjs/Observable';
 import {SessionService} from '../../core/firebase/session.service';
 import {MdSnackBar} from '@angular/material';
-import {MdDialog} from '@angular/material';
 import {Router} from '@angular/router';
 import {Post} from '../../post/shared/post.model';
-import {SubmitDialogComponent} from '../../shared/submit-dialog/submit-dialog.component';
 import {DialogService} from "../../shared/dialog.service";
 
 @Component({
