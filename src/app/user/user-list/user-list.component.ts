@@ -4,7 +4,7 @@ import {User} from '../shared/user.model';
 import {Observable} from 'rxjs/Observable';
 import {MdSnackBar} from '@angular/material';
 import {SessionService} from '../../core/firebase/session.service';
-import {Registration, RegistrationService} from '../../core/firebase/registration.service';
+import {Registration, RegistrationService} from '../shared/registration.service';
 
 @Component({
   selector: 'app-user-list',

@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import {AngularFire, FirebaseAuthState} from 'angularfire2';
 import {Observable} from 'rxjs/Observable';
 import {Observer} from 'rxjs/Observer';
-import {ObjectCache} from './ObjectCache';
-import {User, USERS_RESOURCE_PATH} from '../../user/shared/user.model';
+import {ObjectRef} from '../../core/firebase/ObjectRef';
+import {User, USERS_RESOURCE_PATH} from './user.model';
 
 export class Registration {
   name: string;
@@ -19,7 +19,7 @@ export class RegistrationService {
 
   public register(registration: Registration): Observable<any> {
 
-    const userRef: ObjectCache<User> = new ObjectCache<User>(this.af.database);
+    const userRef: ObjectRef<User> = new ObjectRef<User>(this.af.database, USERS_RESOURCE_PATH);
     const user: User = User.newDefault();
     user.name = registration.name;
     user.email = registration.email;
@@ -37,7 +37,7 @@ export class RegistrationService {
       ).then(
         (createUserResult: FirebaseAuthState) => {
           user.uid = createUserResult.uid;
-          userRef.add(USERS_RESOURCE_PATH, createUserResult.uid, user).subscribe(
+          userRef.add(createUserResult.uid, user).subscribe(
             (userAddResult) => {
               observer.next(userAddResult);
               observer.complete();

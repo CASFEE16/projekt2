@@ -9,6 +9,8 @@ import {CoreModule} from '../core/core.module';
 import {RouterModule} from '@angular/router';
 import {USER_ROUTE_CONFIG} from './user-route-config';
 import {SharedModule} from '../shared/shared.module';
+import {RegisterComponent} from './register/register.component';
+import {UserMenuComponent} from './user-menu/user-menu.component';
 
 @NgModule({
   imports: [
@@ -19,6 +21,18 @@ import {SharedModule} from '../shared/shared.module';
     SharedModule,
     RouterModule.forChild(USER_ROUTE_CONFIG)
   ],
-  declarations: [UserListComponent, UserComponent, UserDetailsComponent]
+  declarations: [
+    UserListComponent,
+    UserComponent,
+    UserDetailsComponent,
+    RegisterComponent,
+    UserMenuComponent
+  ],
+  exports: [
+    UserMenuComponent
+  ],
+  entryComponents: [
+    UserMenuComponent
+  ]
 })
 export class UserModule { }

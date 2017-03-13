@@ -4,7 +4,7 @@ import {SessionService} from '../../core/firebase/session.service';
 import {Show, SHOWS_RESOURCE_PATH} from './show.model';
 import {Observable} from 'rxjs/Observable';
 import {DateUtils} from '../../shared/DateUtils';
-import {ListCache} from '../../core/firebase/ListCache';
+import {ListRef} from '../../core/firebase/ListRef';
 import {Post} from '../../post/shared/post.model';
 import {ShowPostsService} from './show-posts.service';
 import {ModelFactory} from "../../core/firebase/model";
@@ -17,9 +17,11 @@ export interface ShowWithPosts {
 @Injectable()
 export class ShowListService {
 
-  private listCache: ListCache<Show> = new ListCache<Show>();
+  private listCache: ListRef<Show> = null;
 
-  constructor(private backend: BackendService, private session: SessionService, private showPostsService: ShowPostsService) { }
+  constructor(private backend: BackendService, private session: SessionService) {
+    this.listCache = new ListRef<Show>(this.backend.database(), SHOWS_RESOURCE_PATH);
+  }
 
   public newDefault(): Show {
     const show: Show = Show.newDefault();
@@ -31,7 +33,7 @@ export class ShowListService {
   }
 
   public findUpcoming(): Observable<Show[]> {
-    return this.listCache.find(this.backend.database(), SHOWS_RESOURCE_PATH, {
+    return this.listCache.find({
       query: {
         limitToLast: 10,
         orderByChild: 'date',
@@ -39,21 +41,8 @@ export class ShowListService {
       }}).map(each => this.map(each));
   }
 
-  /*
-  public findFront(): Observable<ShowWithPosts[]> {
-    return this.findUpcoming().flatMap(shows => {
-      return Observable.of(
-        shows.map(show => {
-          const posts: Observable<Post[]> = this.showPostsService.findPostsForShow(show);
-          return {show: show, posts: posts};
-        })
-      );
-    });
-  }
-  */
-
   public findAll(): Observable<Show[]> {
-    return this.listCache.find(this.backend.database(), SHOWS_RESOURCE_PATH, {
+    return this.listCache.find({
       query: {
         limitToLast: 100,
         orderByChild: 'sortKey'
@@ -61,8 +50,7 @@ export class ShowListService {
   }
 
   map(list: Show[]): Show[] {
-    const newList: Show[] = list.map(each => ModelFactory.toClass(Show, each));
-    return newList;
+    return list.map(each => ModelFactory.toClass(Show, each));
   }
 
   public add(show: Show): Observable<Show> {

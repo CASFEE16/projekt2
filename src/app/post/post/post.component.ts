@@ -2,7 +2,7 @@ import {Component, OnInit, Input} from '@angular/core';
 import {Post} from '../shared/post.model';
 import {Observable} from 'rxjs/Observable';
 import {MdSnackBarConfig, MdSnackBar, MdDialog} from '@angular/material';
-import {PostService} from '../shared/post.service';
+import {PostListService} from '../shared/post-list.service';
 import {SessionService} from '../../core/firebase/session.service';
 import {Show} from '../../show/shared/show.model';
 import {PostShowListEntry} from '../shared/post-show.model';
@@ -27,7 +27,7 @@ export class PostComponent implements OnInit {
 
   constructor(
     public postUtils: PostUtils,
-    private postService: PostService,
+    private postService: PostListService,
     private sessionService: SessionService,
     private dialogService: DialogService,
     private snackbar: MdSnackBar) { }

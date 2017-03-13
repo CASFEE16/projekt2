@@ -5,36 +5,50 @@ import {BackendService} from '../../core/firebase/backend.service';
 import {FirebaseListObservable} from 'angularfire2';
 import {SessionService} from '../../core/firebase/session.service';
 import {DateUtils} from '../../shared/DateUtils';
-import {ListCache} from '../../core/firebase/ListCache';
+import {ListRef} from '../../core/firebase/ListRef';
 import {ContentService} from '../../core/content/content.service';
 import {TraceService} from '../../core/trace/trace.service';
 import {PostShowListEntry} from './post-show.model';
 import {ModelFactory} from "../../core/firebase/model";
 
 @Injectable()
-export class PostService {
+export class PostListService {
 
-  private listCache: ListCache<Post> = new ListCache<Post>();
+  private listCache: ListRef<Post> = new ListRef<Post>();
 
   constructor(
     private trace: TraceService,
     private backend: BackendService,
     private session: SessionService,
-    private content: ContentService) { }
+    private content: ContentService) {
 
-  public findFront(): Observable<PostShowListEntry[]> {
-    return this.listCache.find(this.backend.database(), POSTS_RESOURCE_PATH, {
+    this.listCache = new ListRef<Post>(this.backend.database(), POSTS_RESOURCE_PATH);
+  }
+
+  public findLast(count = 100): Observable<PostShowListEntry[]> {
+    return this.listCache.find({
       query: {
-        limitToLast: 100,
+        limitToLast: count,
         orderByChild: 'sortKey'
       }}).map(posts => {
           return posts.map(post => {
-              // TODO: Get Show from Firebase this.backend.database.object(...)
               return {post: ModelFactory.toClass(Post, post), show: null};
             }
           );
         }
       );
+  }
+
+  public findQuery(query: any): Observable<PostShowListEntry[]> {
+    return this.listCache.find({
+      query: query
+    }).map(posts => {
+        return posts.map(post => {
+            return {post: ModelFactory.toClass(Post, post), show: null};
+          }
+        );
+      }
+    );
   }
 
   public add(post: Post): Observable<Post> {

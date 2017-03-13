@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {BackendService} from '../../core/firebase/backend.service';
 import {SessionService} from '../../core/firebase/session.service';
 import {Observable} from 'rxjs/Observable';
-import {ObjectCache} from '../../core/firebase/ObjectCache';
+import {ObjectRef} from '../../core/firebase/ObjectRef';
 import {SHOWS_RESOURCE_PATH, Show} from '../shared/show.model';
 import {Post, POSTS_RESOURCE_PATH} from '../../post/shared/post.model';
 import {ModelFactory} from '../../core/firebase/model';
@@ -11,10 +11,10 @@ import {TraceService} from '../../core/trace/trace.service';
 @Injectable()
 export class ShowDetailsService {
 
-  private object: ObjectCache<Show> = null;
+  private object: ObjectRef<Show> = null;
 
   constructor(private backend: BackendService, private session: SessionService, private trace: TraceService) {
-    this.object = new ObjectCache<Show>(backend.database());
+    this.object = new ObjectRef<Show>(backend.database());
   }
 
   public get(id: string): Observable<Show> {
@@ -40,7 +40,7 @@ export class ShowDetailsService {
   }
 
   public updatePost(post: Post, data: any): Observable<Post> {
-    const obj: ObjectCache<Post> = new ObjectCache<Post>(this.backend.database());
+    const obj: ObjectRef<Post> = new ObjectRef<Post>(this.backend.database());
     return obj.getId(POSTS_RESOURCE_PATH, post['$key'])
       .first()
       .do(each => console.log('X UPDATE', post, data))

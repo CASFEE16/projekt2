@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {BackendService} from '../../core/firebase/backend.service';
 import {SessionService} from '../../core/firebase/session.service';
 import {Show, SHOWS_RESOURCE_PATH} from './show.model';
-import {ObjectCache} from '../../core/firebase/ObjectCache';
+import {ObjectRef} from '../../core/firebase/ObjectRef';
 import {ShowPostsService} from './show-posts.service';
 import {Observable} from 'rxjs/Observable';
 
@@ -10,13 +10,13 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class ShowService {
 
-  private objectRef: ObjectCache<Show>;
+  private objectRef: ObjectRef<Show>;
 
   constructor(
       private backend: BackendService,
       private session: SessionService,
       private showPostsService: ShowPostsService) {
-    this.objectRef = new ObjectCache<Show>(backend.database());
+    this.objectRef = new ObjectRef<Show>(backend.database());
   }
 
   public delete(show: Show): Observable<Show> {

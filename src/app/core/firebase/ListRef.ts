@@ -1,16 +1,22 @@
 import {FirebaseListObservable, AngularFireDatabase} from 'angularfire2';
 import {Observable} from 'rxjs/Observable';
 import {Observer} from 'rxjs/Observer';
+import {DatabaseRef} from "./DatabaseRef";
 
-export class ListCache<T> {
+/*
+ * Wrapper class for FirebaseListObservable, which responds Observables instead of Promises for most operations.
+ *
+ */
+export class ListRef<T> extends DatabaseRef {
 
   list: FirebaseListObservable<T[]> = null;
 
-  constructor() {
+  constructor(afDatabase?: AngularFireDatabase, resource?: string) {
+    super(afDatabase, resource);
   }
 
-  public find(afDatabase: AngularFireDatabase, resource: string, options?: any): FirebaseListObservable<T[]> {
-    this.list = afDatabase.list(resource, options);
+  public find(options?: any): FirebaseListObservable<T[]> {
+    this.list = this.afDatabase.list(this.resource, options);
     return this.list;
   }
 

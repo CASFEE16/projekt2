@@ -3,7 +3,7 @@ import {BackendService} from '../../core/firebase/backend.service';
 import {Show} from './show.model';
 import {Observable} from 'rxjs/Observable';
 import {Post, POSTS_RESOURCE_PATH} from '../../post/shared/post.model';
-import {ObjectCache} from "../../core/firebase/ObjectCache";
+import {ObjectRef} from "../../core/firebase/ObjectRef";
 
 export interface ShowWithPosts {
   show: Show;

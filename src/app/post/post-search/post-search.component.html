@@ -14,12 +14,21 @@
             </div>
           </div>
           <div>
-            <md-radio-group name="type" [(ngModel)]="search.type">
+            <md-radio-group name="type" [(ngModel)]="search.type" (ngModelChange)="onTypeChanged($event)">
               <md-radio-button *ngFor="let t of typeList" [value]="t.value">{{t.label}} </md-radio-button>
             </md-radio-group>
           </div>
         </div>
     </form>
   </md-card>
+
+  <md-spinner *ngIf="loading"></md-spinner>
+
+  <div class="post-list">
+    <div *ngFor="let each of posts | async">
+      <app-post [each]="each" [shows]="shows">
+      </app-post>
+    </div>
+  </div>
 
 </div>

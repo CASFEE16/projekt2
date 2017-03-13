@@ -9,6 +9,7 @@ import {SharedModule} from '../shared/shared.module';
 import { PostComponent } from './post/post.component';
 import { PostAirComponent } from './post-air/post-air.component';
 import {PostUtils} from './shared/post-utils.service';
+import {SearchComponent} from "./post-search/post-search.component";
 
 @NgModule({
   imports: [
@@ -22,9 +23,10 @@ import {PostUtils} from './shared/post-utils.service';
     PostFrontComponent,
     SafePipe,
     PostComponent,
-    PostAirComponent
+    PostAirComponent,
+    SearchComponent
   ],
-  exports: [PostFrontComponent, PostAirComponent],
+  exports: [PostFrontComponent, PostAirComponent, SearchComponent],
   providers: [PostUtils]
 })
 export class PostModule { }

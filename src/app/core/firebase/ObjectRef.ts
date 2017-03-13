@@ -1,32 +1,32 @@
 import {FirebaseListObservable, AngularFireDatabase, FirebaseObjectObservable} from 'angularfire2';
 import {Observable} from 'rxjs/Observable';
 import {Observer} from 'rxjs/Observer';
+import {DatabaseRef} from "./DatabaseRef";
 
 /*
  * Wrapper class for FirebaseObjectObservable, which responds Observables instead of Promises for most operations.
  *
  */
-export class ObjectCache<T> {
+export class ObjectRef<T> extends DatabaseRef {
 
   object: FirebaseObjectObservable<T> = null;
-  afDatabase: AngularFireDatabase = null;
 
-  constructor(afDatabase?: AngularFireDatabase) {
-    this.afDatabase = afDatabase;
+  constructor(afDatabase?: AngularFireDatabase, resource?: string) {
+    super(afDatabase, resource);
   }
 
-  public get(resource: string, options?: any): Observable<T> {
-    this.object = this.afDatabase.object(resource, options);
+  public get(options?: any): Observable<T> {
+    this.object = this.afDatabase.object(this.resource, options);
     return this.object;
   }
 
-  public getId(resource: string, id: string, options?: any): Observable<T> {
-    this.object = this.afDatabase.object(resource + '/' + id, options);
+  public getId(id: string, options?: any): Observable<T> {
+    this.object = this.afDatabase.object(this.resource + '/' + id, options);
     return this.object;
   }
 
-  public add(resource: string, id: string, obj: T): Observable<T> {
-    this.object = this.afDatabase.object(`${resource}/${id}`);
+  public add(id: string, obj: T): Observable<T> {
+    this.object = this.afDatabase.object(`${this.resource}/${id}`);
     return Observable.create((observer: Observer<T>) => {
       return this.object.set(obj)
         .catch(error => observer.error(error))

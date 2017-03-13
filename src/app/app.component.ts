@@ -1,7 +1,7 @@
 import {Component, OnInit, HostListener, Inject, ViewChild, ElementRef} from '@angular/core';
 import {SessionService, ISessionEvent} from './core/firebase/session.service';
 import {MdDialog, MdSidenav, MdSidenavToggleResult, MdSidenavContainer} from '@angular/material';
-import {UserMenuComponent} from './front/user-menu/user-menu.component';
+import {UserMenuComponent} from './user/user-menu/user-menu.component';
 import {TraceService} from './core/trace/trace.service';
 import {Router} from '@angular/router';
 import {EventService, IEvent} from './core/event/event.service';

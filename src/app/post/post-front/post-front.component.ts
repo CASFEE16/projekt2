@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {PostService} from '../shared/post.service';
+import {PostListService} from '../shared/post-list.service';
 import {Observable} from 'rxjs/Observable';
 import {Post, PostTypes, PostType, ContentDetector} from '../shared/post.model';
 import {MdSnackBar, MdSnackBarConfig, MdDialog} from '@angular/material';
@@ -14,7 +14,7 @@ import {DialogService} from "../../shared/dialog.service";
   selector: 'app-post-front',
   templateUrl: './post-front.component.html',
   styleUrls: ['./post-front.component.css'],
-  providers: [PostService, ShowListService]
+  providers: [PostListService, ShowListService]
 })
 export class PostFrontComponent implements OnInit {
 
@@ -28,7 +28,7 @@ export class PostFrontComponent implements OnInit {
   snackbarConfig: MdSnackBarConfig = new MdSnackBarConfig();
 
   constructor(
-    private postService: PostService,
+    private postService: PostListService,
     private showService: ShowListService,
     private sessionService: SessionService,
     private router: Router,
@@ -47,7 +47,7 @@ export class PostFrontComponent implements OnInit {
         this.shows = Observable.of(result);
       });
 
-    this.posts = this.postService.findFront()
+    this.posts = this.postService.findLast()
       .do(each => this.loading = false);
 
   }
