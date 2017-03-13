@@ -15,7 +15,7 @@ import {PostUtils} from '../../post/shared/post-utils.service';
 })
 export class ShowFrontComponent implements OnInit {
 
-  shows: Observable<ShowWithPosts[]> = null;
+  shows: Observable<Show[]> = null;
   loading = true;
   loggedIn: Observable<boolean>;
 
@@ -27,11 +27,8 @@ export class ShowFrontComponent implements OnInit {
 
   ngOnInit() {
     this.loggedIn = this.sessionService.watchLoggedIn();
-    this.shows = this.showService.findFront()
-      .do(each => this.loading = false)
-      .do(each => {
-          each.forEach(showWithPosts => showWithPosts.posts.do(eachPost => eachPost.sort((a, b) => a.show.index - b.show.index)));
-      });
+    this.shows = this.showService.findUpcoming()
+      .do(each => this.loading = false);
   }
 
   onEdit(obj: Show) {

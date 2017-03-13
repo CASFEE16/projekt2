@@ -39,6 +39,7 @@ export class ShowListService {
       }}).map(each => this.map(each));
   }
 
+  /*
   public findFront(): Observable<ShowWithPosts[]> {
     return this.findUpcoming().flatMap(shows => {
       return Observable.of(
@@ -49,6 +50,7 @@ export class ShowListService {
       );
     });
   }
+  */
 
   public findAll(): Observable<Show[]> {
     return this.listCache.find(this.backend.database(), SHOWS_RESOURCE_PATH, {
@@ -59,9 +61,7 @@ export class ShowListService {
   }
 
   map(list: Show[]): Show[] {
-    console.log('MAP', list);
     const newList: Show[] = list.map(each => ModelFactory.toClass(Show, each));
-    console.log('MAPNEW', newList);
     return newList;
   }
 

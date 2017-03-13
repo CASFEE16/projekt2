@@ -1,6 +1,4 @@
 export abstract class Model {
-  $key: string = null;
-  $exists: any = null;
 }
 
 export class ModelFactory {
@@ -8,7 +6,7 @@ export class ModelFactory {
     const newObj = Object.assign(new clazz(), json);
 
     // Make shure Angularfire properties are also copied
-    if (!newObj['$key']) {
+    if (!newObj['$key'] && json['$key']) {
       newObj['$key'] = json['$key'];
     }
 

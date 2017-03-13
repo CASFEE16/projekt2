@@ -8,6 +8,7 @@ import {MdDialog} from '@angular/material';
 import {Router} from '@angular/router';
 import {Post} from '../../post/shared/post.model';
 import {SubmitDialogComponent} from '../../shared/submit-dialog/submit-dialog.component';
+import {DialogService} from "../../shared/dialog.service";
 
 @Component({
   selector: 'app-user',
@@ -24,7 +25,7 @@ export class UserComponent implements OnInit {
     private userService: UserService,
     private sessionService: SessionService,
     private snackbar: MdSnackBar,
-    private dialog: MdDialog,
+    private dialogService: DialogService,
     private router: Router) { }
 
   ngOnInit() {
@@ -32,9 +33,8 @@ export class UserComponent implements OnInit {
   }
 
   onDelete(obj: User) {
-    const dialogRef = this.dialog.open(SubmitDialogComponent);
-    dialogRef.afterClosed().subscribe(dialogResult => {
-      if (dialogResult === 'ok') {
+    const dialogRef = this.dialogService.confirmDelete(obj.name).subscribe(dialogResult => {
+    if (dialogResult) {
         this.userService.delete(obj).subscribe(
           result => this.snackbar.open('User deleted', null, {duration: 5000}),
           error => this.snackbar.open(error.message, null, {duration: 5000})

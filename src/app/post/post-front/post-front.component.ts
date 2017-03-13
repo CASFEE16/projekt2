@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import {PostService} from '../shared/post.service';
 import {Observable} from 'rxjs/Observable';
 import {Post, PostTypes, PostType, ContentDetector} from '../shared/post.model';
-import {MdSnackBar, MdSnackBarConfig} from '@angular/material';
+import {MdSnackBar, MdSnackBarConfig, MdDialog} from '@angular/material';
 import {ShowListService} from '../../show/shared/show-list.service';
 import {Show} from '../../show/shared/show.model';
 import {SessionService} from '../../core/firebase/session.service';
 import {Router} from '@angular/router';
 import {PostShowListEntry} from '../shared/post-show.model';
+import {SubmitDialogComponent} from "../../shared/submit-dialog/submit-dialog.component";
+import {DialogService} from "../../shared/dialog.service";
 
 @Component({
   selector: 'app-post-front',
@@ -31,6 +33,7 @@ export class PostFrontComponent implements OnInit {
     private showService: ShowListService,
     private sessionService: SessionService,
     private router: Router,
+    private dialogService: DialogService,
     private snackbar: MdSnackBar) { }
 
   ngOnInit() {
@@ -68,10 +71,13 @@ export class PostFrontComponent implements OnInit {
     if (this.loading) {
       return;
     }
-    this.postService.delete(deletePost).subscribe(
-        result => this.snackbar.open('Post deleted', null, this.snackbarConfig),
-        error => this.snackbar.open(error.message, null, this.snackbarConfig)
-      );
+    const dialogRef = this.dialogService.confirmDelete(deletePost.text).subscribe(dialogResult => {
+      if (dialogResult) {
+        this.postService.delete(deletePost).subscribe(
+          result => this.snackbar.open('Post deleted', null, this.snackbarConfig),
+          error => this.snackbar.open(error.message, null, this.snackbarConfig)
+        );
+      }});
   }
 
   onEdit(editPost: Post) {

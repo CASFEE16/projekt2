@@ -7,6 +7,8 @@ import {MdSnackBar} from '@angular/material';
 import {Post} from '../../post/shared/post.model';
 import {ShowPostsService} from '../shared/show-posts.service';
 import {PostUtils} from '../../post/shared/post-utils.service';
+import {CanComponentDeactivate} from '../../shared/can-deactivate-guard.service';
+import {Observable} from 'rxjs/Observable';
 
 @Component({
   selector: 'app-show-edit',
@@ -14,7 +16,7 @@ import {PostUtils} from '../../post/shared/post-utils.service';
   styleUrls: ['show-details.component.css'],
   providers: [ShowDetailsService, ShowPostsService]
 })
-export class ShowDetailsComponent implements OnInit, OnDestroy {
+export class ShowDetailsComponent implements OnInit, OnDestroy, CanComponentDeactivate {
 
   show: Show = null;
   posts: Post[] = [];
@@ -40,6 +42,7 @@ export class ShowDetailsComponent implements OnInit, OnDestroy {
         // Only get the data we want to edit
         this.show.date = show.date;
         this.show.title = show.title;
+        this.show.description = show.description;
         this.showPostsService.findPostsForShow(show).take(1).subscribe(result => this.posts = result);
       });
     });
@@ -58,28 +61,24 @@ export class ShowDetailsComponent implements OnInit, OnDestroy {
 
   public onSubmit(event: Event) {
     event.preventDefault();
-
-    this.postsToRemove.forEach(
-      (each) =>
-        this.showDetailsService.removePost(each)
-          .subscribe(
-            (result) => this.snackbar.open('Post removed', null, {duration: 2000}),
-            (error) => this.snackbar.open(error.message, null, {duration: 2000})
-          )
-    );
-
-    this.showDetailsService.updatePosts(this.posts);
-
     this.showDetailsService.save(this.show)
       .subscribe(
         (result) => {
           this.snackbar.open('Show saved', null, {duration: 2000});
-          this.router.navigate(['/show']);
-          },
+          this.showDetailsService.updatePosts(this.posts, this.postsToRemove).subscribe(
+            (result) => {
+              this.snackbar.open('Posts updated', null, {duration: 2000});
+            },
+            (error) => {
+              this.snackbar.open(error.message, null, {duration: 2000});
+            },
+            () => {
+              // this.location.back();
+            }
+          );
+        },
         (error) => this.snackbar.open(error.message, null, {duration: 2000})
       );
-
-    this.location.back();
   }
 
   public onCancel() {
@@ -122,6 +121,17 @@ export class ShowDetailsComponent implements OnInit, OnDestroy {
       return 'post-removed';
     }
     return '';
+  }
+
+
+  public canDeactivate(): Observable<boolean> | boolean {
+    // Allow synchronous navigation (`true`) if no crisis or the crisis is unchanged
+    if (!this.dirty) {
+      return true;
+    }
+    // Otherwise ask the user with the dialog service and return its
+    // promise which resolves to true or false when the user decides
+    return this.dialog.confirm('Discard changes?');
   }
 
 }

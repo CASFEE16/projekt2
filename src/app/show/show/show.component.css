@@ -1,3 +1,27 @@
 table {
   margin: 2px 20px;
+  border-collapse: collapse;
+  width: 90%;
+}
+
+.post-actions {
+  position: relative;
+  top: 0;
+  right: 0;
+  display: flex;
+}
+
+.post-action {
+  min-width: 3em;
+  padding: 0px;
+}
+
+.small {
+  width: 1em;
+  height: 1em;
+  font-size: 1em;
+}
+
+tr:hover {
+  background-color: #cfd8dc;
 }

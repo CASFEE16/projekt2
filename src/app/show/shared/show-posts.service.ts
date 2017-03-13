@@ -3,6 +3,7 @@ import {BackendService} from '../../core/firebase/backend.service';
 import {Show} from './show.model';
 import {Observable} from 'rxjs/Observable';
 import {Post, POSTS_RESOURCE_PATH} from '../../post/shared/post.model';
+import {ObjectCache} from "../../core/firebase/ObjectCache";
 
 export interface ShowWithPosts {
   show: Show;
@@ -30,6 +31,14 @@ export class ShowPostsService {
         console.log('POSTS', posts, show);
         return posts.sort((a, b) => a.show.index - b.show.index);
       });
+  }
+
+  public removeFromShow(post: Post, show: Show): Observable<any> {
+    if (!show['$key']) {
+      return Observable.throw(new Error('Show has no key'));
+    }
+    post.show = {key: null, index: null};
+    return this.backend.update(POSTS_RESOURCE_PATH, post, {show_key: null, show: post.show});
   }
 
 }

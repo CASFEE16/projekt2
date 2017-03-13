@@ -10,6 +10,7 @@ import {SubmitDialogComponent} from '../../shared/submit-dialog/submit-dialog.co
 import {ShowPostsService} from '../shared/show-posts.service';
 import {PostUtils} from '../../post/shared/post-utils.service';
 import {ShowService} from '../shared/show.service';
+import {DialogService} from "../../shared/dialog.service";
 
 @Component({
   selector: 'app-show',
@@ -20,8 +21,10 @@ import {ShowService} from '../shared/show.service';
 export class ShowComponent implements OnInit {
 
   @Input() show: Show = null;
-  posts: Post[] = [];
+  @Input() live = false;
+  posts: Observable<Post[]> = null;
   loggedIn: Observable<boolean> = null;
+  postWithFocus: Post = null;
 
   constructor(
     private showService: ShowService,
@@ -29,32 +32,37 @@ export class ShowComponent implements OnInit {
     public  postUtils: PostUtils,
     private sessionService: SessionService,
     private snackbar: MdSnackBar,
-    private dialog: MdDialog,
+    private dialogService: DialogService,
     private router: Router) { }
 
   ngOnInit() {
     this.loggedIn = this.sessionService.watchLoggedIn();
-    this.showPostsService.findPostsForShow(this.show)
-      .take(1)
-      .subscribe(
-        result => {
-          console.log('RESULT', result);
-          this.posts = result;
-        },
-        error => {
-          console.log('ERROR', error);
-          this.snackbar.open(error.message, null, {duration: 5000});
-        }
-      );
+    this.onPostRefresh();
+  }
+
+  onPostRefresh() {
+    if (this.live) {
+      this.posts = this.showPostsService.findPostsForShow(this.show);
+    } else {
+      this.showPostsService.findPostsForShow(this.show)
+        .take(1)
+        .subscribe(
+          result => {
+            this.posts = Observable.of(result);
+          },
+          error => {
+            this.snackbar.open(error.message, null, {duration: 2000});
+          }
+        );
+    }
   }
 
   onDelete(obj: Show) {
-    const dialogRef = this.dialog.open(SubmitDialogComponent);
-    dialogRef.afterClosed().subscribe(dialogResult => {
-      if (dialogResult === 'ok') {
+    const dialogRef = this.dialogService.confirmDelete(obj.title).subscribe(dialogResult => {
+    if (dialogResult) {
         this.showService.delete(obj).subscribe(
-          result => this.snackbar.open('Show deleted', null, {duration: 5000}),
-          error => this.snackbar.open(error.message, null, {duration: 5000})
+          result => this.snackbar.open('Show deleted', null, {duration: 2000}),
+          error => this.snackbar.open(error.message, null, {duration: 2000})
         );
       }
     });
@@ -67,6 +75,43 @@ export class ShowComponent implements OnInit {
 
   onAir(obj: Show) {
     this.router.navigate(['/air', obj['$key']]);
+  }
+
+  onPostEdit(obj: Post) {
+    // this.router.navigate(['/post', editPost['$key']]);
+  }
+
+  onPostRemove(obj: Post) {
+    const dialogRef = this.dialogService.confirmDelete(obj.text).subscribe(dialogResult => {
+      if (dialogResult) {
+
+        this.showPostsService.removeFromShow(obj, this.show).subscribe(
+          result => {
+            if (!this.live) {
+              this.onPostRefresh();
+            }
+            this.snackbar.open('Post removed', null, {duration: 2000});
+          },
+          error => this.snackbar.open(error.message, null, {duration: 2000})
+        );
+      }
+    });
+  }
+
+  // TODO: What is the best way to show/hide elements on mouse enter/over?
+
+  onMouseEnter(obj: Post) {
+    if (this.sessionService.isLoggedIn()) {
+      this.postWithFocus = obj;
+    }
+  }
+
+  onMouseLeave(obj: Post) {
+    this.postWithFocus = null;
+  }
+
+  showPostActions(obj: Post) {
+    return this.postWithFocus === obj;
   }
 
 }

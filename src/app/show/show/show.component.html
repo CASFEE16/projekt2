@@ -7,8 +7,15 @@
   <md-card-content>
     <p>{{show.description}}</p>
     <table>
-      <tr *ngFor="let post of posts">
-        <td><md-icon>{{postUtils.getIcon(post)}}</md-icon></td><td>{{post.text}}</td>
+      <tr *ngFor="let post of posts | async" on-mouseenter='onMouseEnter(post)' on-mouseleave="onMouseLeave(post)">
+        <td><md-icon>{{postUtils.getIcon(post)}}</md-icon></td><td>{{post.text}}
+        </td>
+        <td>
+          <span class="post-actions" *ngIf="showPostActions(post)">
+            <button class="post-action" md-button (click)="onPostEdit(show)"><md-icon class="small">edit</md-icon></button>
+            <button class="post-action" md-button (click)="onPostRemove(show)"><md-icon class="small">clear</md-icon></button>
+          </span>
+        </td>
       </tr>
     </table>
   </md-card-content>

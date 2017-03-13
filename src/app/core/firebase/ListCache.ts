@@ -21,6 +21,8 @@ export class ListCache<T> {
         .then(result => {
           observer.next(result);
           observer.complete();
+        }, error => {
+          observer.error(error);
         });
     });
   }
@@ -32,6 +34,8 @@ export class ListCache<T> {
         .then(result => {
           observer.next(result);
           observer.complete();
+        }, error => {
+          observer.error(error);
         });
     });
   }
@@ -43,6 +47,8 @@ export class ListCache<T> {
         .then(result => {
           observer.next(result);
           observer.complete();
+        }, error => {
+          observer.error(error);
         });
     });
   }

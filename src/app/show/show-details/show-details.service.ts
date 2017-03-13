@@ -5,19 +5,20 @@ import {Observable} from 'rxjs/Observable';
 import {ObjectCache} from '../../core/firebase/ObjectCache';
 import {SHOWS_RESOURCE_PATH, Show} from '../shared/show.model';
 import {Post, POSTS_RESOURCE_PATH} from '../../post/shared/post.model';
-import {ModelFactory} from "../../core/firebase/model";
-
+import {ModelFactory} from '../../core/firebase/model';
+import {TraceService} from '../../core/trace/trace.service';
 
 @Injectable()
 export class ShowDetailsService {
 
   private object: ObjectCache<Show> = null;
 
-  constructor(private backend: BackendService, private session: SessionService) {
+  constructor(private backend: BackendService, private session: SessionService, private trace: TraceService) {
     this.object = new ObjectCache<Show>(backend.database());
   }
 
   public get(id: string): Observable<Show> {
+    this.trace.log('ShowDetailsService', 'get', id, this);
     return this.object.getId(SHOWS_RESOURCE_PATH, id)
       .map(obj => ModelFactory.toClass(Show, obj));
   }
@@ -30,35 +31,42 @@ export class ShowDetailsService {
   }
 
   public save(changes: any): Observable<Show> {
+    this.trace.log('ShowDetailsService', 'save', changes, this);
     return this.object.update(changes);
   }
 
   public removePost(post: Post): Observable<Post> {
+    return this.updatePost(post, {show: {key: null, index: null}});
+  }
+
+  public updatePost(post: Post, data: any): Observable<Post> {
     const obj: ObjectCache<Post> = new ObjectCache<Post>(this.backend.database());
-    return obj.getId(POSTS_RESOURCE_PATH, post['$key']).flatMap(
-      result => obj.update({show: {key: null, index: null}})
+    return obj.getId(POSTS_RESOURCE_PATH, post['$key'])
+      .first()
+      .do(each => console.log('X UPDATE', post, data))
+      .flatMap(
+        result => obj.update(data)
     );
   }
 
   // TODO: Find out how to do multiple or batch updates within one observable
-  public updatePosts(posts: Post[]): void {
+  public updatePosts(posts: Post[], postsToRemove: Post[]): Observable<Post> {
+
+    const updates: Observable<Post>[] = new Array();
+    postsToRemove.forEach(each => {
+      updates.push(this.removePost(each));
+    });
 
     let idx = 0;
-    posts.forEach(each => each.show.index = idx++);
-
-    const obj: ObjectCache<Post> = new ObjectCache<Post>(this.backend.database());
     posts.forEach(each => {
-      console.log(each.show);
-      obj.getId(POSTS_RESOURCE_PATH, each['$key']).subscribe(
-        getIdResult => {
-          obj.update({show: each.show}).subscribe(
-            updateResult => {},
-            error => console.log(error)
-          );
-        },
-         error => console.log(error)
-      );
+      if (postsToRemove.indexOf(each) < 0) {
+        each.show.index = idx++;
+        updates.push(this.updatePost(each, {show: each.show}));
+      }
     });
+
+    return Observable.merge(...updates);
+
   }
 
 }
