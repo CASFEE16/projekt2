@@ -1,12 +1,13 @@
 import {YoutubeUtils} from '../../core/youtube/YoutubeUtils';
 import {SpotifyUtils} from '../../core/spotify/SpotifyUtils';
+import {Model} from "../../core/firebase/model";
 
 export interface ShowRef {
   key: string;
   index: number;
 }
 
-export class Post {
+export class Post extends Model {
   text: string;
   content?: string;
   type?: PostType;

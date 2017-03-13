@@ -4,6 +4,7 @@ import {User, USERS_RESOURCE_PATH} from './user.model';
 import {DateUtils} from '../../shared/DateUtils';
 import {Observable} from 'rxjs/Observable';
 import {ListCache} from '../../core/firebase/ListCache';
+import {ModelFactory} from "../../core/firebase/model";
 
 @Injectable()
 export class UserService {
@@ -21,7 +22,7 @@ export class UserService {
   public findAll(): Observable<User[]> {
     return this.listCache
       .find(this.backend.database(), USERS_RESOURCE_PATH)
-      .map(list => list.map(each => Object.assign(new User(), each)));
+      .map(list => list.map(each => ModelFactory.toClass(User, each)));
   }
 
   public add(user: User): Observable<User> {

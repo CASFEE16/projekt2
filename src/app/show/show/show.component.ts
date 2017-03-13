@@ -38,9 +38,13 @@ export class ShowComponent implements OnInit {
       .take(1)
       .subscribe(
         result => {
+          console.log('RESULT', result);
           this.posts = result;
         },
-        error => this.snackbar.open(error.message, null, {duration: 5000})
+        error => {
+          console.log('ERROR', error);
+          this.snackbar.open(error.message, null, {duration: 5000});
+        }
       );
   }
 
@@ -57,6 +61,7 @@ export class ShowComponent implements OnInit {
   }
 
   onEdit(obj: Show) {
+    console.log('EDIT', obj);
     this.router.navigate(['/show', obj['$key']]);
   }
 

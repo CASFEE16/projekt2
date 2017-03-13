@@ -7,6 +7,7 @@ import {DateUtils} from '../../shared/DateUtils';
 import {ListCache} from '../../core/firebase/ListCache';
 import {Post} from '../../post/shared/post.model';
 import {ShowPostsService} from './show-posts.service';
+import {ModelFactory} from "../../core/firebase/model";
 
 export interface ShowWithPosts {
   show: Show;
@@ -58,7 +59,9 @@ export class ShowListService {
   }
 
   map(list: Show[]): Show[] {
-    const newList: Show[] = list.map(each => Object.assign(new Show(), each));
+    console.log('MAP', list);
+    const newList: Show[] = list.map(each => ModelFactory.toClass(Show, each));
+    console.log('MAPNEW', newList);
     return newList;
   }
 

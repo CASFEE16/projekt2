@@ -9,6 +9,7 @@ import {ListCache} from '../../core/firebase/ListCache';
 import {ContentService} from '../../core/content/content.service';
 import {TraceService} from '../../core/trace/trace.service';
 import {PostShowListEntry} from './post-show.model';
+import {ModelFactory} from "../../core/firebase/model";
 
 @Injectable()
 export class PostService {
@@ -29,7 +30,7 @@ export class PostService {
       }}).map(posts => {
           return posts.map(post => {
               // TODO: Get Show from Firebase this.backend.database.object(...)
-              return {post: Object.assign(new Post(), post), show: null};
+              return {post: ModelFactory.toClass(Post, post), show: null};
             }
           );
         }

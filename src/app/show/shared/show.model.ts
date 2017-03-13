@@ -1,6 +1,7 @@
 import {DateUtils} from '../../shared/DateUtils';
+import {Model} from "../../core/firebase/model";
 
-export class Show {
+export class Show extends Model {
   title: string;    // Title of the show
   description?: string; // Description
   user?: string;    // User who created the show

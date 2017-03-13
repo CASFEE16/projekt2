@@ -20,3 +20,4 @@ import 'zone.js/dist/zone';
 
 import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/take';
+import 'rxjs/add/observable/throw';

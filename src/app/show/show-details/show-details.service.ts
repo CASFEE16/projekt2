@@ -5,6 +5,7 @@ import {Observable} from 'rxjs/Observable';
 import {ObjectCache} from '../../core/firebase/ObjectCache';
 import {SHOWS_RESOURCE_PATH, Show} from '../shared/show.model';
 import {Post, POSTS_RESOURCE_PATH} from '../../post/shared/post.model';
+import {ModelFactory} from "../../core/firebase/model";
 
 
 @Injectable()
@@ -18,7 +19,7 @@ export class ShowDetailsService {
 
   public get(id: string): Observable<Show> {
     return this.object.getId(SHOWS_RESOURCE_PATH, id)
-      .map(obj => Object.assign(new Show(), obj));
+      .map(obj => ModelFactory.toClass(Show, obj));
   }
 
   public delete(show: Show): Observable<Show> {
