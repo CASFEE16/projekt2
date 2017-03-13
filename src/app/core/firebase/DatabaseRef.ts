@@ -7,7 +7,7 @@ export class DatabaseRef {
   resource: string = null;
   afDatabase: AngularFireDatabase = null;
 
-  constructor(afDatabase?: AngularFireDatabase, resource?: string) {
+  constructor(afDatabase: AngularFireDatabase, resource: string) {
     this.afDatabase = afDatabase;
     this.resource = resource;
   }

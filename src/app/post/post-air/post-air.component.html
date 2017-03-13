@@ -16,7 +16,7 @@
       <iframe *ngIf="postUtils.spotifyURL(post)" [src]="postUtils.spotifyURL(post) | safe"
               width="300" height="80" frameborder="0" allowtransparency="true"></iframe>
       <p *ngIf="postUtils.webURL(post)">
-        <a [href]="postUtils.webURL(post) | safe">{{post.text}}</a>
+        <a [href]="postUtils.webURL(post) | safe">{{post.content}}</a>
       </p>
     </md-card-content>
 

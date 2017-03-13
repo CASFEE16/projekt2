@@ -52,4 +52,23 @@ export class PostFrontComponent implements OnInit {
 
   }
 
+  onSubmit(event: Event) {
+    event.preventDefault();
+    if (this.loading) {
+      return;
+    }
+    this.postService.add(this.post).subscribe(
+      result => {
+        this.snackbar.open('Post added', null, this.snackbarConfig);
+        this.post = new Post();
+      },
+      error => this.snackbar.open(error.message, null, this.snackbarConfig)
+    );
+  }
+
+  onTextChanged(event: string) {
+    if (this.loading) return;
+    this.post.type = this.contentDetector.getType(event);
+  }
+
 }

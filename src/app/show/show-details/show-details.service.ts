@@ -14,12 +14,12 @@ export class ShowDetailsService {
   private object: ObjectRef<Show> = null;
 
   constructor(private backend: BackendService, private session: SessionService, private trace: TraceService) {
-    this.object = new ObjectRef<Show>(backend.database());
+    this.object = new ObjectRef<Show>(backend.database(), SHOWS_RESOURCE_PATH);
   }
 
   public get(id: string): Observable<Show> {
     this.trace.log('ShowDetailsService', 'get', id, this);
-    return this.object.getId(SHOWS_RESOURCE_PATH, id)
+    return this.object.getId(id)
       .map(obj => ModelFactory.toClass(Show, obj));
   }
 

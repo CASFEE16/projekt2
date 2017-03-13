@@ -9,6 +9,10 @@ tr {
   padding: 5px;
 }
 
+tr:hover {
+  background-color: #cfd8dc;
+}
+
 td {
   padding: 0px 10px;
 }
