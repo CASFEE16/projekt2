@@ -6,6 +6,7 @@ import {LoginComponent} from './login/login.component';
 import {FormsModule} from '@angular/forms';
 import {PostModule} from '../post/post.module';
 import {ShowModule} from '../show/show.module';
+import {HomeComponent} from './home/home.component';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import {ShowModule} from '../show/show.module';
   ],
   declarations: [
     AboutComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent
   ],
   exports: [
     AboutComponent

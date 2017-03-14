@@ -6,16 +6,24 @@
           <div class="search-entry">
             <div class="search-form-text">
               <md-input-container class="search-input">
-                <input mdInput type="text" name="Text" [(ngModel)]="search.text" (ngModelChange)="onTextChanged($event)">
+                <input mdInput type="text" name="Text" placeholder="Search title"
+                       [(ngModel)]="search.text" (ngModelChange)="onTextChanged($event)">
               </md-input-container>
             </div>
             <div class="search-form-button">
               <button md-fab><md-icon>search</md-icon></button>
             </div>
           </div>
-          <div>
+          <div class="radio-group">
             <md-radio-group name="type" [(ngModel)]="search.type" (ngModelChange)="onTypeChanged($event)">
               <md-radio-button *ngFor="let t of typeList" [value]="t.value">{{t.label}} </md-radio-button>
+            </md-radio-group>
+          </div>
+          <div class="radio-group">
+            <md-radio-group name="state" [(ngModel)]="search.state" (ngModelChange)="onStateChanged($event)">
+              <md-radio-button value="all">All</md-radio-button>
+              <md-radio-button value="scheduled">Scheduled</md-radio-button>
+              <md-radio-button value="notscheduled">Not scheduled</md-radio-button>
             </md-radio-group>
           </div>
         </div>

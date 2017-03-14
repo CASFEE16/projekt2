@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import {AngularFire, AngularFireDatabase} from 'angularfire2';
 import {Observable} from 'rxjs/Observable';
-import {ObjectRef} from "./ObjectRef";
-import {ListRef} from "./ListRef";
+import {ObjectRef} from './ObjectRef';
+import {ListRef} from './ListRef';
 
 @Injectable()
 export class BackendService {

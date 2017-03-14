@@ -8,7 +8,7 @@ import {Show} from '../../show/shared/show.model';
 import {SessionService} from '../../core/firebase/session.service';
 import {Router} from '@angular/router';
 import {PostShowListEntry} from '../shared/post-show.model';
-import {DialogService} from "../../shared/dialog.service";
+import {DialogService} from '../../shared/dialog.service';
 
 @Component({
   selector: 'app-post-front',
@@ -42,7 +42,7 @@ export class PostFrontComponent implements OnInit {
     this.snackbarConfig.duration = 5000;
     this.loggedIn = this.sessionService.watchLoggedIn();
 
-    this.showService.findUpcoming()
+    this.showService.findAll()
       .subscribe(result => {
         this.shows = Observable.of(result);
       });
@@ -67,7 +67,9 @@ export class PostFrontComponent implements OnInit {
   }
 
   onTextChanged(event: string) {
-    if (this.loading) return;
+    if (this.loading) {
+      return;
+    }
     this.post.type = this.contentDetector.getType(event);
   }
 

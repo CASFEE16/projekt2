@@ -1,6 +1,6 @@
 import {YoutubeUtils} from '../../core/youtube/YoutubeUtils';
 import {SpotifyUtils} from '../../core/spotify/SpotifyUtils';
-import {Model} from "../../core/firebase/model";
+import {Model} from '../../core/firebase/model';
 
 export interface ShowRef {
   key: string;

@@ -6,12 +6,12 @@ import {MdDialogRef} from '@angular/material';
   templateUrl: 'confirm-dialog.component.html',
   styleUrls: ['confirm-dialog.component.css']
 })
-export class ConfirmDialog implements OnInit {
+export class ConfirmDialogComponent implements OnInit {
 
   public title: string;
   public message: string;
 
-  constructor(public dialogRef: MdDialogRef<ConfirmDialog>) { }
+  constructor(public dialogRef: MdDialogRef<ConfirmDialogComponent>) { }
 
   ngOnInit() {
   }

@@ -9,7 +9,7 @@ import {ShowPostsService} from '../shared/show-posts.service';
 import {PostUtils} from '../../post/shared/post-utils.service';
 import {CanComponentDeactivate} from '../../shared/can-deactivate-guard.service';
 import {Observable} from 'rxjs/Observable';
-import {DialogService} from "../../shared/dialog.service";
+import {DialogService} from '../../shared/dialog.service';
 
 @Component({
   selector: 'app-show-edit',
@@ -68,7 +68,7 @@ export class ShowDetailsComponent implements OnInit, OnDestroy, CanComponentDeac
         (result) => {
           this.snackbar.open('Show saved', null, {duration: 2000});
           this.showDetailsService.updatePosts(this.posts, this.postsToRemove).subscribe(
-            (result) => {
+            (updatePostsResult) => {
               this.snackbar.open('Posts updated', null, {duration: 2000});
             },
             (error) => {

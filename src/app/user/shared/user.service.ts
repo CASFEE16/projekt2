@@ -4,7 +4,7 @@ import {User, USERS_RESOURCE_PATH} from './user.model';
 import {DateUtils} from '../../shared/DateUtils';
 import {Observable} from 'rxjs/Observable';
 import {ListRef} from '../../core/firebase/ListRef';
-import {ModelFactory} from "../../core/firebase/model";
+import {ModelFactory} from '../../core/firebase/model';
 
 @Injectable()
 export class UserService {

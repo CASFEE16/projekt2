@@ -6,7 +6,7 @@ import {SessionService} from '../../core/firebase/session.service';
 import {MdSnackBar} from '@angular/material';
 import {Router} from '@angular/router';
 import {Post} from '../../post/shared/post.model';
-import {DialogService} from "../../shared/dialog.service";
+import {DialogService} from '../../shared/dialog.service';
 
 @Component({
   selector: 'app-user',

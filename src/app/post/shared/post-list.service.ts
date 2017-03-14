@@ -9,7 +9,7 @@ import {ListRef} from '../../core/firebase/ListRef';
 import {ContentService} from '../../core/content/content.service';
 import {TraceService} from '../../core/trace/trace.service';
 import {PostShowListEntry} from './post-show.model';
-import {ModelFactory} from "../../core/firebase/model";
+import {ModelFactory} from '../../core/firebase/model';
 
 @Injectable()
 export class PostListService {

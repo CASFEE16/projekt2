@@ -7,7 +7,7 @@ import {SessionService} from '../../core/firebase/session.service';
 import {Show} from '../../show/shared/show.model';
 import {PostShowListEntry} from '../shared/post-show.model';
 import {PostUtils} from '../shared/post-utils.service';
-import {DialogService} from "../../shared/dialog.service";
+import {DialogService} from '../../shared/dialog.service';
 
 @Component({
   selector: 'app-post',
@@ -75,7 +75,7 @@ export class PostComponent implements OnInit {
     this.postService.setShow(post, showKey).subscribe(
       result => {
         console.log('PostService.onSelectShow', result);
-        this.snackbar.open('Post updated', null, this.snackbarConfig)
+        this.snackbar.open('Post updated', null, this.snackbarConfig);
         },
         error => this.snackbar.open(error.message, null, this.snackbarConfig)
     );

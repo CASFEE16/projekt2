@@ -1,35 +1,46 @@
 import { Component, OnInit } from '@angular/core';
 import {PostType, PostTypes, Post} from '../shared/post.model';
-import {PostListService} from "../shared/post-list.service";
+import {PostListService} from '../shared/post-list.service';
 import {Observable} from 'rxjs/Observable';
-import {PostShowListEntry} from "../shared/post-show.model";
+import {PostShowListEntry} from '../shared/post-show.model';
+import {Show} from '../../show/shared/show.model';
+import {ShowListService} from '../../show/shared/show-list.service';
 
 interface Search {
   text: string;
   type: PostType;
+  state: string;
 }
 
 @Component({
   selector: 'app-post-search',
   templateUrl: 'post-search.component.html',
   styleUrls: ['post-search.component.css'],
-  providers: [PostListService]
+  providers: [PostListService, ShowListService]
 })
 export class SearchComponent implements OnInit {
 
   search: Search;
   typeList: PostType[];
   posts: Observable<PostShowListEntry[]> = null;
+  shows: Observable<Show[]> = null;
   loading = false;
 
-  constructor(private postService: PostListService) { }
+  constructor(private postService: PostListService, private showService: ShowListService) { }
 
   ngOnInit() {
     this.search = {
       text: '',
-      type: PostType.Note
+      type: PostType.Note,
+      state: 'all'
     };
     this.typeList = PostTypes.list();
+
+    this.showService.findAll()
+      .subscribe(result => {
+        this.shows = Observable.of(result);
+      });
+
     this.onSubmit();
   }
 
@@ -38,6 +49,10 @@ export class SearchComponent implements OnInit {
   }
 
   onTypeChanged(event: any) {
+    this.onSubmit();
+  }
+
+  onStateChanged(event: any) {
     this.onSubmit();
   }
 
@@ -50,12 +65,23 @@ export class SearchComponent implements OnInit {
     })
       .do(each => this.loading = false)
       .first()
-      .map(result => this.filter(result));
+      .map(result => this.filterByState(this.filterByText(result)));
   }
 
-  filter(queryResult: PostShowListEntry[]): PostShowListEntry[] {
+  filterByText(queryResult: PostShowListEntry[]): PostShowListEntry[] {
     if (this.search.text) {
-      return queryResult.filter(each => each.post.text.indexOf(this.search.text) >= 0 ? true : false);
+      return queryResult.filter(each => each.post.text.toLowerCase().indexOf(this.search.text.toLowerCase()) >= 0 ? true : false);
+    }
+    return queryResult;
+  }
+
+  filterByState(queryResult: PostShowListEntry[]): PostShowListEntry[] {
+    if (this.search.state && this.search.state !== 'all') {
+      if (this.search.state === 'notscheduled') {
+        return queryResult.filter(each => !each.post.show || !each.post.show.key);
+      } else {
+        return queryResult.filter(each => each.post.show && each.post.show.key);
+      }
     }
     return queryResult;
   }

@@ -54,10 +54,9 @@ export class AppComponent implements OnInit {
   sidenavMode = 'over';
   sidenavOpened = false;
   sidenavOpenedByUser = false;
-
   sidenavRightShow = true;
-
   loggedIn: Observable<boolean> = null;
+  window: Window = null;
 
   get username(): string {
     return this.sessionService.username;
@@ -69,8 +68,10 @@ export class AppComponent implements OnInit {
     private trace: TraceService,
     private dialog: MdDialog,
     private router: Router,
-    @Inject('windowObject') private window: any,
-    private element: ElementRef) {}
+    @Inject('Window') window: any,
+    private element: ElementRef) {
+    this.window = window;
+  }
 
   ngOnInit() {
     // Register for all authentication events like login, logout

@@ -10,7 +10,7 @@ import {Post} from '../../post/shared/post.model';
 import {ShowPostsService} from '../shared/show-posts.service';
 import {PostUtils} from '../../post/shared/post-utils.service';
 import {ShowService} from '../shared/show.service';
-import {DialogService} from "../../shared/dialog.service";
+import {DialogService} from '../../shared/dialog.service';
 
 @Component({
   selector: 'app-show',
@@ -85,7 +85,7 @@ export class ShowComponent implements OnInit {
   }
 
   onPostRemove(obj: Post) {
-    const dialogRef = this.dialogService.confirm('Confirm', 'Remove ' + obj.text + '?').subscribe(dialogResult => {
+    const dialogRef = this.dialogService.confirm('Confirm', 'Remove "' + obj.text + '"?').subscribe(dialogResult => {
       if (dialogResult) {
         this.subscription =  this.showPostsService.removeFromShow(obj, this.show)
           .first()

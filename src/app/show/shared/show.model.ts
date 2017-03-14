@@ -1,5 +1,5 @@
 import {DateUtils} from '../../shared/DateUtils';
-import {Model} from "../../core/firebase/model";
+import {Model} from '../../core/firebase/model';
 
 export class Show extends Model {
   title: string;    // Title of the show

@@ -7,7 +7,7 @@ import {DateUtils} from '../../shared/DateUtils';
 import {ListRef} from '../../core/firebase/ListRef';
 import {Post} from '../../post/shared/post.model';
 import {ShowPostsService} from './show-posts.service';
-import {ModelFactory} from "../../core/firebase/model";
+import {ModelFactory} from '../../core/firebase/model';
 
 export interface ShowWithPosts {
   show: Show;
