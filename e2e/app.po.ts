@@ -1,11 +1,16 @@
 import { browser, element, by } from 'protractor';
 
 export class Projekt2Page {
-  navigateTo() {
-    return browser.get('/');
+
+  navigateTo(route: string) {
+    return browser.get(route);
   }
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+  getToolbarTitle() {
+    return element(by.className('toolbar-title')).getText();
+  }
+
+  getAboutHeader() {
+    return element(by.css('.about h1')).getText();
   }
 }
