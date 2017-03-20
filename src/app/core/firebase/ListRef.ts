@@ -1,7 +1,8 @@
-import {FirebaseListObservable, AngularFireDatabase} from 'angularfire2';
+import {FirebaseListObservable} from 'angularfire2';
 import {Observable} from 'rxjs/Observable';
 import {Observer} from 'rxjs/Observer';
 import {DatabaseRef} from './DatabaseRef';
+import {BackendService} from "./backend.service";
 
 /*
  * Wrapper class for FirebaseListObservable, which responds Observables instead of Promises for most operations.
@@ -11,12 +12,12 @@ export class ListRef<T> extends DatabaseRef {
 
   list: FirebaseListObservable<T[]> = null;
 
-  constructor(afDatabase?: AngularFireDatabase, resource?: string) {
-    super(afDatabase, resource);
+  constructor(backend?: BackendService, resource?: string) {
+    super(backend, resource);
   }
 
   public find(options?: any): FirebaseListObservable<T[]> {
-    this.list = this.afDatabase.list(this.resource, options);
+    this.list = this.backend.list(this.resource, options) as FirebaseListObservable<T[]>;
     return this.list;
   }
 

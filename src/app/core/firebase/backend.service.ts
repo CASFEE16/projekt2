@@ -1,19 +1,26 @@
 import { Injectable } from '@angular/core';
-import {AngularFire, AngularFireDatabase} from 'angularfire2';
+import {AngularFire, AngularFireDatabase, FirebaseAuthState} from 'angularfire2';
 import {Observable} from 'rxjs/Observable';
 import {ObjectRef} from './ObjectRef';
-import {ListRef} from './ListRef';
 
 @Injectable()
 export class BackendService {
 
+  public get events(): Observable<any> {
+    return this.af.auth;
+  }
+
   constructor(private af: AngularFire) { }
 
-  public database(): AngularFireDatabase {
+  private database(): AngularFireDatabase {
     return this.af.database;
   }
 
   public list(resource: string, options?: any): Observable<any> {
+    return this.database().list(resource, options);
+  }
+
+  public object(resource: string, options?: any): Observable<any> {
     return this.database().list(resource, options);
   }
 
@@ -22,11 +29,27 @@ export class BackendService {
   }
 
   public update(resource: string, obj: any, data: any): Observable<any> {
-    const objRef = new ObjectRef<any>(this.af.database);
+    const objRef = new ObjectRef<any>(this);
     return objRef.getId(resource, obj['$key']).flatMap(
       (result) => {
         return objRef.update(data);
       });
+  }
+
+  public login(config?: any): firebase.Promise<FirebaseAuthState> {
+    return this.af.auth.login(config);
+  }
+
+  public loginCredentials(credentials: any, options?: any): firebase.Promise<FirebaseAuthState> {
+    return this.af.auth.login(credentials, options);
+  }
+
+  public logout(): Promise<void> {
+    return this.af.auth.logout();
+  }
+
+  public createUser(credentials: any): firebase.Promise<FirebaseAuthState> {
+    return this.af.auth.createUser(credentials);
   }
 
 }

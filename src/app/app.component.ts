@@ -1,4 +1,4 @@
-import {Component, OnInit, HostListener, Inject, ViewChild, ElementRef} from '@angular/core';
+import {Component, OnInit, OnDestroy, HostListener, Inject, ViewChild, ElementRef} from '@angular/core';
 import {SessionService, ISessionEvent} from './core/firebase/session.service';
 import {MdDialog, MdSidenav, MdSidenavToggleResult, MdSidenavContainer} from '@angular/material';
 import {UserMenuComponent} from './user/user-menu/user-menu.component';
@@ -6,6 +6,7 @@ import {TraceService} from './core/trace/trace.service';
 import {Router} from '@angular/router';
 import {EventService, IEvent} from './core/event/event.service';
 import {Observable} from 'rxjs/Observable';
+import {Subscription} from 'rxjs/Subscription';
 
 export interface NavLink {
   link: string;
@@ -18,7 +19,7 @@ export interface NavLink {
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
 
   navLinks: NavLink[] = [
     {
@@ -57,6 +58,7 @@ export class AppComponent implements OnInit {
   sidenavRightShow = true;
   loggedIn: Observable<boolean> = null;
   window: Window = null;
+  sessionSubscription: Subscription = null;
 
   get username(): string {
     return this.sessionService.username;
@@ -64,7 +66,6 @@ export class AppComponent implements OnInit {
 
   constructor(
     private sessionService: SessionService,
-    private eventService: EventService,
     private trace: TraceService,
     private dialog: MdDialog,
     private router: Router,
@@ -75,11 +76,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     // Register for all authentication events like login, logout
-    this.sessionService.event.subscribe(
+    this.sessionSubscription = this.sessionService.event.subscribe(
       (event) => this.handleSessionEvent(event)
-    );
-    this.eventService.event.subscribe(
-      (event) => this.handleAppEvent(event)
     );
     this.loggedIn = this.sessionService.watchLoggedIn();
     this.updateForWidth(this.window.innerWidth);
@@ -91,7 +89,12 @@ export class AppComponent implements OnInit {
         cnt[0].style.overflow = 'hidden';
       }
     }
+  }
 
+  ngOnDestroy() {
+    if (this.sessionSubscription) {
+      this.sessionSubscription.unsubscribe();
+    }
   }
 
   @HostListener('window:resize', ['$event'])
@@ -127,14 +130,6 @@ export class AppComponent implements OnInit {
       this.sidenav.close();
     }
 
-  }
-
-  handleAppEvent(event: IEvent) {
-    if (event.name === 'SidenavRight') {
-      if (event.data === true) {
-        this.sidenavRightShow = (event.data === true);
-      }
-    }
   }
 
   // About Toolbar etc on authentication event

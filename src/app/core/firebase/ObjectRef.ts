@@ -2,6 +2,7 @@ import {FirebaseListObservable, AngularFireDatabase, FirebaseObjectObservable} f
 import {Observable} from 'rxjs/Observable';
 import {Observer} from 'rxjs/Observer';
 import {DatabaseRef} from './DatabaseRef';
+import {BackendService} from "./backend.service";
 
 /*
  * Wrapper class for FirebaseObjectObservable, which responds Observables instead of Promises for most operations.
@@ -11,22 +12,22 @@ export class ObjectRef<T> extends DatabaseRef {
 
   object: FirebaseObjectObservable<T> = null;
 
-  constructor(afDatabase?: AngularFireDatabase, resource?: string) {
-    super(afDatabase, resource);
+  constructor(backend?: BackendService, resource?: string) {
+    super(backend, resource);
   }
 
   public get(options?: any): Observable<T> {
-    this.object = this.afDatabase.object(this.resource, options);
+    this.object = this.backend.object(this.resource, options) as FirebaseObjectObservable<T>;
     return this.object;
   }
 
   public getId(id: string, options?: any): Observable<T> {
-    this.object = this.afDatabase.object(this.resource + '/' + id, options);
+    this.object = this.backend.object(this.resource + '/' + id, options) as FirebaseObjectObservable<T>;
     return this.object;
   }
 
   public add(id: string, obj: T): Observable<T> {
-    this.object = this.afDatabase.object(`${this.resource}/${id}`);
+    this.object = this.backend.object(`${this.resource}/${id}`)  as FirebaseObjectObservable<T>;
     return Observable.create((observer: Observer<T>) => {
       return this.object.set(obj)
         .catch(error => observer.error(error))

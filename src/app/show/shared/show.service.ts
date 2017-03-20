@@ -16,7 +16,7 @@ export class ShowService {
       private backend: BackendService,
       private session: SessionService,
       private showPostsService: ShowPostsService) {
-    this.objectRef = new ObjectRef<Show>(backend.database());
+    this.objectRef = new ObjectRef<Show>(backend);
   }
 
   public delete(show: Show): Observable<Show> {

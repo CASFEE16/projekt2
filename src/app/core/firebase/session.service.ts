@@ -5,6 +5,7 @@ import {ReplaySubject} from 'rxjs/ReplaySubject';
 import {Observer} from 'rxjs/Observer';
 import {Observable} from 'rxjs/Observable';
 import {TraceService} from '../trace/trace.service';
+import {BackendService} from "./backend.service";
 
 export interface ISessionEvent {
   name: string;
@@ -19,16 +20,16 @@ export interface ISessionEvent {
 @Injectable()
 export class SessionService {
 
-  private _user: firebase.User = null;
-  private _state: FirebaseAuthState = null;
-  private _started = false;
+  protected _user: firebase.User = null;
+  protected _state: FirebaseAuthState = null;
+  protected _started = false;
   public event: ReplaySubject<ISessionEvent> = new ReplaySubject();
 
-  constructor(private af: AngularFire, private trace: TraceService) {
+  constructor(private backend: BackendService, private trace: TraceService) {
   }
 
   public start(): Observable<ISessionEvent> {
-    this.af.auth.subscribe((auth) =>  {
+    this.backend.events.subscribe((auth) =>  {
       this.trace.log('SessionService', 'Firebase Auth Event', auth);
       this._started = true;
       this._state = auth;
@@ -50,7 +51,7 @@ export class SessionService {
   }
 
   public loginAnonymous() {
-    this.af.auth.login({
+    this.backend.login({
       provider: AuthProviders.Anonymous,
       method: AuthMethods.Anonymous,
     });
@@ -58,7 +59,7 @@ export class SessionService {
 
   public loginCredentials(credentials: EmailPasswordCredentials): Observable<FirebaseAuthState> {
     return Observable.create((observer: Observer<any>) => {
-      this.af.auth.login(credentials, {
+      this.backend.loginCredentials(credentials, {
         provider: AuthProviders.Password,
         method: AuthMethods.Password
       }).catch(
@@ -75,7 +76,7 @@ export class SessionService {
 
   public logout(): Observable<FirebaseAuthState> {
     return Observable.create((observer: Observer<any>) => {
-      this.af.auth.logout().catch(
+      this.backend.logout().catch(
         (error) => {
           observer.error(error);
         }

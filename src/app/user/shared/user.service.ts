@@ -12,7 +12,7 @@ export class UserService {
   private listCache: ListRef<User>;
 
   constructor(private backend: BackendService) {
-    this.listCache = new ListRef<User>(this.backend.database(), USERS_RESOURCE_PATH);
+    this.listCache = new ListRef<User>(this.backend, USERS_RESOURCE_PATH);
   }
 
   public newDefault(): User {

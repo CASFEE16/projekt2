@@ -14,7 +14,7 @@ export class ShowDetailsService {
   private object: ObjectRef<Show> = null;
 
   constructor(private backend: BackendService, private session: SessionService, private trace: TraceService) {
-    this.object = new ObjectRef<Show>(backend.database(), SHOWS_RESOURCE_PATH);
+    this.object = new ObjectRef<Show>(backend, SHOWS_RESOURCE_PATH);
   }
 
   public get(id: string): Observable<Show> {
@@ -40,7 +40,7 @@ export class ShowDetailsService {
   }
 
   public updatePost(post: Post, data: any): Observable<Post> {
-    const obj: ObjectRef<Post> = new ObjectRef<Post>(this.backend.database());
+    const obj: ObjectRef<Post> = new ObjectRef<Post>(this.backend);
     return obj.getId(POSTS_RESOURCE_PATH, post['$key'])
       .first()
       .do(each => console.log('X UPDATE', post, data))

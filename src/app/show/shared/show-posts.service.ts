@@ -21,7 +21,7 @@ export class ShowPostsService {
       return Observable.throw(new Error('Show has no key'));
     }
 
-    return this.backend.database().list(POSTS_RESOURCE_PATH, {
+    return this.backend.list(POSTS_RESOURCE_PATH, {
       query: {
         limitToLast: 10,
         orderByChild: 'show/key',

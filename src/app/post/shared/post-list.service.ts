@@ -22,7 +22,7 @@ export class PostListService {
     private session: SessionService,
     private content: ContentService) {
 
-    this.listCache = new ListRef<Post>(this.backend.database(), POSTS_RESOURCE_PATH);
+    this.listCache = new ListRef<Post>(this.backend, POSTS_RESOURCE_PATH);
   }
 
   public findLast(count = 100): Observable<PostShowListEntry[]> {

@@ -20,7 +20,7 @@ export class ShowListService {
   private listCache: ListRef<Show> = null;
 
   constructor(private backend: BackendService, private session: SessionService) {
-    this.listCache = new ListRef<Show>(this.backend.database(), SHOWS_RESOURCE_PATH);
+    this.listCache = new ListRef<Show>(this.backend, SHOWS_RESOURCE_PATH);
   }
 
   public newDefault(): Show {

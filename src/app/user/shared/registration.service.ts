@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import {AngularFire, FirebaseAuthState} from 'angularfire2';
+import {FirebaseAuthState} from 'angularfire2';
 import {Observable} from 'rxjs/Observable';
 import {Observer} from 'rxjs/Observer';
 import {ObjectRef} from '../../core/firebase/ObjectRef';
 import {User, USERS_RESOURCE_PATH} from './user.model';
+import {BackendService} from "../../core/firebase/backend.service";
 
 export class Registration {
   name: string;
@@ -15,11 +16,11 @@ export class Registration {
 @Injectable()
 export class RegistrationService {
 
-  constructor(private af: AngularFire) {}
+  constructor(private backend: BackendService) {}
 
   public register(registration: Registration): Observable<any> {
 
-    const userRef: ObjectRef<User> = new ObjectRef<User>(this.af.database, USERS_RESOURCE_PATH);
+    const userRef: ObjectRef<User> = new ObjectRef<User>(this.backend, USERS_RESOURCE_PATH);
     const user: User = User.newDefault();
     user.name = registration.name;
     user.email = registration.email;
@@ -30,7 +31,7 @@ export class RegistrationService {
         observer.error(new Error('Password does not match'));
       }
 
-      this.af.auth.createUser({email: registration.email, password: registration.password1}).catch(
+      this.backend.createUser({email: registration.email, password: registration.password1}).catch(
         (error) => {
           observer.error(error);
         }
