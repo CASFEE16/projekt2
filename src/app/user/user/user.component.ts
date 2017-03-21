@@ -42,7 +42,7 @@ export class UserComponent implements OnInit {
   }
 
   onEdit(obj: User) {
-    this.router.navigate(['/user', obj['$key']]);
+    this.router.navigate(['/user', this.userService.getKey(obj)]);
   }
 
 }

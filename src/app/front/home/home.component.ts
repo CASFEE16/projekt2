@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import {FirebaseListObservable} from 'angularfire2';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +8,6 @@ import {FirebaseListObservable} from 'angularfire2';
 })
 export class HomeComponent implements OnInit {
 
-  items: FirebaseListObservable<string[]>;
 
   constructor() {
   }

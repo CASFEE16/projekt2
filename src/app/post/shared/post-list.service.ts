@@ -14,7 +14,7 @@ import {ModelFactory} from '../../core/firebase/model';
 @Injectable()
 export class PostListService {
 
-  private listCache: ListRef<Post> = new ListRef<Post>();
+  private listCache: ListRef<Post> = null;
 
   constructor(
     private trace: TraceService,

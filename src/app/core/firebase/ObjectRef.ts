@@ -12,7 +12,7 @@ export class ObjectRef<T> extends DatabaseRef {
 
   object: FirebaseObjectObservable<T> = null;
 
-  constructor(backend?: BackendService, resource?: string) {
+  constructor(backend: BackendService, resource: string) {
     super(backend, resource);
   }
 
@@ -22,8 +22,8 @@ export class ObjectRef<T> extends DatabaseRef {
   }
 
   public getId(id: string, options?: any): Observable<T> {
-    this.object = this.backend.object(this.resource + '/' + id, options) as FirebaseObjectObservable<T>;
-    return this.object;
+    this.resource = this.resource + '/' + id;
+    return this.get(options);
   }
 
   public add(id: string, obj: T): Observable<T> {

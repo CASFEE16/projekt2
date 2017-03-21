@@ -12,7 +12,7 @@ export class ListRef<T> extends DatabaseRef {
 
   list: FirebaseListObservable<T[]> = null;
 
-  constructor(backend?: BackendService, resource?: string) {
+  constructor(backend: BackendService, resource: string) {
     super(backend, resource);
   }
 

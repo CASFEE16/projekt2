@@ -21,16 +21,16 @@ export class BackendService {
   }
 
   public object(resource: string, options?: any): Observable<any> {
-    return this.database().list(resource, options);
+    return this.database().object(resource, options);
   }
 
   public get(resource: string, id: string, options?: any): Observable<any> {
-    return this.database().list(resource + '/' + id, options);
+    return this.database().object(resource + '/' + id, options);
   }
 
   public update(resource: string, obj: any, data: any): Observable<any> {
-    const objRef = new ObjectRef<any>(this);
-    return objRef.getId(resource, obj['$key']).flatMap(
+    const objRef = new ObjectRef<any>(this, resource);
+    return objRef.getId(obj['$key']).flatMap(
       (result) => {
         return objRef.update(data);
       });
@@ -50,6 +50,13 @@ export class BackendService {
 
   public createUser(credentials: any): firebase.Promise<FirebaseAuthState> {
     return this.af.auth.createUser(credentials);
+  }
+
+  public getKey(obj: any): string | null {
+    if (!obj || typeof obj !== 'object' || !obj['$key']) {
+      return null;
+    }
+    return obj['$key'];
   }
 
 }

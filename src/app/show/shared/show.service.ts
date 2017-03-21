@@ -16,16 +16,20 @@ export class ShowService {
       private backend: BackendService,
       private session: SessionService,
       private showPostsService: ShowPostsService) {
-    this.objectRef = new ObjectRef<Show>(backend);
+    this.objectRef = new ObjectRef<Show>(backend, SHOWS_RESOURCE_PATH);
   }
 
   public delete(show: Show): Observable<Show> {
     if (!(show.user === this.session.currentUser().uid)) {
       return Observable.throw(new Error('Can only delete your own shows'));
     }
-    return this.objectRef.getId(SHOWS_RESOURCE_PATH, show['$key']).flatMap(
+    return this.objectRef.getId(this.backend.getKey(show)).flatMap(
       result => this.objectRef.delete()
     );
+  }
+
+  public getKey(obj: Show) {
+    return this.backend.getKey(obj);
   }
 
 }

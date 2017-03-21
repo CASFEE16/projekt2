@@ -1,4 +1,5 @@
-import {Component, OnInit, OnDestroy, HostListener, Inject, ViewChild, ElementRef} from '@angular/core';
+import {Component, OnInit, OnDestroy, HostListener, Inject,
+  ViewChild, ElementRef, NgZone, ChangeDetectorRef} from '@angular/core';
 import {SessionService, ISessionEvent} from './core/firebase/session.service';
 import {MdDialog, MdSidenav, MdSidenavToggleResult, MdSidenavContainer} from '@angular/material';
 import {UserMenuComponent} from './user/user-menu/user-menu.component';
@@ -7,12 +8,7 @@ import {Router} from '@angular/router';
 import {EventService, IEvent} from './core/event/event.service';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
-
-export interface NavLink {
-  link: string;
-  label: string;
-  icon?: string;
-}
+import {NavService} from "./shared/nav.service";
 
 @Component({
   selector: 'app-root',
@@ -20,35 +16,6 @@ export interface NavLink {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, OnDestroy {
-
-  navLinks: NavLink[] = [
-    {
-      link: '/',
-      label: 'Posts',
-      icon: 'home'
-    }, {
-      link: '/show',
-      label: 'Shows',
-      icon: 'radio'
-    }, {
-      link: '/search',
-      label: 'Search',
-      icon: 'search'
-    }, {
-      link: '/about',
-      label: 'About',
-      icon: 'info'
-    }];
-  userLinks: NavLink[] = [ {
-      link: '/login',
-      label: 'Login',
-      icon: 'login'
-    }, {
-      link: '/register',
-      label: 'Register',
-      icon: 'register'
-    }];
-  toolbarNavLinks: NavLink[] = [];
 
   @ViewChild('sidenav') sidenav: MdSidenav;
   @ViewChild('sidenavcontainer') sidenavContainer: MdSidenavContainer;
@@ -69,7 +36,10 @@ export class AppComponent implements OnInit, OnDestroy {
     private trace: TraceService,
     private dialog: MdDialog,
     private router: Router,
+    public nav: NavService,
     @Inject('Window') window: any,
+    private ngzone: NgZone,
+    private cdref: ChangeDetectorRef,
     private element: ElementRef) {
     this.window = window;
   }
@@ -80,15 +50,29 @@ export class AppComponent implements OnInit, OnDestroy {
       (event) => this.handleSessionEvent(event)
     );
     this.loggedIn = this.sessionService.watchLoggedIn();
-    this.updateForWidth(this.window.innerWidth);
 
+    if (this.window) {
+      this.updateForWidth(this.window.innerWidth);
+    }
+
+    // Hack the material sidenav content element so that we can display different
+    // scrollbars for posts and shows.
     if (this.element) {
       const cnt = this.element.nativeElement.getElementsByClassName('mat-sidenav-content');
       if (cnt) {
-        console.log(cnt);
-        cnt[0].style.overflow = 'hidden';
+        this.ngzone.runOutsideAngular( () => cnt[0].style.overflow = 'hidden' );
       }
     }
+  }
+
+  ngAfterViewInit() {
+    /*
+    Observable.fromEvent(window, 'resize')
+      .throttleTime(200)
+      .subscribe(_ => {
+        this.updateForWidth(this.window.innerWidth);
+      })
+      */
   }
 
   ngOnDestroy() {
@@ -99,7 +83,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   @HostListener('window:resize', ['$event'])
   onResize(event) {
-    this.updateForWidth(event.target.innerWidth);
+   this.updateForWidth(event.target.innerWidth);
   }
 
   updateForWidth(width: number) {
@@ -115,17 +99,12 @@ export class AppComponent implements OnInit, OnDestroy {
         this.sidenav.close();
       }
     }
-    this.toolbarNavLinks = [];
+
     if (width >= 400 && width < 500) {
-      if (!this.sessionService.isLoggedIn()) {
-        this.toolbarNavLinks = this.userLinks;
-      }
+      this.nav.toggleMedium();
     }
     if (width < 400) {
-      this.toolbarNavLinks.push(...this.navLinks);
-      if (!this.sessionService.isLoggedIn()) {
-        this.toolbarNavLinks.push(...this.userLinks);
-      }
+      this.nav.toggleSmall();
       this.sidenavOpened = false;
       this.sidenav.close();
     }
@@ -135,18 +114,7 @@ export class AppComponent implements OnInit, OnDestroy {
   // About Toolbar etc on authentication event
   handleSessionEvent(event: ISessionEvent) {
     this.trace.log('AppComponent', 'Session event', event);
-    if (event.name === 'login') {
-      const link = this.navLinks.find(each => each.link === '/users');
-      if (!link) {
-        this.navLinks.push({
-          link: '/users',
-          label: 'Users',
-          icon: 'supervisor_account'
-        });
-      }
-    } else {
-      this.navLinks = this.navLinks.filter(each => each.link !== '/users');
-    }
+    this.nav.toggleUsers(event.name === 'login');
   }
 
   onUserMenu() {

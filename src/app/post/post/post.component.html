@@ -1,12 +1,12 @@
   <md-card class="post-card">
     <md-card-header>
-        <div md-card-avatar><md-icon class="avatar" color="primary">{{postUtils.getIcon(each.post)}}</md-icon></div>
-        <md-card-title>{{each.post.text}}</md-card-title>
-        <md-card-subtitle>{{each.post.date | date}}</md-card-subtitle>
+        <div md-card-avatar><md-icon class="avatar" color="primary">{{postUtils.getIcon(each?.post)}}</md-icon></div>
+        <md-card-title>{{each?.post.text}}</md-card-title>
+        <md-card-subtitle>{{each?.post.date | date}}</md-card-subtitle>
         <div class="card-menu" *ngIf="loggedIn | async">
           <button md-button class="menu-button" [mdMenuTriggerFor]="menu"><md-icon>more_vert</md-icon></button>
           <md-menu #menu="mdMenu">
-            <button *ngIf="!!each.post?.show?.key" md-menu-item (click)="onRemoveFromShows(each.post)">
+            <button *ngIf="!!each?.post?.show?.key" md-menu-item (click)="onRemoveFromShows(each.post)">
               <md-icon>clear</md-icon>Remove from show
             </button>
             <button md-menu-item (click)="onEdit(each.post)"><md-icon>edit</md-icon>Edit</button>
@@ -30,12 +30,12 @@
     <md-card-actions >
       <div class="post-card-actions">
         <div class="post-card-rating">
-          <app-rating [rating]="each.post.rating" [disabled]="!(loggedIn | async)"
+          <app-rating [rating]="each?.post.rating" [disabled]="!(loggedIn | async)"
                       (onChanged)="onRatingClick(each.post, $event)"></app-rating>
         </div>
         <div class="post-card-show">
           <md-select class="post-card-show-select" placeholder="Show"
-                     [(ngModel)]="each.post.show.key" (ngModelChange)="onSelectShow(each.post, $event)"
+                     [(ngModel)]="each?.post?.show.key" (ngModelChange)="onSelectShow(each.post, $event)"
                      [disabled]="!(loggedIn | async)">
             <md-option *ngFor="let show of shows | async" [value]="show['$key']">
               {{ show.title }} {{show.date | date}}

@@ -1,21 +1,21 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { DialogService } from './dialog.service';
+import { NavService } from './nav.service';
 import {TestModule} from "../../test/test.module";
 
-describe('DialogService', () => {
+describe('NavService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule(TestModule.forTest({
       imports: [],
       providers: [
-        DialogService
+        NavService
       ],
       declarations: [
       ]
     }));
   });
 
-  it('should ...', inject([DialogService], (service: DialogService) => {
+  it('should ...', inject([NavService], (service: NavService) => {
     expect(service).toBeTruthy();
   }));
 });

@@ -1,11 +1,11 @@
 <md-card class="show-card">
   <md-card-header>
     <div md-card-avatar><md-icon>radio</md-icon></div>
-    <md-card-title><strong>{{show.title}}</strong></md-card-title>
-    <md-card-subtitle>{{show.date | date}}</md-card-subtitle>
+    <md-card-title><strong>{{show?.title}}</strong></md-card-title>
+    <md-card-subtitle>{{show?.date | date}}</md-card-subtitle>
   </md-card-header>
   <md-card-content>
-    <p>{{show.description}}</p>
+    <p>{{show?.description}}</p>
     <table>
       <tr *ngFor="let post of posts | async" on-mouseenter='onMouseEnter(post)' on-mouseleave="onMouseLeave(post)">
         <td><md-icon>{{postUtils.getIcon(post)}}</md-icon></td><td>{{post.text}}

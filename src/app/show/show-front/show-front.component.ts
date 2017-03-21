@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import {ShowListService, ShowWithPosts} from '../shared/show-list.service';
 import {Show} from '../shared/show.model';
 import {Observable} from 'rxjs/Observable';
@@ -23,12 +23,14 @@ export class ShowFrontComponent implements OnInit {
     private showService: ShowListService,
     private sessionService: SessionService,
     public postUtils: PostUtils,
-    private router: Router) { }
+    private zone: NgZone,
+    private router: Router) {
+  }
 
   ngOnInit() {
     this.loggedIn = this.sessionService.watchLoggedIn();
     this.shows = this.showService.findUpcoming()
-      .do(each => this.loading = false);
+      .do(each => this.zone.run(() => this.loading = false));
   }
 
   onEdit(obj: Show) {

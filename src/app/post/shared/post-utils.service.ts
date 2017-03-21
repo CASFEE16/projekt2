@@ -6,7 +6,7 @@ import {SpotifyUtils} from '../../core/spotify/SpotifyUtils';
 @Injectable()
 export class PostUtils {
 
-  youtubeURL(post: Post) {
+  public youtubeURL(post: Post) {
     let url = YoutubeUtils.getEmbedUrl(YoutubeUtils.getId(post.text));
     if (url) {
       return url;
@@ -15,7 +15,7 @@ export class PostUtils {
     return url;
   }
 
-  spotifyURL(post: Post) {
+  public spotifyURL(post: Post) {
     let url = SpotifyUtils.getEmbedUrl(SpotifyUtils.getId(post.content));
     if (url) {
       url = url + '&theme=white&view=coverart';
@@ -23,14 +23,40 @@ export class PostUtils {
     return url;
   }
 
-  webURL(post: Post) {
-    if (post.type === PostType.Web) {
+  public webURL(post: Post) {
+    if (post && post.type === PostType.Web) {
       return post.content;
     }
     return null;
   }
 
-  getIcon(obj: Post) {
-    return PostTypes.icon(obj.type);
+  public getIcon(post: Post) {
+    if (!post) {
+      return PostTypes.icon(PostType.Note);
+    }
+    return PostTypes.icon(post.type);
   }
+
+  public getContentTypeString(post: Post): [string, string] {
+    let postContentType = null;
+    let postContent = null;
+    if (post) {
+      postContentType = 'youtube';
+      postContent = this.youtubeURL(post);
+      if (!postContent) {
+        postContentType = 'spotify';
+        postContent = this.spotifyURL(post);
+        if (!postContent) {
+          postContentType = 'web';
+          postContent = this.webURL(post);
+          if (!postContent) {
+            postContentType = 'text';
+            postContent = post.content;
+          }
+        }
+      }
+    }
+    return [postContentType, postContent];
+  }
+
 }

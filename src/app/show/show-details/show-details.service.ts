@@ -20,7 +20,11 @@ export class ShowDetailsService {
   public get(id: string): Observable<Show> {
     this.trace.log('ShowDetailsService', 'get', id, this);
     return this.object.getId(id)
-      .map(obj => ModelFactory.toClass(Show, obj));
+      .map(obj => {
+        const result = ModelFactory.toClass(Show, obj)
+        this.trace.log('ShowDetailsService', 'result', id, obj, result);
+        return result;
+      });
   }
 
   public delete(show: Show): Observable<Show> {
@@ -40,12 +44,14 @@ export class ShowDetailsService {
   }
 
   public updatePost(post: Post, data: any): Observable<Post> {
-    const obj: ObjectRef<Post> = new ObjectRef<Post>(this.backend);
-    return obj.getId(POSTS_RESOURCE_PATH, post['$key'])
+    const obj: ObjectRef<Post> = new ObjectRef<Post>(this.backend, POSTS_RESOURCE_PATH);
+    return obj.getId(post['$key'])
       .first()
-      .do(each => console.log('X UPDATE', post, data))
       .flatMap(
-        result => obj.update(data)
+        result => {
+          console.log('UPDATE', obj, data);
+          return obj.update(data);
+        }
     );
   }
 
@@ -64,6 +70,8 @@ export class ShowDetailsService {
         updates.push(this.updatePost(each, {show: each.show}));
       }
     });
+
+    this.trace.log('ShowDetailsService', 'updatePosts', posts, postsToRemove, updates);
 
     return Observable.merge(...updates);
 

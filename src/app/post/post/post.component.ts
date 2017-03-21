@@ -35,23 +35,11 @@ export class PostComponent implements OnInit {
   ngOnInit() {
     this.snackbarConfig.duration = 2000;
     this.loggedIn = this.sessionService.watchLoggedIn();
-    if (!this.each.post.show) {
-      this.each.post.show = {key: null, index: null};
-    }
-
-    this.postContentType = 'youtube';
-    this.postContent = this.postUtils.youtubeURL(this.each.post);
-    if (!this.postContent) {
-      this.postContentType = 'spotify';
-      this.postContent = this.postUtils.spotifyURL(this.each.post);
-      if (!this.postContent) {
-        this.postContentType = 'web';
-        this.postContent = this.postUtils.webURL(this.each.post);
-        if (!this.postContent) {
-          this.postContentType = 'text';
-          this.postContent = this.each.post.content;
-        }
+    if (this.each && this.each.post) {
+      if (!this.each.post.show) {
+        this.each.post.show = {key: null, index: null};
       }
+      [this.postContentType, this.postContent] = this.postUtils.getContentTypeString(this.each.post);
     }
   }
 

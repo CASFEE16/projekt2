@@ -21,7 +21,6 @@ import {SearchComponent} from './post-search/post-search.component';
   ],
   declarations: [
     PostFrontComponent,
-    SafePipe,
     PostComponent,
     PostAirComponent,
     SearchComponent

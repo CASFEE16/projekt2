@@ -42,6 +42,9 @@ export class ShowComponent implements OnInit {
   }
 
   onPostRefresh() {
+    if (!this.show) {
+      return;
+    }
     if (this.live) {
       this.posts = this.showPostsService.findPostsForShow(this.show);
     } else {
@@ -72,12 +75,17 @@ export class ShowComponent implements OnInit {
   }
 
   onEdit(obj: Show) {
-    console.log('EDIT', obj);
-    this.router.navigate(['/show', obj['$key']]);
+    const key = this.showService.getKey(obj);
+    if (key) {
+      this.router.navigate(['/show', key]);
+    }
   }
 
   onAir(obj: Show) {
-    this.router.navigate(['/air', obj['$key']]);
+    const key = this.showService.getKey(obj);
+    if (key) {
+      this.router.navigate(['/air', key]);
+    }
   }
 
   onPostEdit(obj: Post) {

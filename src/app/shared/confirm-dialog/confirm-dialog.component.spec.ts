@@ -1,22 +1,34 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MaterialModule, MdDialogModule, MdDialog, MdDialogRef } from '@angular/material';
 
 import { ConfirmDialogComponent } from './confirm-dialog.component';
+import {SharedModule} from "../shared.module";
 
-describe('SubmitDialogComponent', () => {
+describe('ConfirmDialogComponent', () => {
   let component: ConfirmDialogComponent;
+  let dialog: MdDialog;
   let fixture: ComponentFixture<ConfirmDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ConfirmDialogComponent ]
+      imports: [
+        CommonModule,
+        FormsModule,
+        MaterialModule,
+        SharedModule
+      ],
+      providers: [],
+      declarations: []
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ConfirmDialogComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    dialog = TestBed.get(MdDialog);
+    let dialogRef = dialog.open(ConfirmDialogComponent);
+    component = dialogRef.componentInstance;
   });
 
   it('should create', () => {

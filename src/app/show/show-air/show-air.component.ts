@@ -15,7 +15,6 @@ import {ShowPostsService} from '../shared/show-posts.service';
 })
 export class ShowAirComponent implements OnInit, OnDestroy {
 
-
   show: Show = null;
   posts: Observable<Post[]> = null;
   onAir = false;
@@ -34,10 +33,12 @@ export class ShowAirComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.routeSubscription = this.route.params.subscribe(params => {
-      this.showDetailsService.get(params['id']).subscribe(show => {
-        this.show = show;
-        this.posts = this.showPostsService.findPostsForShow(show);
-      });
+      if (params['id']) {
+        this.showDetailsService.get(params['id']).subscribe(show => {
+          this.show = show;
+          this.posts = this.showPostsService.findPostsForShow(show);
+        });
+      }
     });
     setInterval(() => {
       this.currentDateTime =  new Date();

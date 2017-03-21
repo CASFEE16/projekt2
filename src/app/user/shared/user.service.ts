@@ -36,4 +36,8 @@ export class UserService {
     return this.listCache.delete(user);
   }
 
+  public getKey(user: User): string {
+    return this.backend.getKey(user);
+  }
+
 }

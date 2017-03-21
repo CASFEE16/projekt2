@@ -29,7 +29,6 @@ export class UserListComponent implements OnInit {
     this.loggedIn = this.sessionService.watchLoggedIn();
     this.users = this.userService.findAll()
       .do(each => this.loading = false);
-    console.log(this.users);
   }
 
   onSubmit() {

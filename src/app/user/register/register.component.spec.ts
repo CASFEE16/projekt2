@@ -4,16 +4,24 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { RegisterComponent } from './register.component';
+import {TestModule} from "../../../test/test.module";
+import {RegistrationService} from "../shared/registration.service";
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
   let fixture: ComponentFixture<RegisterComponent>;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ RegisterComponent ]
-    })
-    .compileComponents();
+    TestBed.configureTestingModule(TestModule.forTest({
+      imports: [],
+      providers: [
+        RegistrationService
+      ],
+      declarations: [
+        RegisterComponent
+      ]
+    }));
+    TestBed.compileComponents();
   }));
 
   beforeEach(() => {

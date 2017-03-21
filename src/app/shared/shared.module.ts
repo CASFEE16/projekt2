@@ -5,6 +5,8 @@ import {RatingComponent} from './rating/rating.component';
 import {CanDeactivateGuard} from './can-deactivate-guard.service';
 import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog.component';
 import {DialogService} from './dialog.service';
+import {SafePipe} from './safe.pipe';
+import {NavService} from "./nav.service";
 
 export function windowFactory(): Window { return window; }
 
@@ -13,12 +15,13 @@ export function windowFactory(): Window { return window; }
     CommonModule,
     MaterialModule
   ],
-  declarations: [RatingComponent, ConfirmDialogComponent],
-  exports: [RatingComponent, ConfirmDialogComponent],
+  declarations: [RatingComponent, ConfirmDialogComponent, SafePipe],
+  exports: [RatingComponent, ConfirmDialogComponent, SafePipe],
   entryComponents: [ConfirmDialogComponent],
   providers: [
     CanDeactivateGuard,
     DialogService,
+    NavService,
     { provide: 'Window', useFactory: windowFactory}
     ]
 })

@@ -7,7 +7,7 @@
         <div class="sidenav-user" *ngIf="loggedIn | async">{{username}}</div>
       </div>
       <div class="sidenav-container">
-        <div *ngFor="let navLink of navLinks">
+        <div *ngFor="let navLink of nav.navLinks">
           <a md-button class="sidenav-link" routerLink="{{navLink.link}}" routerLinkActive #rla="routerLinkActive">
             <div class="sidenav-item">
               <div class="sidenav-item-icon"><md-icon>{{navLink.icon}}</md-icon></div>
@@ -45,7 +45,7 @@
     </div>
 
     <div class="toolbar-nav">
-        <div *ngFor="let navLink of navLinks">
+        <div *ngFor="let navLink of nav.navLinks">
           <a md-button class="toolbar-link toolbar-nav-button" routerLink="{{navLink.link}}" routerLinkActive #rla="routerLinkActive">
             <md-icon>{{navLink.icon}}</md-icon> <span class="toolbar-nav-text">{{navLink.label}}</span>
           </a>
@@ -54,10 +54,10 @@
 
     <div class="app-toolbar-filler"></div>
 
-    <div *ngIf="!!toolbarNavLinks.length" class="toolbar-nav toolbar-nav-menu">
+    <div *ngIf="!!nav.toolbarNavLinks.length" class="toolbar-nav toolbar-nav-menu">
       <button class="toolbar-nav-menu-button" md-button [mdMenuTriggerFor]="menu"><md-icon>more_vert</md-icon> <span class="toolbar-nav-menu-title"></span></button>
       <md-menu #menu="mdMenu">
-        <button md-menu-item *ngFor="let navLink of toolbarNavLinks" routerLink="{{navLink.link}}">
+        <button md-menu-item *ngFor="let navLink of nav.toolbarNavLinks" routerLink="{{navLink.link}}">
           <md-icon>{{navLink.icon}}</md-icon> {{navLink.label}}
         </button>
       </md-menu>

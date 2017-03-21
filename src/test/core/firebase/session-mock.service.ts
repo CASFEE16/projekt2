@@ -3,7 +3,7 @@ import {FirebaseAuthState} from 'angularfire2';
 import { EmailPasswordCredentials } from 'angularfire2/auth';
 import {Observer} from 'rxjs/Observer';
 import {Observable} from 'rxjs/Observable';
-import {ISessionEvent, SessionService} from "../../../core/firebase/session.service";
+import {ISessionEvent, SessionService} from "../../../app/core/firebase/session.service";
 
 /**
  * This is a global service! It keeps the authentication state for the application.

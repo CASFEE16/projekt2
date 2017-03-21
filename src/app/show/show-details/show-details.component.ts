@@ -69,7 +69,8 @@ export class ShowDetailsComponent implements OnInit, OnDestroy, CanComponentDeac
           this.snackbar.open('Show saved', null, {duration: 2000});
           this.showDetailsService.updatePosts(this.posts, this.postsToRemove).subscribe(
             (updatePostsResult) => {
-              this.snackbar.open('Posts updated', null, {duration: 2000});
+              this.snackbar.open('Show saved and posts updated', null, {duration: 2000});
+              this.dirty = false;
             },
             (error) => {
               this.snackbar.open(error.message, null, {duration: 2000});

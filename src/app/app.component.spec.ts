@@ -1,48 +1,57 @@
 /* tslint:disable:no-unused-variable */
 import { TestBed, async } from '@angular/core/testing';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { MaterialModule } from '@angular/material';
 import {AppComponent} from './app.component';
-import {SharedModule} from './shared/shared.module';
-import {APP_BASE_HREF} from '@angular/common';
 
 import {RouterModule} from '@angular/router';
 import {ROUTE_CONFIG} from './route-config';
 
-import {UserModule} from './user/user.module';
-import {CoreModule} from './core/core.module';
-import {FrontModule} from './front/front.module';
-import {PostModule} from './post/post.module';
-import {ShowModule} from './show/show.module';
+import {ShowListService} from './show/shared/show-list.service';
+import {ShowListMockService} from '../test/show/shared/show-list-mock.service';
+import {ShowFrontComponent} from "./show/show-front/show-front.component";
+import {PostFrontComponent} from "./post/post-front/post-front.component";
+import {AboutComponent} from './front/about/about.component';
+import {LoginComponent} from "./front/login/login.component";
+import {RegisterComponent} from "./user/register/register.component";
+import {SearchComponent} from "./post/post-search/post-search.component";
+import {UserListComponent} from "./user/user-list/user-list.component";
+import {UserMenuComponent} from "./user/user-menu/user-menu.component";
+import {ShowComponent} from "./show/show/show.component";
+import {PostComponent} from "./post/post/post.component";
+import {UserComponent} from "./user/user/user.component";
+import {PostUtils} from "./post/shared/post-utils.service";
+import {TestModule} from "../test/test.module";
 
-import {SessionService} from './core/firebase/session.service';
-import {SessionMockService} from './test/core/firebase/session-mock.service';
-import {BackendService} from './core/firebase/backend.service';
-import {BackendMockService} from './test/core/firebase/backend-mock.service';
-
-fdescribe('AppComponent', () => {
+describe('AppComponent', () => {
   beforeEach(() => {
-    TestBed.configureTestingModule({
+
+    TestBed.configureTestingModule(TestModule.forTest({
       imports: [
-        BrowserModule,
-        FormsModule,
-        MaterialModule,
-        RouterModule.forRoot(ROUTE_CONFIG),
-        SharedModule,
-        UserModule,
-        FrontModule,
-        PostModule,
-        ShowModule
       ],
       providers: [
-        {provide: APP_BASE_HREF, useValue : '/' },
-        {provide: SessionService, useClass: SessionMockService},
-        {provide: BackendService, useClass: BackendMockService},
+        PostUtils
       ],
       declarations: [
-        AppComponent
-      ],
+        AppComponent,
+        ShowFrontComponent,
+        PostFrontComponent,
+        AboutComponent,
+        LoginComponent,
+        RegisterComponent,
+        SearchComponent,
+        UserListComponent,
+        UserMenuComponent,
+        ShowComponent,
+        PostComponent,
+        UserComponent
+      ]
+    }));
+
+    TestBed.overrideComponent(ShowFrontComponent, {
+      set: {
+        providers: [
+          {provide: ShowListService, useClass: ShowListMockService}
+        ]
+      }
     });
     TestBed.compileComponents();
   });
@@ -55,6 +64,7 @@ fdescribe('AppComponent', () => {
   }));
 
 
+  /*
   it(`should have set a window`, async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
@@ -63,7 +73,6 @@ fdescribe('AppComponent', () => {
   }));
 
 
-  /*
   it('should render title in a h1 tag', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
