@@ -1,12 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PostComponent } from './post.component';
-import {TestModule} from "../../../test/test.module";
-import {ContentService} from "../../core/content/content.service";
-import {YoutubeService} from "../../core/youtube/youtube.service";
-import {SpotifyService} from "../../core/spotify/spotify.service";
-import {PostUtils} from "../shared/post-utils.service";
-import {PostListService} from "../shared/post-list.service";
+import {TestModule} from '../../../test/test.module';
+import {ContentService} from '../../core/content/content.service';
+import {YoutubeService} from '../../core/youtube/youtube.service';
+import {SpotifyService} from '../../core/spotify/spotify.service';
+import {PostUtils} from '../shared/post-utils.service';
+import {PostListService} from '../shared/post-list.service';
 
 describe('PostComponent', () => {
   let component: PostComponent;

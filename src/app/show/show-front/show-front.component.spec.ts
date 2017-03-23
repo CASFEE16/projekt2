@@ -16,13 +16,13 @@ import {BackendService} from '../../core/firebase/backend.service';
 import {BackendMockService} from '../../../test/core/firebase/backend-mock.service';
 import {ShowListService} from '../shared/show-list.service';
 import {ShowListMockService} from '../../../test/show/shared/show-list-mock.service';
-import {ShowComponent} from "../show/show.component";
+import {ShowComponent} from '../show/show.component';
 import {TraceService} from '../../core/trace/trace.service';
 import {ShowPostsService} from '../shared/show-posts.service';
 
 import { ShowFrontComponent } from './show-front.component';
-import {PostUtils} from "../../post/shared/post-utils.service";
-import {PostComponent} from "../../post/post/post.component";
+import {PostUtils} from '../../post/shared/post-utils.service';
+import {PostComponent} from '../../post/post/post.component';
 
 import {TestModule} from '../../../test/test.module';
 

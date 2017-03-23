@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import {Observer} from 'rxjs/Observer';
 import {ObjectRef} from '../../core/firebase/ObjectRef';
 import {User, USERS_RESOURCE_PATH} from './user.model';
-import {BackendService} from "../../core/firebase/backend.service";
+import {BackendService} from '../../core/firebase/backend.service';
 
 export class Registration {
   name: string;

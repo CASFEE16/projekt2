@@ -1,7 +1,7 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { DialogService } from './dialog.service';
-import {TestModule} from "../../test/test.module";
+import {TestModule} from '../../test/test.module';
 
 describe('DialogService', () => {
   beforeEach(() => {

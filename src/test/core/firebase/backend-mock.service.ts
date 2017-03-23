@@ -1,4 +1,4 @@
-import {BackendService} from "../../../app/core/firebase/backend.service";
+import {BackendService} from '../../../app/core/firebase/backend.service';
 import {Observable} from 'rxjs/Observable';
 import {ReplaySubject} from 'rxjs/ReplaySubject';
 import {FirebaseAuthState} from 'angularfire2';

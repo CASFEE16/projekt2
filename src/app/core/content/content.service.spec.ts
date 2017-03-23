@@ -1,9 +1,9 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { ContentService } from './content.service';
-import {TestModule} from "../../../test/test.module";
-import {YoutubeService} from "../youtube/youtube.service";
-import {SpotifyService} from "../spotify/spotify.service";
+import {TestModule} from '../../../test/test.module';
+import {YoutubeService} from '../youtube/youtube.service';
+import {SpotifyService} from '../spotify/spotify.service';
 
 describe('ContentService', () => {
   beforeEach(() => {

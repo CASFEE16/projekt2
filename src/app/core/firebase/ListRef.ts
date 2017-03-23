@@ -2,7 +2,7 @@ import {FirebaseListObservable} from 'angularfire2';
 import {Observable} from 'rxjs/Observable';
 import {Observer} from 'rxjs/Observer';
 import {DatabaseRef} from './DatabaseRef';
-import {BackendService} from "./backend.service";
+import {BackendService} from './backend.service';
 
 /*
  * Wrapper class for FirebaseListObservable, which responds Observables instead of Promises for most operations.

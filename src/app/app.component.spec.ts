@@ -7,19 +7,19 @@ import {ROUTE_CONFIG} from './route-config';
 
 import {ShowListService} from './show/shared/show-list.service';
 import {ShowListMockService} from '../test/show/shared/show-list-mock.service';
-import {ShowFrontComponent} from "./show/show-front/show-front.component";
-import {PostFrontComponent} from "./post/post-front/post-front.component";
+import {ShowFrontComponent} from './show/show-front/show-front.component';
+import {PostFrontComponent} from './post/post-front/post-front.component';
 import {AboutComponent} from './front/about/about.component';
-import {LoginComponent} from "./front/login/login.component";
-import {RegisterComponent} from "./user/register/register.component";
-import {SearchComponent} from "./post/post-search/post-search.component";
-import {UserListComponent} from "./user/user-list/user-list.component";
-import {UserMenuComponent} from "./user/user-menu/user-menu.component";
-import {ShowComponent} from "./show/show/show.component";
-import {PostComponent} from "./post/post/post.component";
-import {UserComponent} from "./user/user/user.component";
-import {PostUtils} from "./post/shared/post-utils.service";
-import {TestModule} from "../test/test.module";
+import {LoginComponent} from './front/login/login.component';
+import {RegisterComponent} from './user/register/register.component';
+import {SearchComponent} from './post/post-search/post-search.component';
+import {UserListComponent} from './user/user-list/user-list.component';
+import {UserMenuComponent} from './user/user-menu/user-menu.component';
+import {ShowComponent} from './show/show/show.component';
+import {PostComponent} from './post/post/post.component';
+import {UserComponent} from './user/user/user.component';
+import {PostUtils} from './post/shared/post-utils.service';
+import {TestModule} from '../test/test.module';
 
 describe('AppComponent', () => {
   beforeEach(() => {

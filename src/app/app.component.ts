@@ -1,5 +1,5 @@
 import {Component, OnInit, OnDestroy, HostListener, Inject,
-  ViewChild, ElementRef, NgZone, ChangeDetectorRef} from '@angular/core';
+  ViewChild, ElementRef, NgZone, ChangeDetectorRef, AfterViewInit} from '@angular/core';
 import {SessionService, ISessionEvent} from './core/firebase/session.service';
 import {MdDialog, MdSidenav, MdSidenavToggleResult, MdSidenavContainer} from '@angular/material';
 import {UserMenuComponent} from './user/user-menu/user-menu.component';
@@ -8,14 +8,14 @@ import {Router} from '@angular/router';
 import {EventService, IEvent} from './core/event/event.service';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
-import {NavService} from "./shared/nav.service";
+import {NavService} from './shared/nav.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @ViewChild('sidenav') sidenav: MdSidenav;
   @ViewChild('sidenavcontainer') sidenavContainer: MdSidenavContainer;

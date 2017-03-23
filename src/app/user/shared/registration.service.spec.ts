@@ -2,7 +2,7 @@
 
 import { TestBed, async, inject } from '@angular/core/testing';
 import {RegistrationService} from './registration.service';
-import {TestModule} from "../../../test/test.module";
+import {TestModule} from '../../../test/test.module';
 
 describe('RegistrationService', () => {
   beforeEach(() => {

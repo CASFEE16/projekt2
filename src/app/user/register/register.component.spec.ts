@@ -4,8 +4,8 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { RegisterComponent } from './register.component';
-import {TestModule} from "../../../test/test.module";
-import {RegistrationService} from "../shared/registration.service";
+import {TestModule} from '../../../test/test.module';
+import {RegistrationService} from '../shared/registration.service';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;

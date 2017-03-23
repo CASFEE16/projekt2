@@ -2,7 +2,7 @@
 
 import { TestBed, async, inject } from '@angular/core/testing';
 import { SessionService } from './session.service';
-import {TestModule} from "../../../test/test.module";
+import {TestModule} from '../../../test/test.module';
 
 describe('SessionService', () => {
   beforeEach(() => {

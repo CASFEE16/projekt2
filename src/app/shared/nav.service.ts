@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {SessionService} from "../core/firebase/session.service";
+import {SessionService} from '../core/firebase/session.service';
 
 export interface NavLink {
   link: string;

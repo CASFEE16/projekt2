@@ -5,7 +5,7 @@ import {ReplaySubject} from 'rxjs/ReplaySubject';
 import {Observer} from 'rxjs/Observer';
 import {Observable} from 'rxjs/Observable';
 import {TraceService} from '../trace/trace.service';
-import {BackendService} from "./backend.service";
+import {BackendService} from './backend.service';
 
 export interface ISessionEvent {
   name: string;

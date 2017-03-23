@@ -1,8 +1,8 @@
 import { TestBed, inject } from '@angular/core/testing';
 
 import { ShowService } from './show.service';
-import {TestModule} from "../../../test/test.module";
-import {ShowPostsService} from "./show-posts.service";
+import {TestModule} from '../../../test/test.module';
+import {ShowPostsService} from './show-posts.service';
 
 describe('ShowService', () => {
   beforeEach(() => {

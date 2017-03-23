@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { MaterialModule, MdDialogRef } from '@angular/material';
 import {RouterModule} from '@angular/router';
-import {SharedModule} from "../app/shared/shared.module";
+import {SharedModule} from '../app/shared/shared.module';
 
 import {SessionService} from '../app/core/firebase/session.service';
 import {SessionMockService} from './core/firebase/session-mock.service';

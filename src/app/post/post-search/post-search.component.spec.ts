@@ -4,11 +4,11 @@ import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
 import { SearchComponent } from './post-search.component';
-import {TestModule} from "../../../test/test.module";
-import {PostComponent} from "../post/post.component";
-import {ContentService} from "../../core/content/content.service";
-import {YoutubeService} from "../../core/youtube/youtube.service";
-import {SpotifyService} from "../../core/spotify/spotify.service";
+import {TestModule} from '../../../test/test.module';
+import {PostComponent} from '../post/post.component';
+import {ContentService} from '../../core/content/content.service';
+import {YoutubeService} from '../../core/youtube/youtube.service';
+import {SpotifyService} from '../../core/spotify/spotify.service';
 
 describe('SearchComponent', () => {
   let component: SearchComponent;

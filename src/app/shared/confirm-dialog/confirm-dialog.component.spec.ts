@@ -4,12 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { MaterialModule, MdDialogModule, MdDialog, MdDialogRef } from '@angular/material';
 
 import { ConfirmDialogComponent } from './confirm-dialog.component';
-import {SharedModule} from "../shared.module";
+import {SharedModule} from '../shared.module';
 
 describe('ConfirmDialogComponent', () => {
   let component: ConfirmDialogComponent;
   let dialog: MdDialog;
-  let fixture: ComponentFixture<ConfirmDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -27,7 +26,7 @@ describe('ConfirmDialogComponent', () => {
 
   beforeEach(() => {
     dialog = TestBed.get(MdDialog);
-    let dialogRef = dialog.open(ConfirmDialogComponent);
+    const dialogRef = dialog.open(ConfirmDialogComponent);
     component = dialogRef.componentInstance;
   });
 

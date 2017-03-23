@@ -11,7 +11,7 @@ export class YoutubeUtils {
       return null;
     }
 
-    let regex = /www.youtube.com\/watch\?v=([_0-9a-zA-Z]+)/i;
+    let regex = /www.youtube.com\/watch\?v=([_0-9a-zA-Z-]+)/i;
     let match = regex.exec(text);
     if (match) {
       return match[1];
@@ -39,12 +39,12 @@ export class YoutubeUtils {
     if (!text) {
       return null;
     }
-    let regex = /(http[s]*:\/\/www.youtube.com\/watch\?v=[_0-9a-zA-Z]+)/i;
+    let regex = /(http[s]*:\/\/www.youtube.com\/watch\?v=[_0-9a-zA-Z-]+)/i;
     let match = regex.exec(text);
     if (match) {
       return match[1];
     }
-    regex = /(http[s]*:\/\/youtu.be\/[_0-9a-zA-Z]+)/i;
+    regex = /(http[s]*:\/\/youtu.be\/[_0-9a-zA-Z-]+)/i;
     match = regex.exec(text);
     if (match) {
       return match[1];

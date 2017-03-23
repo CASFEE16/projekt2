@@ -17,7 +17,7 @@ import 'hammerjs';
 import {PostModule} from './post/post.module';
 import {ShowModule} from './show/show.module';
 import {SharedModule} from './shared/shared.module';
-import {FIREBASE_CONFIG} from "./firebase-config";
+import {FIREBASE_CONFIG} from './firebase-config';
 
 @NgModule({
   declarations: [

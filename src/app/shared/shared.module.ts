@@ -6,7 +6,7 @@ import {CanDeactivateGuard} from './can-deactivate-guard.service';
 import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog.component';
 import {DialogService} from './dialog.service';
 import {SafePipe} from './safe.pipe';
-import {NavService} from "./nav.service";
+import {NavService} from './nav.service';
 
 export function windowFactory(): Window { return window; }
 

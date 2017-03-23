@@ -21,7 +21,7 @@ export class ShowDetailsService {
     this.trace.log('ShowDetailsService', 'get', id, this);
     return this.object.getId(id)
       .map(obj => {
-        const result = ModelFactory.toClass(Show, obj)
+        const result = ModelFactory.toClass(Show, obj);
         this.trace.log('ShowDetailsService', 'result', id, obj, result);
         return result;
       });
