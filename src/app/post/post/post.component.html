@@ -1,7 +1,7 @@
   <md-card class="post-card">
     <md-card-header>
         <div md-card-avatar><md-icon class="avatar" color="primary">{{postUtils.getIcon(each?.post)}}</md-icon></div>
-        <md-card-title>{{each?.post.text}}</md-card-title>
+        <md-card-title class="post-title">{{each?.post.text}}</md-card-title>
         <md-card-subtitle>{{each?.post.date | date}}</md-card-subtitle>
         <div class="card-menu" *ngIf="loggedIn | async">
           <button md-button class="menu-button" [mdMenuTriggerFor]="menu"><md-icon>more_vert</md-icon></button>
