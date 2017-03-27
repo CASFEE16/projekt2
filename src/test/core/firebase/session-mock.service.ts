@@ -1,9 +1,21 @@
 import { Injectable } from '@angular/core';
-import {FirebaseAuthState} from 'angularfire2';
+import {FirebaseAuthState, AuthProviders} from 'angularfire2';
 import { EmailPasswordCredentials } from 'angularfire2/auth';
 import {Observer} from 'rxjs/Observer';
 import {Observable} from 'rxjs/Observable';
 import {ISessionEvent, SessionService} from '../../../app/core/firebase/session.service';
+
+export class MockAuthState implements FirebaseAuthState {
+  uid: string;
+  provider: AuthProviders;
+  auth: firebase.User;
+
+  constructor() {
+    this.uid = 'uid1';
+    this.provider = null;
+    this.auth = null;
+  }
+}
 
 /**
  * This is a global service! It keeps the authentication state for the application.
@@ -32,16 +44,29 @@ export class SessionMockService extends SessionService {
 
   public loginCredentials(credentials: EmailPasswordCredentials): Observable<FirebaseAuthState> {
     return Observable.create((observer: Observer<any>) => {
-        observer.next(null);
+        const state = new MockAuthState();
+        observer.next(state);
+        this.event.next({
+          name: 'login',
+          state: state
+        });
         observer.complete();
     });
   }
 
   public logout(): Observable<FirebaseAuthState> {
     return Observable.create((observer: Observer<any>) => {
-        observer.next(null);
+        observer.next(new MockAuthState());
+        this.event.next({
+          name: 'logout',
+          state: null
+        });
         observer.complete();
     });
+  }
+
+  public get username(): string {
+    return 'test';
   }
 
 }

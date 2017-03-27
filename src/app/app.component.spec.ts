@@ -1,5 +1,5 @@
 /* tslint:disable:no-unused-variable */
-import { TestBed, async } from '@angular/core/testing';
+import { TestBed, async, fakeAsync, tick } from '@angular/core/testing';
 import {AppComponent} from './app.component';
 
 import {RouterModule} from '@angular/router';
@@ -20,6 +20,7 @@ import {PostComponent} from './post/post/post.component';
 import {UserComponent} from './user/user/user.component';
 import {PostUtils} from './post/shared/post-utils.service';
 import {TestModule} from '../test/test.module';
+import {SessionService} from './core/firebase/session.service';
 
 describe('AppComponent', () => {
   beforeEach(() => {
@@ -63,21 +64,31 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   }));
 
-
-  /*
-  it(`should have set a window`, async(() => {
-    const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const app = fixture.debugElement.componentInstance;
-    expect(app.window);
-  }));
-
-
   it('should render title in a h1 tag', async(() => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('md-toolbar-row').textContent).toContain('Radio App');
   }));
-  */
+
+  it('should enable user menus on login', async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('#auth-menu')).toBeTruthy();
+    expect(compiled.querySelector('#user-menu')).toBeFalsy();
+
+    const sessionService: SessionService = TestBed.get(SessionService);
+    sessionService.loginCredentials({email: 'test@test.com', password: '1234'}).subscribe(
+      (result) => null,
+      (error) => null,
+      () => {
+        fixture.detectChanges();
+        expect(compiled.querySelector('#auth-menu')).toBeFalsy();
+        expect(compiled.querySelector('#user-menu')).toBeTruthy();
+      }
+    );
+  }));
+
 });

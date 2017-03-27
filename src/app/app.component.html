@@ -65,10 +65,10 @@
 
     <!-- <button md-button (click)="isDarkTheme = !isDarkTheme">TOGGLE DARK THEME</button> -->
     <div class="toolbar-nav-user">
-      <div *ngIf="loggedIn | async">
+      <div id="user-menu" *ngIf="loggedIn | async">
         <div><button md-fab (click)="onUserMenu()"><md-icon>face</md-icon></button></div>
       </div>
-      <div class="toolbar-nav toolbar-nav-auth" *ngIf="!(loggedIn  | async)">
+      <div id="auth-menu" class="toolbar-nav toolbar-nav-auth" *ngIf="!(loggedIn  | async)">
         <div><a md-button class="toolbar-link" routerLink="/login">Login</a></div>
         <div><a md-button class="toolbar-link" routerLink="/register">Register</a></div>
       </div>

@@ -15,7 +15,7 @@ import {NavService} from './shared/nav.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
+export class AppComponent implements OnInit, OnDestroy {
 
   @ViewChild('sidenav') sidenav: MdSidenav;
   @ViewChild('sidenavcontainer') sidenavContainer: MdSidenavContainer;
@@ -45,11 +45,13 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnInit() {
-    // Register for all authentication events like login, logout
-    this.sessionSubscription = this.sessionService.event.subscribe(
-      (event) => this.handleSessionEvent(event)
-    );
     this.loggedIn = this.sessionService.watchLoggedIn();
+
+    this.loggedIn.subscribe(
+      (loggedIn) => {
+        this.nav.toggleUsers(loggedIn);
+      }
+    );
 
     if (this.window) {
       this.updateForWidth(this.window.innerWidth);
@@ -65,15 +67,15 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
     }
   }
 
+  /*
   ngAfterViewInit() {
-    /*
     Observable.fromEvent(window, 'resize')
       .throttleTime(200)
       .subscribe(_ => {
         this.updateForWidth(this.window.innerWidth);
       })
-      */
   }
+   */
 
   ngOnDestroy() {
     if (this.sessionSubscription) {
@@ -109,12 +111,6 @@ export class AppComponent implements OnInit, OnDestroy, AfterViewInit {
       this.sidenav.close();
     }
 
-  }
-
-  // About Toolbar etc on authentication event
-  handleSessionEvent(event: ISessionEvent) {
-    this.trace.log('AppComponent', 'Session event', event);
-    this.nav.toggleUsers(event.name === 'login');
   }
 
   onUserMenu() {
