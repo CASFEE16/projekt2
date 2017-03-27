@@ -28,7 +28,11 @@
 }
 
 .card-menu {
-  flex: 0 0;
+  position: absolute;
+  top: 15px;
+  right: 10px;
+  background-color: white;
+  opacity: 0.8;
 }
 
 .post-card-show-select {
@@ -49,4 +53,8 @@ md-card-title {
 .center {
   margin: auto;
   width: 50%;
+}
+
+.post-content {
+  overflow: hidden;
 }

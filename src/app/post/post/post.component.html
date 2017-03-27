@@ -9,13 +9,12 @@
             <button *ngIf="!!each?.post?.show?.key" md-menu-item (click)="onRemoveFromShows(each.post)">
               <md-icon>clear</md-icon>Remove from show
             </button>
-            <button md-menu-item (click)="onEdit(each.post)"><md-icon>edit</md-icon>Edit</button>
             <button md-menu-item (click)="onDelete(each.post)"><md-icon>delete</md-icon>Delete</button>
           </md-menu>
         </div>
     </md-card-header>
     <md-card-content>
-      <div class="">
+      <div class="post-content">
       <!-- width="560" height="315" /  -->
       <iframe *ngIf="postContentType === 'youtube'"  [src]="postContent | safe"
               width="450" height="253" frameborder="0" allowfullscreen></iframe>

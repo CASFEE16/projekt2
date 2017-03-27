@@ -1,6 +1,6 @@
 <div class="post-front-container">
 
-  <md-card *ngIf="loggedIn | async" class="post-card">
+  <md-card *ngIf="loggedIn | async" class="post-card-edit">
       <form (ngSubmit)="onSubmit($event)">
         <div class="post-new-form">
           <div class="post-new-form-data">
@@ -26,7 +26,7 @@
   <md-spinner *ngIf="loading"></md-spinner>
 
   <div class="post-list">
-    <div *ngFor="let each of posts | async">
+    <div *ngFor="let each of posts | async" class="post-card">
       <app-post [each]="each" [shows]="shows">
       </app-post>
     </div>

@@ -1,4 +1,4 @@
-<div>
+<div class="container">
     <md-spinner *ngIf="loading"></md-spinner>
     <app-show [show]="each" [live]="true" class="show-card" *ngFor="let each of shows | async">
     </app-show>

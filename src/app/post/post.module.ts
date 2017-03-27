@@ -4,7 +4,7 @@ import { PostFrontComponent } from './post-front/post-front.component';
 import {FormsModule} from '@angular/forms';
 import {MaterialModule} from '@angular/material';
 import {CoreModule} from '../core/core.module';
-import {SafePipe} from '../shared/safe.pipe';
+import {SafePipe} from '../core/firebase/safe.pipe';
 import {SharedModule} from '../shared/shared.module';
 import { PostComponent } from './post/post.component';
 import { PostAirComponent } from './post-air/post-air.component';

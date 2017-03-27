@@ -52,4 +52,8 @@ export class YoutubeUtils {
     return null;
   }
 
+  public static isTrusted(url: string): boolean {
+    return (url && typeof url === 'string' && url.indexOf('https://www.youtube.com/embed/') === 0);
+  }
+
 }

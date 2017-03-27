@@ -52,4 +52,8 @@ export class SpotifyUtils {
     return match[0];
   }
 
+  public static isTrusted(url: string): boolean {
+    return (url && typeof url === 'string' && url.indexOf('https://embed.spotify.com/?uri=') === 0);
+  }
+
 }

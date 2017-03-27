@@ -2,21 +2,28 @@ table {
   margin: 2px 20px;
   border-collapse: collapse;
   width: 90%;
+  height: 100%;
+}
+
+.cell-with-action {
+  position:relative;
+  overflow: hidden;
+  height: 100%;
 }
 
 .post-actions {
-  position: relative;
+  position: absolute;
   top: 0;
   right: 0;
-  display: flex;
 }
 
-.post-action {
+.post-action-button {
   min-width: 3em;
-  padding: 0px;
+  padding: 0;
+  margin-top: -5px;
 }
 
-.small {
+.small-icon {
   width: 1em;
   height: 1em;
   font-size: 1em;

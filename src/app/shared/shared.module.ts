@@ -5,7 +5,7 @@ import {RatingComponent} from './rating/rating.component';
 import {CanDeactivateGuard} from './can-deactivate-guard.service';
 import {ConfirmDialogComponent} from './confirm-dialog/confirm-dialog.component';
 import {DialogService} from './dialog.service';
-import {SafePipe} from './safe.pipe';
+import {SafePipe} from '../core/firebase/safe.pipe';
 import {NavService} from './nav.service';
 
 export function windowFactory(): Window { return window; }

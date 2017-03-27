@@ -1,16 +1,8 @@
-.show-upcoming-card {
-  margin: 0px;
-  padding: 0px;
+.container {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .show-card {
   margin: 10px;
-}
-
-.show-upcoming-card {
-  background-color: #cfd8dc;
-}
-
-table {
-  margin: 2px 20px;
 }
