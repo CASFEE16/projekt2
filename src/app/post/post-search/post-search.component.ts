@@ -8,7 +8,7 @@ import {ShowListService} from '../../show/shared/show-list.service';
 
 interface Search {
   text: string;
-  type: PostType;
+  type: string;
   state: string;
 }
 
@@ -21,7 +21,7 @@ interface Search {
 export class SearchComponent implements OnInit {
 
   search: Search;
-  typeList: PostType[];
+  typeList: any[];
   posts: Observable<PostShowListEntry[]> = null;
   shows: Observable<Show[]> = null;
   loading = false;
@@ -31,10 +31,11 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
     this.search = {
       text: '',
-      type: PostType.Note,
+      type: 'all',
       state: 'all'
     };
-    this.typeList = PostTypes.list();
+    this.typeList = [{value: 'all', label: 'All'}];
+    this.typeList.push(...PostTypes.list());
 
     this.showService.findAll()
       .subscribe(result => {
@@ -58,11 +59,14 @@ export class SearchComponent implements OnInit {
 
   onSubmit() {
     this.loading = true;
-    this.posts = this.postService.findQuery({
+    const query = {
       limitToLast: 100,
-      orderByChild: 'type',
-      equalTo: this.search.type
-    })
+      orderByChild: 'type'
+    };
+    if (this.search.type !== 'all') {
+      query['equalTo'] = this.search.type;
+    }
+    this.posts = this.postService.findQuery(query)
       .do(each => this.loading = false)
       .first()
       .map(result => this.filterByState(this.filterByText(result)));
