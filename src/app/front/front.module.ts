@@ -7,12 +7,14 @@ import {FormsModule} from '@angular/forms';
 import {PostModule} from '../post/post.module';
 import {ShowModule} from '../show/show.module';
 import {HomeComponent} from './home/home.component';
+import {CoreModule} from '../core/core.module';
 
 @NgModule({
   imports: [
     CommonModule,
     MaterialModule,
     FormsModule,
+    CoreModule,
     PostModule,
     ShowModule
   ],

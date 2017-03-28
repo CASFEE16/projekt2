@@ -9,6 +9,7 @@ import {EventService, IEvent} from './core/event/event.service';
 import {Observable} from 'rxjs/Observable';
 import {Subscription} from 'rxjs/Subscription';
 import {NavService} from './shared/nav.service';
+import {BuildInfoService, BuildInfo} from './core/build/build-info.service';
 
 @Component({
   selector: 'app-root',
@@ -26,12 +27,14 @@ export class AppComponent implements OnInit, OnDestroy {
   loggedIn: Observable<boolean> = null;
   window: Window = null;
   sessionSubscription: Subscription = null;
+  buildInfo: BuildInfo = null;
 
   get username(): string {
     return this.sessionService.username;
   }
 
   constructor(
+    private buildInfoService: BuildInfoService,
     private sessionService: SessionService,
     private trace: TraceService,
     private dialog: MdDialog,
@@ -45,6 +48,11 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+
+    this.buildInfoService.load().subscribe(
+      (buildInfo) => this.buildInfo = buildInfo
+    );
+
     this.loggedIn = this.sessionService.watchLoggedIn();
 
     this.loggedIn.subscribe(

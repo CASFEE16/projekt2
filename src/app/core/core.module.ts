@@ -11,6 +11,7 @@ import {AuthGuard} from './auth/AuthGuard';
 import {NotAuthGuard} from './auth/NotAuthGuard';
 import {StartedGuard} from './auth/StartedGuard';
 import {EventService} from './event/event.service';
+import {BuildInfoService} from './build/build-info.service';
 
 @NgModule({
   imports: [
@@ -28,7 +29,8 @@ import {EventService} from './event/event.service';
     AuthGuard,
     NotAuthGuard,
     StartedGuard,
-    EventService
+    EventService,
+    BuildInfoService
   ]
 })
 export class CoreModule { }

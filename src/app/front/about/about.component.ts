@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {BuildInfoService, BuildInfo} from '../../core/build/build-info.service';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-about',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutComponent implements OnInit {
 
-  constructor() { }
+  buildInfo: BuildInfo;
+
+  constructor(private buildInfoService: BuildInfoService) { }
 
   ngOnInit() {
+    this.buildInfoService.load().subscribe(
+      (buildInfo) => this.buildInfo = buildInfo
+    );
   }
 
 }

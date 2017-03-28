@@ -12,6 +12,8 @@ import {SessionMockService} from './core/firebase/session-mock.service';
 import {BackendService} from '../app/core/firebase/backend.service';
 import {BackendMockService} from './core/firebase/backend-mock.service';
 import {TraceService} from '../app/core/trace/trace.service';
+import {BuildInfoService} from '../app/core/build/build-info.service';
+import {MockBuildInfoService} from './core/build/mock-build-info.service';
 
 import {TestModuleMetadata} from '@angular/core/testing';
 
@@ -33,6 +35,7 @@ export class TestModule {
         {provide: APP_BASE_HREF, useValue : '/' },
         {provide: SessionService, useClass: SessionMockService},
         {provide: BackendService, useClass: BackendMockService},
+        {provide: BuildInfoService, useClass: MockBuildInfoService},
         TraceService,
         ...config.providers
       ],

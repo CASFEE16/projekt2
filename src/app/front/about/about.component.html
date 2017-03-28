@@ -1,21 +1,55 @@
 <div class="about">
-  <h1>Projekt 2</h1>
-  <h2>Frameworks</h2>
-  <ul>
-    <li><a href="https://angular.io/">Angular 2</a></li>
-    <li><a href="https://cli.angular.io/">Angular CLI</a></li>
-    <li><a href="https://material.angular.io/">Angular Material 2</a></li>
-    <li><a href="https://material.io/icons/">Material Icons Font</a></li>
-    <li><a href="http://angularfire2.com">AngularFire 2</a></li>
-  </ul>
-  <h2>APIs</h2>
-  <ul>
-    <li><a href="https://console.firebase.google.com/project/hsr-fee16-projekt2">Google Firebase</a></li>
-    <li><a href="https://developers.google.com/youtube/v3/">Google Youtube Data</a></li>
-    <li><a href="https://developer.spotify.com/">Spotify Developer</a></li>
-  </ul>
-  <h2>Sites</h2>
-  <ul>
-    <li><a href="https://github.com/CASFEE16/projekt2">Github</a></li>
-  </ul>
+  <md-card>
+    <md-card-header>
+      <md-card-title class="title"><h1>Projekt 2</h1></md-card-title>
+    </md-card-header>
+    <md-card-content>
+      <table>
+        <tr>
+          <th>Version</th>
+          <td>{{buildInfo?.version}}</td>
+        </tr>
+        <tr>
+          <th>Build</th>
+          <td>{{buildInfo?.build}}</td>
+        </tr>
+        <tr>
+          <th>Angular version</th>
+          <td>{{buildInfo?.angular}}</td>
+        </tr>
+        <tr>
+          <th>Angular CLI version</th>
+          <td>{{buildInfo?.cli}}</td>
+        </tr>
+        <tr>
+          <th>Datetime</th>
+          <td>{{buildInfo?.datetime}}</td>
+        </tr>
+        <tr>
+          <th>Commit</th>
+          <td>{{buildInfo?.commit}}</td>
+        </tr>
+      </table>
+    </md-card-content>
+      <h2>Frameworks</h2>
+      <ul>
+        <li><a href="https://angular.io/">Angular 2</a></li>
+        <li><a href="https://cli.angular.io/">Angular CLI</a></li>
+        <li><a href="https://material.angular.io/">Angular Material 2</a></li>
+        <li><a href="https://material.io/icons/">Material Icons Font</a></li>
+        <li><a href="http://angularfire2.com">AngularFire 2</a></li>
+      </ul>
+      <h2>APIs</h2>
+      <ul>
+        <li><a href="https://console.firebase.google.com/project/hsr-fee16-projekt2">Google Firebase</a></li>
+        <li><a href="https://developers.google.com/youtube/v3/">Google Youtube Data</a></li>
+        <li><a href="https://developer.spotify.com/">Spotify Developer</a></li>
+      </ul>
+      <h2>Sites</h2>
+      <ul>
+        <li><a href="https://github.com/CASFEE16/projekt2">Github</a></li>
+      </ul>
+    <md-card-footer>
+    </md-card-footer>
+  </md-card>
 </div>

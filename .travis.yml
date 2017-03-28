@@ -7,6 +7,7 @@ node_js:
   - "6"
 before_script:
   - npm install
+  - node write-build-info.js
 script:
   - npm run-script build -- --prod
 after_success:
