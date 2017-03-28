@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
+import { environment } from '../../../environments/environment';
 
 export interface BuildInfo {
   build?: number;
@@ -22,8 +23,14 @@ export class BuildInfoService {
     if (this.cache) {
       return Observable.of(this.cache);
     }
+
+    let file: string = '/public/build.json';
+    if (environment.production) {
+      file = '/build.json';
+    }
+
     return this.http
-      .get('/public/build.json')
+      .get(file)
       .map((result) => {
         this.cache = result.json();
         return this.cache;

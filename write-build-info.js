@@ -4,7 +4,7 @@ var angular = require('./node_modules/@angular/common/package.json');
 var cli = require('./node_modules/@angular/cli/package.json');
 
 var buildInfo = {
-  build: process.env.TRAVIS_BUILD_NUMBER,
+  build: (process.env.TRAVIS_BUILD_NUMBER ? process.env.TRAVIS_BUILD_NUMBER : 0),
   commit: process.env.TRAVIS_COMMIT,
   datetime: (new Date()).toISOString(),
   version: package.version,
@@ -12,8 +12,24 @@ var buildInfo = {
   cli: cli.version
 };
 
-fs.writeFile("public/build.json", JSON.stringify(buildInfo), function(err) {
+var destDir = 'public';
+
+if (process.env.TRAVIS_BUILD_NUMBER) {
+  console.log(process.env.TRAVIS_BUILD_NUMBER);
+  destDir = 'dist';
+}
+
+var destFile = destDir + '/build.json';
+console.log(destFile);
+
+fs.writeFile(destFile, JSON.stringify(buildInfo), function(err) {
   if(err) {
-    return console.log(err);
+    console.log(err);
   }
 });
+
+console.log(buildInfo);
+
+//fs.readFile(destFile, {}, function(error, data) {
+//  console.log(JSON.parse(data));
+//});
