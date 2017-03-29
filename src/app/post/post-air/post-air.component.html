@@ -29,6 +29,19 @@
           <button md-mini-fab (click)="onClear()"><md-icon>{{action}}</md-icon></button>
         </div>
       </div>
+
+      <div *ngIf="this.comments && this.comments.length > 0">
+        <div  class="comments">
+          <div class="comment" *ngFor="let comment of comments">
+            <div class="comment-content">
+              <div class="comment-user">{{comment.username}}</div>
+              <div class="comment-text">{{comment.comment}}</div>
+              <div class="comment-date">{{comment.date | date}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
     </md-card-actions>
 
   </md-card>

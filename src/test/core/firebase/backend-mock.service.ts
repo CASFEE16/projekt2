@@ -44,6 +44,13 @@ export class BackendMockService extends BackendService {
         ['$key']: 'u1'
       }
     ]);
+    this.testResource('/comments', [
+      {
+        comment: 'test',
+        ['$key']: 'c1',
+        show_key: 's1'
+      }
+    ]);
 
   }
 

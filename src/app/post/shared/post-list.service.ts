@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Post, POSTS_RESOURCE_PATH} from './post.model';
 import {BackendService} from '../../core/firebase/backend.service';
-import {FirebaseListObservable} from 'angularfire2';
 import {SessionService} from '../../core/firebase/session.service';
 import {DateUtils} from '../../shared/DateUtils';
 import {ListRef} from '../../core/firebase/ListRef';

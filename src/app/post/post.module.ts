@@ -10,6 +10,7 @@ import { PostComponent } from './post/post.component';
 import { PostAirComponent } from './post-air/post-air.component';
 import {PostUtils} from './shared/post-utils.service';
 import {SearchComponent} from './post-search/post-search.component';
+import { CommentComponent } from './comment/comment.component';
 
 @NgModule({
   imports: [
@@ -23,9 +24,10 @@ import {SearchComponent} from './post-search/post-search.component';
     PostFrontComponent,
     PostComponent,
     PostAirComponent,
-    SearchComponent
+    SearchComponent,
+    CommentComponent
   ],
-  exports: [PostFrontComponent, PostAirComponent, SearchComponent],
+  exports: [PostFrontComponent, PostAirComponent, SearchComponent, CommentComponent],
   providers: [PostUtils]
 })
 export class PostModule { }

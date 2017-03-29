@@ -59,3 +59,7 @@ md-card-title {
   overflow: hidden;
 }
 
+.post-card-comments {
+  margin: 10px 10px;
+}
+

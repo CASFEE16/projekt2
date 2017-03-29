@@ -24,7 +24,7 @@ export class BuildInfoService {
       return Observable.of(this.cache);
     }
 
-    let file: string = '/public/build.json';
+    let file = '/public/build.json';
     if (environment.production) {
       file = '/build.json';
     }

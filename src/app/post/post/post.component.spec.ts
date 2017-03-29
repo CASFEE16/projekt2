@@ -7,6 +7,8 @@ import {YoutubeService} from '../../core/youtube/youtube.service';
 import {SpotifyService} from '../../core/spotify/spotify.service';
 import {PostUtils} from '../shared/post-utils.service';
 import {PostListService} from '../shared/post-list.service';
+import {CommentComponent} from '../comment/comment.component';
+import {CommentService} from '../shared/comment.service';
 
 describe('PostComponent', () => {
   let component: PostComponent;
@@ -20,10 +22,12 @@ describe('PostComponent', () => {
         YoutubeService,
         SpotifyService,
         PostUtils,
-        PostListService
+        PostListService,
+        CommentService
       ],
       declarations: [
-        PostComponent
+        PostComponent,
+        CommentComponent
       ]
     }));
     TestBed.compileComponents();

@@ -1,0 +1,24 @@
+<div class="container">
+  <div *ngIf="comments" class="comments">
+      <div class="comment" *ngFor="let comment of comments | async">
+        <div class="comment-content">
+          <div class="comment-user">{{comment.username}}</div>
+          <div class="comment-text">{{comment.comment}}</div>
+          <div class="comment-date">{{comment.date | date}}</div>
+        </div>
+        <div class="comment-actions" *ngIf="isLoggedIn | async">
+          <button md-button (click)="onDelete(comment)"><md-icon>delete</md-icon></button>
+        </div>
+      </div>
+  </div>
+  <div class="comment-new" *ngIf="isLoggedIn | async">
+    <form #form="ngForm" (ngSubmit)="onSubmit($event)">
+      <md-input-container>
+        <input mdInput placeholder="New comment" type="text"
+               [(ngModel)]="comment.comment" name="comment">
+      </md-input-container>
+    </form>
+  </div>
+  <div class="comment-new-placeholder" *ngIf="!(isLoggedIn | async)">
+  </div>
+</div>

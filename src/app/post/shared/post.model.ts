@@ -19,7 +19,8 @@ export class Post extends Model {
   sortKey?: number;
   show?: ShowRef;
 
-  public Post() {
+  public constructor() {
+    super();
     this.text = '';
     this.type = PostType.Note;
   }
@@ -99,3 +100,23 @@ export class ContentDetector {
 
 }
 
+export const COMMENTS_RESOURCE_PATH = '/comments';
+
+export class Comment extends Model {
+  comment: string;
+  date?: string;
+  user?: string;
+  username?: string;
+  ts?: number;
+  sortKey?: number;
+  post_key: string;
+
+  public constructor(post: Post, comment: string) {
+    super();
+    this.comment = comment;
+    if (post) {
+      this.post_key = post['$key'];
+    }
+  }
+
+}

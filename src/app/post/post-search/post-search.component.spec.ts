@@ -9,6 +9,8 @@ import {PostComponent} from '../post/post.component';
 import {ContentService} from '../../core/content/content.service';
 import {YoutubeService} from '../../core/youtube/youtube.service';
 import {SpotifyService} from '../../core/spotify/spotify.service';
+import {CommentComponent} from '../comment/comment.component';
+import {CommentService} from '../shared/comment.service';
 
 describe('SearchComponent', () => {
   let component: SearchComponent;
@@ -20,11 +22,13 @@ describe('SearchComponent', () => {
       providers: [
         ContentService,
         YoutubeService,
-        SpotifyService
+        SpotifyService,
+        CommentService
       ],
       declarations: [
         SearchComponent,
-        PostComponent
+        PostComponent,
+        CommentComponent
       ]
     }));
     TestBed.compileComponents();

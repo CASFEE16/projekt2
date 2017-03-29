@@ -21,6 +21,7 @@ import {UserComponent} from './user/user/user.component';
 import {PostUtils} from './post/shared/post-utils.service';
 import {TestModule} from '../test/test.module';
 import {SessionService} from './core/firebase/session.service';
+import {CommentComponent} from './post/comment/comment.component';
 
 describe('AppComponent', () => {
   beforeEach(() => {
@@ -29,7 +30,8 @@ describe('AppComponent', () => {
       imports: [
       ],
       providers: [
-        PostUtils
+        PostUtils,
+
       ],
       declarations: [
         AppComponent,
@@ -43,7 +45,8 @@ describe('AppComponent', () => {
         UserMenuComponent,
         ShowComponent,
         PostComponent,
-        UserComponent
+        UserComponent,
+        CommentComponent
       ]
     }));
 
