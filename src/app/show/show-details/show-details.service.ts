@@ -49,7 +49,6 @@ export class ShowDetailsService {
       .first()
       .flatMap(
         result => {
-          console.log('UPDATE', obj, data);
           return obj.update(data);
         }
     );

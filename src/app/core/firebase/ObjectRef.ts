@@ -11,23 +11,25 @@ import {BackendService} from './backend.service';
 export class ObjectRef<T> extends DatabaseRef {
 
   object: FirebaseObjectObservable<T> = null;
+  objectResource: string = null;
 
   constructor(backend: BackendService, resource: string) {
     super(backend, resource);
+    this.objectResource = resource;
   }
 
   public get(options?: any): Observable<T> {
-    this.object = this.backend.object(this.resource, options) as FirebaseObjectObservable<T>;
+    this.object = this.backend.object(this.objectResource, options) as FirebaseObjectObservable<T>;
     return this.object;
   }
 
   public getId(id: string, options?: any): Observable<T> {
-    this.resource = this.resource + '/' + id;
+    this.objectResource = this.resource + '/' + id;
     return this.get(options);
   }
 
   public add(id: string, obj: T): Observable<T> {
-    this.object = this.backend.object(`${this.resource}/${id}`)  as FirebaseObjectObservable<T>;
+    this.object = this.backend.object(`${this.objectResource}/${id}`)  as FirebaseObjectObservable<T>;
     return Observable.create((observer: Observer<T>) => {
       return this.object.set(obj)
         .catch(error => observer.error(error))

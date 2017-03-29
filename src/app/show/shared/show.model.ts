@@ -4,6 +4,7 @@ import {Model} from '../../core/firebase/model';
 export class Show extends Model {
   title: string;    // Title of the show
   description?: string; // Description
+  air?: boolean;    // Is the show currently on air?
   user?: string;    // User who created the show
   date?: string;    // Date of the show in ISO format for storing in database
   ts?: number;      // Timestamp the show was created

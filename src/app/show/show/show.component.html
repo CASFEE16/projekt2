@@ -1,8 +1,9 @@
-<md-card class="show-card">
-  <md-card-header>
+<md-card class="show-card" >
+  <md-card-header [ngClass]="{'on-air': live && show.air}">
     <div md-card-avatar><md-icon>radio</md-icon></div>
     <md-card-title><strong>{{show?.title}}</strong></md-card-title>
     <md-card-subtitle>{{show?.date | date}}</md-card-subtitle>
+    <div *ngIf="live && show.air" class="on-air-message">ON AIR</div>
   </md-card-header>
   <md-card-content>
     <p>{{show?.description}}</p>

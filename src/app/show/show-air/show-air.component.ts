@@ -34,9 +34,10 @@ export class ShowAirComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.routeSubscription = this.route.params.subscribe(params => {
       if (params['id']) {
-        this.showDetailsService.get(params['id']).subscribe(show => {
+        this.showDetailsService.get(params['id']).first().subscribe(show => {
           this.show = show;
-          this.posts = this.showPostsService.findPostsForShow(show);
+          this.setOnAir(!!show.air);
+          this.posts = this.showPostsService.findPostsForShow(show).first();
         });
       }
     });
@@ -53,12 +54,22 @@ export class ShowAirComponent implements OnInit, OnDestroy {
 
   public toggleState(event: Event) {
     event.preventDefault();
+    this.setOnAir(!this.onAir);
     if (this.onAir) {
-      this.onAir = false;
-      this.state = 'play_circle_outline';
+      this.showDetailsService.save({air: true}).subscribe();
     } else {
+      this.showDetailsService.save({air: false}).subscribe();
+    }
+  }
+
+  setOnAir(val: boolean) {
+    console.log('ONAIR', val);
+    if (val) {
       this.onAir = true;
       this.state = 'pause_circle_outline';
+    } else {
+      this.onAir = false;
+      this.state = 'play_circle_outline';
     }
   }
 
