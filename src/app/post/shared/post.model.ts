@@ -32,7 +32,7 @@ export const POSTS_RESOURCE_PATH = '/posts';
 export enum PostType {
   Note,
   Music,
-  Movie,
+  Video,
   Web
 }
 
@@ -47,7 +47,7 @@ export class PostTypes {
     switch (type) {
       case PostType.Music:
         return 'album';
-      case PostType.Movie:
+      case PostType.Video:
         return 'movie';
       case PostType.Web:
         return 'web';
@@ -73,7 +73,7 @@ export class PostTypes {
 
 export class ContentDetector {
 
-  static isMovie(text: string): boolean {
+  static isVideo(text: string): boolean {
     return !!YoutubeUtils.getId(text);
   }
 
@@ -86,8 +86,8 @@ export class ContentDetector {
   }
 
   getType(text: string): PostType {
-    if (ContentDetector.isMovie(text)) {
-      return PostType.Movie;
+    if (ContentDetector.isVideo(text)) {
+      return PostType.Video;
     }
     if (ContentDetector.isMusic(text)) {
       return PostType.Music;
