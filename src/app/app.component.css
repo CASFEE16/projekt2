@@ -105,6 +105,11 @@ html, body, material-app, md-sidenav-container, .my-content {
   padding: 0px;
 }
 
+@media screen and (max-width : 950px) {
+  .app-sidenav-right {
+    display: none;
+  }
+}
 
 @media screen and (max-width : 750px) {
   .toolbar-nav-text {
@@ -113,9 +118,6 @@ html, body, material-app, md-sidenav-container, .my-content {
   .toolbar-nav-button {
     padding: 10px;
     min-width: 40px;
-  }
-  .app-sidenav-right {
-    display: none;
   }
 }
 
